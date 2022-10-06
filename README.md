@@ -1,4 +1,7 @@
 # Proyek Tengah Semester - PBP Gasal 2022/2023
+
+![main](https://github.com/github/docs/actions/workflows/main.yml/badge.svg?branch=main)
+
 ### Kelompok F10 - Nutrack
 1.  Farkhan Syawal Harahap
 2.  Muhammad Akmal Hakim

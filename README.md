@@ -22,15 +22,15 @@ Mengingat rangkaian acara KTT G20 yang panjang dan padat, setiap partisipan perl
 [https://nu-track.herokuapp.com/](https://nu-track.herokuapp.com/)
 
 ## Modul Aplikasi
-1. Menghitung kalori yang sudah didapat (dan update total kalori harian)
+1. Autentikasi pengguna (apakah pengguna yang login merupakan admin atau user)
+    - Dikerjakan oleh: Sasha Nabila Fortuna
+2. Menghitung kalori yang sudah didapat (dan update total kalori harian)
     - Dikerjakan oleh: Reiou Nagata
-2. Rekomendasi makanan dan minuman (membuat filtering system serta mengurutkan daftar makanan/minuman berdasarkan rating dan jumlah rating)
+3. Rekomendasi makanan dan minuman (membuat filtering system serta mengurutkan daftar makanan/minuman berdasarkan rating dan jumlah rating)
     - Dikerjakan oleh: Muhammad Akmal Hakim
-3. Membuat artikel tentang pola makan sehat dan dan semua pengguna bisa melihat artikel tersebut
+4. Membuat artikel tentang pola makan sehat dan dan semua pengguna bisa melihat artikel tersebut
     - Dikerjakan oleh: Shayna Putri Fitria
-4. Membuat dashboard (sekaligus sebagai landing page) dari jumlah kalori yang sudah dikonsumsi dengan menghitung total kalori harian dan membandingkannya dengan target kalori harian yang sudah ditentukan.
+5. Membuat dashboard (sekaligus sebagai landing page) dari jumlah kalori yang sudah dikonsumsi dengan menghitung total kalori harian dan membandingkannya dengan target kalori harian yang sudah ditentukan.
     - Dikerjakan oleh: Sasha Nabila Fortuna
-5. Testimoni pengguna NUtrack
+6. Testimoni pengguna NUtrack
     - Dikerjakan oleh: Farkhan Syawal Harahap
-6. Autentikasi pengguna (apakah pengguna yang login merupakan admin atau user)
-    - Dikerjakan oleh: Sasha Nabila Fortuna

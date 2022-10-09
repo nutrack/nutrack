@@ -22,7 +22,7 @@ Mengingat rangkaian acara KTT G20 yang panjang dan padat, setiap partisipan perl
 [https://nu-track.herokuapp.com/](https://nu-track.herokuapp.com/)
 
 ## Modul Aplikasi
-1. Autentikasi pengguna (apakah pengguna yang login merupakan admin atau user)
+1. Autentikasi pengguna (admin atau user)
     - Dikerjakan oleh: Sasha Nabila Fortuna
 2. Menghitung kalori yang sudah didapat (dan update total kalori harian)
     - Dikerjakan oleh: Reiou Nagata

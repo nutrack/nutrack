@@ -36,12 +36,15 @@ Mengingat rangkaian acara KTT G20 yang panjang dan padat, setiap partisipan perl
     - Dikerjakan oleh: Farkhan Syawal Harahap
 
 ## 🧑🏻 Persona 🧑🏻
-1. User yang tidak login
+**1. User yang tidak login**
+
     - Melihat testimoni pengguna Nutrack
     - Melakukan filtering untuk rekomendasi makanan atau minuman
     - Membaca artikel tentang pola makan sehat
     - Melihat page "About us" yang merupakan deskripsi singkat dari proyek kelompok ini
-2. User yang sudah login
+
+**2. User yang sudah login**
+
     - Mengakses semua modul dari user yang tidak login
     - Menampilkan dashboard dari jumla kalori yang sudah dikonsumsi
     - Menghitung kalori yang sudah didapat
@@ -49,7 +52,7 @@ Mengingat rangkaian acara KTT G20 yang panjang dan padat, setiap partisipan perl
     - Memberikan rekomendasi dengan me-rating makanan atau minuman yang sudah pernah dikonsumsi
     - Membuat testimoni pengguna Nutrack 
 
-## 💡 REFERENSI
+## 💡 Referensi
 1. [Pola Konsumsi Bisnis Setelah Pandemi Covid19](https://www.ukmindonesia.id/baca-deskripsi-posts/pola-konsumsi-bisnis-setelah-pandemi-covid19)
 2. [Changes in Eating Habits and Physical Activity after COVID-19 Pandemic Lockdowns in Italy](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8708956/)
 3. [Mengapa Kita Bisa Bosan Dengan Makanan Sehingga Malas Makan](https://id.quora.com/Mengapa-kita-bisa-bosan-dengan-makanan-sehingga-malas-makan)

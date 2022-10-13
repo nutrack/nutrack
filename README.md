@@ -32,7 +32,7 @@ Mengingat rangkaian acara KTT G20 yang panjang dan padat, setiap partisipan perl
     - Dikerjakan oleh: Shayna Putri Fitria
 5. Membuat dashboard (sekaligus sebagai landing page) dari jumlah kalori yang sudah dikonsumsi dengan menghitung total kalori harian dan membandingkannya dengan target kalori harian yang sudah ditentukan.
     - Dikerjakan oleh: Sasha Nabila Fortuna
-6. Testimoni pengguna NUtrack
+6. Tentang Kami dan Testimoni pengguna NUtrack
     - Dikerjakan oleh: Farkhan Syawal Harahap
 
 ## 🧑🏻 Persona 🧑🏻

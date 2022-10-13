@@ -3,11 +3,11 @@
 ![main](https://github.com/nutrack/nutrack/actions/workflows/dpl.yml/badge.svg?branch=main)
 
 ### 👋 Kelompok F10 - Nutrack 👋
-1.  Farkhan Syawal Harahap
-2.  Muhammad Akmal Hakim
-3.  Reiou Nagata
-4.  Sasha Nabila Fortuna
-5.  Shayna Putri Fitria
+1.  Farkhan Syawal Harahap (2106709125)
+2.  Muhammad Akmal Hakim (2106750383)
+3.  Reiou Nagata (2106636943)
+4.  Sasha Nabila Fortuna (2106632226)
+5.  Shayna Putri Fitria (2106703084)
 
 ## 🔙 Latar Belakang 🔙
 Sejak pandemi COVID-19, banyak orang yang melakukan aktivitas kebanyakan di rumah. Sehingga, ketika berurusan dengan konsumsi sehari-hari, orang-orang akan lebih berkutat di dapur. Dengan begitu, setiap orang memiliki kesempatan untuk meningkatkan mutu gizi karena aktivitasnya lebih banyak dilakukan di dapur ketimbang pergi ke restoran. Hal ini telah menjadi suatu kebiasaan bagi masyarakat untuk menerapkan pola makan yang lebih sehat. Pola makan yang sehat juga dinilai penting demi tetap menjaga imunitas tubuh. Dengan begitu, pembuatan aplikasi untuk tracking gizi yang sudah dikonsumsi pada hari itu cukup penting bagi masyarakat kita saat ini. 

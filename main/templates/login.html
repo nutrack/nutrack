@@ -231,11 +231,11 @@
 
                 <!-- Page banner Section Start -->
                 <div class="page-banner-content">
-                    <h2 class="page-title">Registration Form</h2>
+                    <h2 class="page-title">Login Form</h2>
 
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item active">Register</li>
+                        <li class="breadcrumb-item active">Login</li>
                     </ul>
                 </div>
                 <!-- Page banner Section End -->
@@ -254,18 +254,13 @@
                         <div class="col-lg-6 col-xl-5">
                             <!-- Register & Login Form Start -->
                             <div class="register-login-form">
-                                <h3 class="title">Registration <span>Now</span></h3>
+                                <h3 class="title">Login <span>Now</span></h3>
 
                                 <div class="form-wrapper">
                                     <form action="#">
                                         <!-- Single Form Start -->
                                         <div class="single-form">
-                                            <input type="text" placeholder="Name">
-                                        </div>
-                                        <!-- Single Form End -->
-                                        <!-- Single Form Start -->
-                                        <div class="single-form">
-                                            <input type="email" placeholder="Email">
+                                            <input type="email" placeholder="Username or Email">
                                         </div>
                                         <!-- Single Form End -->
                                         <!-- Single Form Start -->
@@ -275,20 +270,17 @@
                                         <!-- Single Form End -->
                                         <!-- Single Form Start -->
                                         <div class="single-form">
-                                            <input type="password" placeholder="Confirm Password">
+                                            <button class="btn btn-primary btn-hover-dark w-100" type="submit">Login</button>
+                                            <a class="btn btn-secondary btn-outline w-100" href="#">Login with Google</a>
                                         </div>
                                         <!-- Single Form End -->
-                                        <!-- Single Form Start -->
-                                        <div class="single-form">
-                                            <button class="btn btn-primary btn-hover-dark w-100">Create an account</button>
-                                            <a class="btn btn-secondary btn-outline w-100" href="#">Sign up with Google</a>
-                                        </div>
-                                        <!-- Single Form End -->
-                                        <p>Already have an account? <a href="login.html">Log in instead!</a></p>
+                                        <p><a href="#">Lost your password?</a></p>
+                                        <p>No account? <a href="{% url 'main:register' %}">Create one here.</a></p>
                                     </form>
                                 </div>
                             </div>
                             <!-- Register & Login Form End -->
+
                         </div>
                     </div>
                 </div>

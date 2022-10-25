@@ -11,7 +11,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 
 # Create your views here.
-@login_required(login_url='/main/login/')
+# @login_required(login_url='/main/login/')
 def home(request):
     return render(request, 'index.html')
 

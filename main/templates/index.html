@@ -1,4 +1,6 @@
 <!doctype html>
+{% extends 'base.html' %} {% block content %}
+{% load static%}
 <html class="no-js" lang="en">
 
 <head>
@@ -9,25 +11,25 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/images/favicon.ico' %}">
 
     <!-- CSS
 	============================================ -->
 
     <!-- Icon Font CSS -->
-    <link rel="stylesheet" href="assets/css/plugins/icofont.min.css">
-    <link rel="stylesheet" href="assets/css/plugins/flaticon.css">
-    <link rel="stylesheet" href="assets/css/plugins/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'assets/css/plugins/icofont.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/plugins/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/plugins/font-awesome.min.css' %}">
 
     <!-- Plugins CSS -->
-    <link rel="stylesheet" href="assets/css/plugins/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/plugins/animate.min.css">
-    <link rel="stylesheet" href="assets/css/plugins/swiper-bundle.min.css">
-    <link rel="stylesheet" href="assets/css/plugins/magnific-popup.css">
-    <link rel="stylesheet" href="assets/css/plugins/nice-select.css">
+    <link rel="stylesheet" href="{% static 'assets/css/plugins/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/plugins/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/plugins/swiper-bundle.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/plugins/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/plugins/nice-select.css' %}">
 
     <!-- Main Style CSS -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
 
 
     <!--====== Use the minified version files listed below for better performance and remove the files listed above ======-->
@@ -35,7 +37,6 @@
     <link rel="stylesheet" href="assets/css/style.min.css"> -->
 
 </head>
-
 <body>
 
     <div class="main-wrapper">
@@ -52,7 +53,7 @@
 
                         <!-- Header Logo Start -->
                         <div class="header-logo">
-                            <a href="index.html"><img src="assets/images/logo.png" alt="Logo"></a>
+                            <a  href="{% url 'main:home' %}"><img src = "{% static 'assets/images/logo.png' %}" alt="Logo" ></a>
                         </div>
                         <!-- Header Logo End -->
 
@@ -60,7 +61,7 @@
                         <div class="header-menu d-none d-lg-flex">
 
                             <ul class="nav-menu">
-                                <li><a class="active" href="index.html">Home</a></li>
+                                <li><a class="active" href="/">Home</a></li>
                                 <li><a href="about.html">About Us</a></li>
                                 <li>
                                     <a href="#">All Course</a>
@@ -232,7 +233,7 @@
                 <div class="swiper-wrapper">
 
                     <!-- Single Slider Start -->
-                    <div class="swiper-slide animation-style-01 single-slider d-flex align-items-center" style="background-image: url(assets/images/slider/slider-1.jpg);">
+                    <div class="swiper-slide animation-style-01 single-slider d-flex align-items-center" style="background-image: url({% static 'assets/images/slider/slider-1.jpg' %});">
                         <div class="container">
 
                             <!-- Slider Content Start -->
@@ -265,7 +266,7 @@
                     <!-- Single Slider End -->
 
                     <!-- Single Slider Start -->
-                    <div class="swiper-slide animation-style-01 single-slider d-flex align-items-center" style="background-image: url(assets/images/slider/slider-2.jpg);">
+                    <div class="swiper-slide animation-style-01 single-slider d-flex align-items-center" style="background-image: url({% static 'assets/images/slider/slider-2.jpg' %});">
                         <div class="container">
 
                             <!-- Slider Content Start -->
@@ -298,7 +299,7 @@
                     <!-- Single Slider End -->
 
                     <!-- Single Slider Start -->
-                    <div class="swiper-slide animation-style-01 single-slider d-flex align-items-center" style="background-image: url(assets/images/slider/slider-3.jpg);">
+                    <div class="swiper-slide animation-style-01 single-slider d-flex align-items-center" style="background-image: url({% static 'assets/images/slider/slider-3.jpg' %});">
                         <div class="container">
 
                             <!-- Slider Content Start -->
@@ -404,9 +405,9 @@
                         <div class="col-lg-5">
                             <!-- About Images Start -->
                             <div class="about-images">
-                                <img src="assets/images/shape/shape-2.png" alt="shape" class="shape">
+                                <img src="{% static 'assets/images/shape/shape-2.png' %}" alt="shape" class="shape">
                                 <div class="images">
-                                    <img src="assets/images/about.jpg" alt="About">
+                                    <img src="{% static 'assets/images/about.jpg' %}" alt="About">
                                 </div>
                                 <div class="about-btn">
                                     <a href="#" class="btn btn-primary btn-hover-secondary">Meet Instructor</a>
@@ -417,7 +418,7 @@
                         <div class="col-lg-7">
                             <!-- About Content Start -->
                             <div class="about-content bg-white">
-                                <img class="shape" src="assets/images/shape/shape-1.png" alt="shape">
+                                <img class="shape" src="{% static 'assets/images/shape/shape-1.png' %}" alt="shape">
                                 <div class="content-wrapper">
                                     <h6 class="sub-title">25+ years of experience</h6>
                                     <h2 class="main-title">We have expert instructor for help our students.</h2>
@@ -454,7 +455,7 @@
                             <!-- Single Courses Start -->
                             <div class="single-courses">
                                 <div class="courses-images">
-                                    <a href="courses-details-left-sidebar.html"><img src="assets/images/courses/courses-1.jpg" alt="courses"></a>
+                                    <a href="courses-details-left-sidebar.html"><img src="{% static 'assets/images/courses/courses-1.jpg' %}" alt="courses"></a>
                                 </div>
                                 <div class="courses-content">
                                     <div class="courses-price">
@@ -476,7 +477,7 @@
                             <!-- Single Courses Start -->
                             <div class="single-courses">
                                 <div class="courses-images">
-                                    <a href="courses-details-left-sidebar.html"><img src="assets/images/courses/courses-2.jpg" alt="courses"></a>
+                                    <a href="courses-details-left-sidebar.html"><img src="{% static 'assets/images/courses/courses-2.jpg' %}" alt="courses"></a>
                                 </div>
                                 <div class="courses-content">
                                     <div class="courses-price">
@@ -595,8 +596,8 @@
         <!-- Testimonial Section Start -->
         <div class="section section-padding testimonial-section testimonial-active">
 
-            <img class="shape-01 animation-down" src="assets/images/shape/shape-5.png" alt="Shape">
-            <img class="shape-02 animation-up" src="assets/images/shape/shape-6.png" alt="Shape">
+            <img class="shape-01 animation-down" src="{% static 'assets/images/shape/shape-5.png' %}" alt="Shape">
+            <img class="shape-02 animation-up" src="{% static 'assets/images/shape/shape-6.png' %}" alt="Shape">
 
             <div class="container">
 
@@ -615,7 +616,7 @@
                             <!-- Single Testimonial Start -->
                             <div class="single-testimonial swiper-slide">
                                 <div class="testimonial-author">
-                                    <img src="assets/images/author/author-01.jpg" alt="Author">
+                                    <img src="{% static 'assets/images/author/author-01.jpg' %}" alt="Author">
                                     <i class="flaticon-left-quote"></i>
                                 </div>
                                 <p>Lorem Ipsum is simply dummy text of the printing typesetting industry has been the industry's standard dummy text ever ince the 1500s when unknown printer took a galley of type and scrambled it to</p>
@@ -1016,27 +1017,27 @@
     ============================================ -->
 
     <!-- Modernizer & jQuery JS -->
-    <script src="assets/js/vendor/modernizr-3.11.2.min.js"></script>
-    <script src="assets/js/vendor/jquery-3.5.1.min.js"></script>
+    <script src="{% static 'assets/js/vendor/modernizr-3.11.2.min.js' %}"></script>
+    <script src="{% static 'assets/js/vendor/jquery-3.5.1.min.js' %}"></script>
 
     <!-- Bootstrap JS -->
-    <script src="assets/js/plugins/popper.min.js"></script>
-    <script src="assets/js/plugins/bootstrap.min.js"></script>
+    <script src="{% static 'assets/js/plugins/popper.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/bootstrap.min.js' %}"></script>
 
     <!-- Plugins JS -->
-    <script src="assets/js/plugins/swiper-bundle.min.js"></script>
-    <script src="assets/js/plugins/jquery.magnific-popup.min.js"></script>
-    <script src="assets/js/plugins/jquery.nice-select.min.js"></script>
-    <script src="assets/js/plugins/video-playlist.js"></script>
-    <script src="assets/js/plugins/ajax-contact.js"></script>
+    <script src="{% static 'assets/js/plugins/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/video-playlist.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/ajax-contact.js' %}"></script>
 
     <!--====== Use the minified version files listed below for better performance and remove the files listed above ======-->
     <!-- <script src="assets/js/plugins.min.js"></script> -->
 
 
     <!-- Main JS -->
-    <script src="assets/js/main.js"></script>
+    <script src="{% static 'assets/js/main.js' %}"></script>
 
 </body>
-
+{% endblock content %}
 </html>

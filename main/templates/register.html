@@ -54,7 +54,7 @@
 
                         <!-- Header Logo Start -->
                         <div class="header-logo">
-                            <a href="index.html"><img src="{% static 'assets/images/logo.png' %}" alt="Logo"></a>
+                            <a href="{% url 'main:home' %}"><img src="{% static 'assets/images/logo.png' %}" alt="Logo"></a>
                         </div>
                         <!-- Header Logo End -->
 
@@ -62,7 +62,7 @@
                         <div class="header-menu d-none d-lg-flex">
 
                             <ul class="nav-menu">
-                                <li><a class="active" href="index.html">Home</a></li>
+                                <li><a class="active" href="{% url 'main:home' %}">Home</a></li>
                                 <li><a href="about.html">About Us</a></li>
                                 <li>
                                     <a href="#">All Course</a>
@@ -161,7 +161,7 @@
             <!-- Mobile Menu Start -->
             <div class="mobile-menu-items">
                 <ul class="nav-menu">
-                    <li><a class="active" href="index.html">Home</a></li>
+                    <li><a class="active" href="{% url 'main:home' %}">Home</a></li>
                     <li><a href="about.html">About Us</a></li>
                     <li>
                         <a href="#">All Course</a>
@@ -236,7 +236,7 @@
                     <h2 class="page-title">Registration Form</h2>
 
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'main:home' %}">Home</a></li>
                         <li class="breadcrumb-item active">Register</li>
                     </ul>
                 </div>
@@ -247,7 +247,7 @@
         <!-- Page banner Section End -->
 
         <!-- Login & Register Section Start -->
-        <div class="section section-padding">
+        <div class="section section-padding" id="login-register">
             <div class="container">
 
                 <!-- Register & Login Wrapper Start -->
@@ -259,30 +259,31 @@
                                 <h3 class="title">Registration <span>Now</span></h3>
 
                                 <div class="form-wrapper">
-                                    <form action="#">
+                                    <form method="POST">
+                                        {% csrf_token %}
                                         <!-- Single Form Start -->
                                         <div class="single-form">
-                                            <input type="text" placeholder="Name">
+                                            <input type="text" name="username" placeholder="Username">
                                         </div>
                                         <!-- Single Form End -->
                                         <!-- Single Form Start -->
                                         <div class="single-form">
-                                            <input type="email" placeholder="Email">
+                                            <input type="email" name="email" placeholder="Email">
                                         </div>
                                         <!-- Single Form End -->
                                         <!-- Single Form Start -->
                                         <div class="single-form">
-                                            <input type="password" placeholder="Password">
+                                            <input type="password" name="password1" placeholder="Password">
                                         </div>
                                         <!-- Single Form End -->
                                         <!-- Single Form Start -->
                                         <div class="single-form">
-                                            <input type="password" placeholder="Confirm Password">
+                                            <input type="password" name="password2" placeholder="Confirm Password">
                                         </div>
                                         <!-- Single Form End -->
                                         <!-- Single Form Start -->
                                         <div class="single-form">
-                                            <button class="btn btn-primary btn-hover-dark w-100" type="submit">Create an account</button>
+                                            <input class="btn btn-primary btn-hover-dark w-100" type="submit" name="submit" value="Create an account"/>
                                         </div>
                                         <!-- Single Form End -->
                                         <p>Already have an account? <a href="{% url 'main:login' %}">Log in instead!</a></p>

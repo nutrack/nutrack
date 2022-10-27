@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Nutras Fitness & Nutrition Bootstrap 5 Template</title>
+    <title>Nutrack</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -63,9 +63,9 @@
 
                             <ul class="nav-menu">
                                 <li><a class="active" href="{% url 'main:home' %}">Home</a></li>
-                                <li><a href="about.html">About Us</a></li>
+                                <li><a href="about.html">CaloryCalc</a></li>
                                 <li>
-                                    <a href="#">All Course</a>
+                                    <a href="#">Food Recommendation</a>
                                     <ul class="sub-menu">
                                         <li><a href="courses.html">Courses</a></li>
                                         <li><a href="my-courses.html">My Courses</a></li>
@@ -78,7 +78,7 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="#">Pages </a>
+                                    <a href="#">Articles </a>
                                     <ul class="sub-menu">
                                         <li><a href="after-enroll.html">After Enroll</a></li>
                                         <li><a href="courses-admin.html">Instructor Dashboard (Course List)</a></li>
@@ -95,10 +95,10 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="#">Blog</a>
+                                    <a href="#">About Us</a>
                                     <ul class="sub-menu">
                                         <li>
-                                            <a href="#">Blog</a>
+                                            <a href="#">Dive into us!</a>
                                             <ul class="sub-menu">
                                                 <li><a href="blog-grid.html">Blog Grid</a></li>
                                                 <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
@@ -106,7 +106,7 @@
                                             </ul>
                                         </li>
                                         <li>
-                                            <a href="#">Blog Details</a>
+                                            <a href="#">Testimonial</a>
                                             <ul class="sub-menu">
                                                 <li><a href="blog-details-left-sidebar.html">Blog Details Left Sidebar</a></li>
                                                 <li><a href="blog-details-right-sidebar.html">Blog Details Right Sidebar</a></li>
@@ -228,7 +228,7 @@
 
 
         <!-- Page banner Section Start -->
-        <div class="section page-banner-section" style="background-image: url(assets/images/page-banner.jpg);">
+        <div class="section page-banner-section" style="background-image: url(/static/assets/images/page-banner.jpg);">
             <div class="container">
 
                 <!-- Page banner Section Start -->
@@ -261,6 +261,11 @@
                                 <div class="form-wrapper">
                                     <form method="POST">
                                         {% csrf_token %}
+                                        <!-- Single Form Start -->
+                                        <div class="single-form">
+                                            <input type="text" name="username" placeholder="Username">
+                                        </div>
+                                        <!-- Single Form End -->
                                         <!-- Single Form Start -->
                                         <div class="single-form">
                                             <input type="email" name="email" placeholder="Email">

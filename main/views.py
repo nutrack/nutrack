@@ -10,16 +10,21 @@ import datetime
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
+from main.forms import CreateUserForm
+
 # Create your views here.
-@login_required(login_url='/login/')
+# @login_required(login_url='/login/')
 def home(request):
     return render(request, 'index.html')
 
 def register(request):
-    form = UserCreationForm()
+    form = CreateUserForm()
 
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = CreateUserForm(request.POST)
+        print(form.is_valid())
+        print(form.cleaned_data)
+        print(form.error_messages)
         if form.is_valid():
             form.save()
             messages.success(request, 'Akun telah berhasil dibuat!')
@@ -31,8 +36,9 @@ def register(request):
 def login_user(request):
     if request.method == 'POST':
         username = request.POST.get('username')
-        password = request.POST.get('password')
+        password = request.POST.get('password1')
         user = authenticate(request, username=username, password=password)
+        print(user)
         if user is not None:
             login(request, user) # melakukan login terlebih dahulu
             response = HttpResponseRedirect(reverse("main:home")) # membuat response
@@ -42,6 +48,10 @@ def login_user(request):
             messages.info(request, 'Username atau Password salah!')
     context = {}
     return render(request, 'login.html', context)
+
+# @login_required(login_url='/login/')
+# # def getUser(request):
+
 
 def logout_user(request):
     logout(request)

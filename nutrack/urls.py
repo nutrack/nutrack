@@ -22,6 +22,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
     path(r'login/', login_user),
+    path('calorycalc/', include('calorycalc.urls')),
+    
 ]
 
 urlpatterns += staticfiles_urlpatterns()

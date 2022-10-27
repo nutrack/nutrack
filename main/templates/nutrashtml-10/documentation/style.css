@@ -159,7 +159,7 @@ img {
     padding: 36px 0px;
 }
 .logo-title {
-  background: rgba(0, 0, 0, 0) url("images/logo.png") no-repeat scroll center center;
+  background: rgba(0, 0, 0, 0) url("../assets/images/logo.png") no-repeat scroll center center;
   color: #ffffff;
   font-size: 45px;
   font-weight: bold;

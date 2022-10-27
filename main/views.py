@@ -50,10 +50,6 @@ def login_user(request):
     context = {}
     return render(request, 'login.html', context)
 
-# @login_required(login_url='/login/')
-# # def getUser(request):
-
-
 def logout_user(request):
     logout(request)
     response = HttpResponseRedirect(reverse('main:login'))

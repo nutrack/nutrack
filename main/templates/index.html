@@ -113,21 +113,25 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li><a href="contact.html">Contact</a></li>
                             </ul>
 
-
+                            {% if user.is_authenticated %}
                             <div class="header-btn">
-                                <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:register' %}">Sign Up</a>
+                                <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:logout' %}">Bye, {{user.get_username}}!</a>
                             </div>
-
+                            {% else %}
+                            <div class="header-btn">
+                                <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:register' %}">Want to join us?</a>
+                            </div>
+                            {% endif %}
                         </div>
                         <!-- Header Menu End -->
-
+                    
                         <!-- Header Toggle Start -->
+                        {% if user.is_authenticated %}
                         <div class="header-toggle d-lg-none">
 
-                            <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:register' %}">Sign Up</a>
+                            <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:logout' %}">Bye, {{user.get_username}}!</a>
 
                             <a href="#" class="menu-toggle">
                                 <span></span>
@@ -135,6 +139,18 @@
                                 <span></span>
                             </a>
                         </div>
+                        {% else %}
+                        <div class="header-toggle d-lg-none">
+
+                            <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:register' %}">Want to join us?</a>
+
+                            <a href="#" class="menu-toggle">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </a>
+                        </div>
+                        {% endif %}
                         <!-- Header Toggle End -->
 
                     </div>
@@ -212,7 +228,6 @@
                             </li>
                         </ul>
                     </li>
-                    <li><a href="contact.html">Contact</a></li>
                 </ul>
 
             </div>

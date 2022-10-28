@@ -1,5 +1,4 @@
 """project_django URL Configuration
-
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
 Examples:
@@ -23,7 +22,7 @@ urlpatterns = [
     path('', include('main.urls')),
     path(r'login/', login_user),
     path('calorycalc/', include('calorycalc.urls')),
-    
+    path('food_rec/', include('food_rec.urls')),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

@@ -10,12 +10,80 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>  
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+        <script>
+
+function isikonten(calory) {
+    
+      $("#tabel-kalori").html(`
+      <h3>Calory yang didapatkan hari ini: ${calory}</h3>
+      `)
+    }
+
+    function time(){
+    var now = new Date();
+    var h = now.getHours();
+    var m = now.getMinutes();
+    var s = now.getSeconds();
+    if(h==0 && s==0){
+        location.reload();
+    }
+        $("#introduction_time").html(`
+        <h3>${now}</h3>
+        `)
+        setTimeout(time,1000);
+    }
+
+$(document).ready(function() {
+      time()
+      var jumlahkalori=0;
+      $.get("{% url 'calorycalc:show_calory_json' %}", function(calory) {
+        console.log(calory);   
+        if(calory.length==0){
+            isikonten(0)
+        }else{
+        for (const info of calory) {
+            jumlahkalori+=info["calory"];
+        }
+    }
+    isikonten(jumlahkalori)
+      }, "json")
+
+      $("form").submit(function(event) {
+        event.preventDefault()
+        var form = {
+          calory: $("#calory").val(),
+          csrfmiddlewaretoken: "{{ csrf_token }}",
+        } 
+        $.post("{% url 'calorycalc:add_calory' %}", form, function(info) {
+            jumlahkalori+=info["calory"];
+            document.getElementById("calory").value="";
+            isikonten(jumlahkalori)
+        }, "json")
+      })
+    })
+        </script>
     </head>
     <body>
         <div id="introduction">
             <h3>Welcome, {{request.user.username.title }}</h3>
+            <div id="introduction_time">
+
+            </div>
         </div>
         <div id="tabel-kalori">
+        </div>
+        <div id="form_submit"> 
+            <form method="POST" action="">
+                {% csrf_token %}
+                <table>
+                    <h3>Calory yang didapat: </h3>
+                    <input type="number" id="calory" name="calory" placeholder="220" class="form-control">   
+                    <br>
+                </table>
+                    <input class="btn btn-dark" data-bs-dismiss="modal" type="submit" value="Tambah">
+            </form>
         </div>
 
     </body>

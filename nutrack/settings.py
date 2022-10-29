@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'article',
     'calorycalc',
     'food_rec',
+    'testimonies',
 ]
 
 MIDDLEWARE = [

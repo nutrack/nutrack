@@ -113,21 +113,25 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li><a href="contact.html">Contact</a></li>
                             </ul>
 
-
+                            {% if user.is_authenticated %}
                             <div class="header-btn">
-                                <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:register' %}">Sign Up</a>
+                                <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:logout' %}">Bye, {{user.get_username}}!</a>
                             </div>
-
+                            {% else %}
+                            <div class="header-btn">
+                                <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:register' %}">Want to join us?</a>
+                            </div>
+                            {% endif %}
                         </div>
                         <!-- Header Menu End -->
-
+                    
                         <!-- Header Toggle Start -->
+                        {% if user.is_authenticated %}
                         <div class="header-toggle d-lg-none">
 
-                            <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:register' %}">Sign Up</a>
+                            <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:logout' %}">Bye, {{user.get_username}}!</a>
 
                             <a href="#" class="menu-toggle">
                                 <span></span>
@@ -135,6 +139,18 @@
                                 <span></span>
                             </a>
                         </div>
+                        {% else %}
+                        <div class="header-toggle d-lg-none">
+
+                            <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:register' %}">Want to join us?</a>
+
+                            <a href="#" class="menu-toggle">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </a>
+                        </div>
+                        {% endif %}
                         <!-- Header Toggle End -->
 
                     </div>
@@ -212,7 +228,6 @@
                             </li>
                         </ul>
                     </li>
-                    <li><a href="contact.html">Contact</a></li>
                 </ul>
 
             </div>
@@ -241,7 +256,7 @@
                                 <h6 class="sub-title">Fitness & Nutrition</h6>
                                 <h1 class="main-title">This life style for your fitness, not only diet.</h1>
                                 <p>It has survived not only five centuries but also</p>
-                                <a href="#" class="btn btn-primary btn-hover-secondary">Start Course</a>
+                                <a href="{% url 'main:register' %}" class="btn btn-primary btn-hover-secondary">Sign Up</a>
                             </div>
                             <!-- Slider Content End -->
 
@@ -274,7 +289,7 @@
                                 <h6 class="sub-title">Fitness & Nutrition</h6>
                                 <h1 class="main-title">This life style for your fitness, not only diet.</h1>
                                 <p>It has survived not only five centuries but also</p>
-                                <a href="#" class="btn btn-primary btn-hover-secondary">Start Course</a>
+                                <a href="{% url 'main:register' %}" class="btn btn-primary btn-hover-secondary">Sign Up</a>
                             </div>
                             <!-- Slider Content End -->
 
@@ -985,14 +1000,7 @@
                     <div class="copyright-wrapper">
 
                         <div class="copyright-text">
-                            <p>&copy; 2021 <span> Nutras </span> Made with <i class="icofont-heart-alt"></i> by <a href="https://hasthemes.com/" target="_blank">HasThemes</a></p>
-                        </div>
-
-                        <div class="copyright-link">
-                            <a href="#">Terms of Service</a>
-                            <a href="#">Privacy Policy</a>
-                            <a href="#">Sitemap</a>
-                            <a href="#">Security</a>
+                            <p>&copy; 2022 <span> Nutrack </span> Made with <i class="icofont-heart-alt"></i> by <a href="https://github.com/nutrack" target="_blank">Kelompok F10 PTS PBP Semester Gasal, Tahun Ajaran 2022/2023</a></p>
                         </div>
 
                     </div>

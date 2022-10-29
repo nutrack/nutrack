@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Nutrack</title>
+    <title>NuTrack - Article</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -54,7 +54,7 @@
 
                         <!-- Header Logo Start -->
                         <div class="header-logo">
-                            <a href="{% url 'main:home' %}"><img src="{% static 'assets/images/logo.png' %}" alt="Logo"></a>
+                            <a href="index.html"><img src="{% static 'assets/images/logo-nutrack.png' %}" alt="Logo"></a>
                         </div>
                         <!-- Header Logo End -->
 
@@ -62,10 +62,10 @@
                         <div class="header-menu d-none d-lg-flex">
 
                             <ul class="nav-menu">
-                                <li><a class="active" href="{% url 'main:home' %}">Home</a></li>
-                                <li><a href="about.html">CaloryCalc</a></li>
+                                <li><a class="active" href="index.html">Home</a></li>
+                                <li><a href="about.html">About Us</a></li>
                                 <li>
-                                    <a href="#">Food Recommendation</a>
+                                    <a href="#">All Course</a>
                                     <ul class="sub-menu">
                                         <li><a href="courses.html">Courses</a></li>
                                         <li><a href="my-courses.html">My Courses</a></li>
@@ -78,7 +78,7 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="#">Articles </a>
+                                    <a href="#">Pages </a>
                                     <ul class="sub-menu">
                                         <li><a href="after-enroll.html">After Enroll</a></li>
                                         <li><a href="courses-admin.html">Instructor Dashboard (Course List)</a></li>
@@ -88,17 +88,17 @@
                                         <li><a href="engagement.html">Course engagement</a></li>
                                         <li><a href="traffic-conversion.html">Traffic & conversion</a></li>
                                         <li><a href="messages.html">Messages</a></li>
-                                        <li><a href="{% url 'main:register' %}">Register</a></li>
-                                        <li><a href="{% url 'main:login' %}">Login</a></li>
+                                        <li><a href="register.html">Register</a></li>
+                                        <li><a href="login.html">Login</a></li>
                                         <li><a href="faq.html">FAQ</a></li>
                                         <li><a href="404-error.html">404 Error</a></li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="#">About Us</a>
+                                    <a href="#">Blog</a>
                                     <ul class="sub-menu">
                                         <li>
-                                            <a href="#">Dive into us!</a>
+                                            <a href="#">Blog</a>
                                             <ul class="sub-menu">
                                                 <li><a href="blog-grid.html">Blog Grid</a></li>
                                                 <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
@@ -106,7 +106,7 @@
                                             </ul>
                                         </li>
                                         <li>
-                                            <a href="#">Testimonial</a>
+                                            <a href="#">Blog Details</a>
                                             <ul class="sub-menu">
                                                 <li><a href="blog-details-left-sidebar.html">Blog Details Left Sidebar</a></li>
                                                 <li><a href="blog-details-right-sidebar.html">Blog Details Right Sidebar</a></li>
@@ -114,11 +114,12 @@
                                         </li>
                                     </ul>
                                 </li>
+                                <li><a href="contact.html">Contact</a></li>
                             </ul>
 
 
                             <div class="header-btn">
-                                <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:login' %}">Sign Up</a>
+                                <a class="btn btn-secondary btn-hover-primary" href="login.html">Sign Up</a>
                             </div>
 
                         </div>
@@ -127,7 +128,7 @@
                         <!-- Header Toggle Start -->
                         <div class="header-toggle d-lg-none">
 
-                            <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:login' %}">Sign Up</a>
+                            <a class="btn btn-secondary btn-hover-primary" href="login.html">Sign Up</a>
 
                             <a href="#" class="menu-toggle">
                                 <span></span>
@@ -160,10 +161,10 @@
             <!-- Mobile Menu Start -->
             <div class="mobile-menu-items">
                 <ul class="nav-menu">
-                    <li><a class="active" href="{% url 'main:home' %}">Home</a></li>
-                    <li><a href="about.html">CaloryCalc</a></li>
+                    <li><a class="active" href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
                     <li>
-                        <a href="#">Food Recommendation</a>
+                        <a href="#">All Course</a>
                         <ul class="sub-menu">
                             <li><a href="courses.html">Courses</a></li>
                             <li><a href="my-courses.html">My Courses</a></li>
@@ -176,7 +177,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#">Articles </a>
+                        <a href="#">Pages </a>
                         <ul class="sub-menu">
                             <li><a href="after-enroll.html">After Enroll</a></li>
                             <li><a href="courses-admin.html">Instructor Dashboard (Course List)</a></li>
@@ -186,17 +187,17 @@
                             <li><a href="engagement.html">Course engagement</a></li>
                             <li><a href="traffic-conversion.html">Traffic & conversion</a></li>
                             <li><a href="messages.html">Messages</a></li>
-                            <li><a href="{% url 'main:register' %}">Register</a></li>
-                            <li><a href="{% url 'main:login' %}">Login</a></li>
+                            <li><a href="register.html">Register</a></li>
+                            <li><a href="login.html">Login</a></li>
                             <li><a href="faq.html">FAQ</a></li>
                             <li><a href="404-error.html">404 Error</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="#">About Us</a>
+                        <a href="#">Blog</a>
                         <ul class="sub-menu">
                             <li>
-                                <a href="#">Dive into us!</a>
+                                <a href="#">Blog</a>
                                 <ul class="sub-menu">
                                     <li><a href="blog-grid.html">Blog Grid</a></li>
                                     <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
@@ -204,7 +205,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="#">Testimonial</a>
+                                <a href="#">Blog Details</a>
                                 <ul class="sub-menu">
                                     <li><a href="blog-details-left-sidebar.html">Blog Details Left Sidebar</a></li>
                                     <li><a href="blog-details-right-sidebar.html">Blog Details Right Sidebar</a></li>
@@ -212,6 +213,7 @@
                             </li>
                         </ul>
                     </li>
+                    <li><a href="contact.html">Contact</a></li>
                 </ul>
 
             </div>
@@ -226,16 +228,16 @@
 
 
         <!-- Page banner Section Start -->
-        <div class="section page-banner-section" style="background-image: url(/static/assets/images/page-banner.jpg);">
+        <div class="section page-banner-section" style="background-image: url({% static 'assets/images/page-banner.jpg' %});">
             <div class="container">
 
                 <!-- Page banner Section Start -->
                 <div class="page-banner-content">
-                    <h2 class="page-title">Registration Form</h2>
+                    <h2 class="page-title">{{article_post.title}}</h2>
 
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{% url 'main:home' %}">Home</a></li>
-                        <li class="breadcrumb-item active">Register</li>
+                        <li class="breadcrumb-item"><a href="{% url 'article:article' %}">Article</a></li>
                     </ul>
                 </div>
                 <!-- Page banner Section End -->
@@ -244,93 +246,45 @@
         </div>
         <!-- Page banner Section End -->
 
-        <!-- Login & Register Section Start -->
-        <div class="section section-padding" id="login-register">
-            <div class="container">
+        <!-- Blog Post Section Start -->
+        <div class="section section-padding-02" style="padding-top: 25px;">
+            <div class="container" style="padding-bottom: 80px;">
 
-                <!-- Register & Login Wrapper Start -->
-                <div class="register-login-wrapper">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-6 col-xl-5">
-                            <!-- Register & Login Form Start -->
-                            <div class="register-login-form">
-                                <h3 class="title">Registration <span>Now</span></h3>
+                <!-- Blog Wrapper Start -->
+                <div class="blog-wrapper-02">
 
-                                <div class="form-wrapper">
-                                    <form method="POST">
-                                        {% csrf_token %}
-                                        <!-- Single Form Start -->
-                                        <div class="single-form">
-                                            <input type="text" name="username" placeholder="Username">
+                            <!-- Blog Details Wrapper Start -->
+                            <div class="blog-details-wrapper">
+
+                                <!-- <div class="details-images">
+                                    <img src="{% static 'assets/images/blog/blog-details.jpg' %}" alt="Blog Details">
+                                </div> -->
+
+                                <div class="blog-details-admin-meta" style="padding-top: 20px;">
+                                    <div class="author">
+                                        <div class="author-name" style="padding-left: 0px;">
+                                            <p class="name">By: {{article_post.author}}</p>
                                         </div>
-                                        <!-- Single Form End -->
-                                        <!-- Single Form Start -->
-                                        <div class="single-form">
-                                            <input type="email" name="email" placeholder="Email">
-                                        </div>
-                                        <!-- Single Form End -->
-                                        <!-- Single Form Start -->
-                                        <div class="single-form">
-                                            <input type="password" name="password1" placeholder="Password">
-                                        </div>
-                                        <!-- Single Form End -->
-                                        <!-- Single Form Start -->
-                                        <div class="single-form">
-                                            <input type="password" name="password2" placeholder="Confirm Password">
-                                        </div>
-                                        <!-- Single Form End -->
-                                        <!-- Single Form Start -->
-                                        <div class="single-form">
-                                            <input class="btn btn-primary btn-hover-dark w-100" type="submit" name="submit" value="Create an account"/>
-                                        </div>
-                                        <!-- Single Form End -->
-                                        <p>Already have an account? <a href="{% url 'main:login' %}">Log in instead!</a></p>
-                                    </form>
+                                    </div>
+                                    <div class="blog-meta">
+                                        <span> <i class="icofont-calendar"></i>{{article_post.date}}</span>
+                                        <span> <i class="icofont-heart"></i>{{article_post.like}}</span>
+                                    </div>
+                                </div>
+
+
+                                <div class="blog-details-description">
+                                    <p>{{article_post.article_post}}</p>
+
                                 </div>
                             </div>
-                            <!-- Register & Login Form End -->
-                        </div>
-                    </div>
+                            <!-- Blog Details Wrapper End -->
                 </div>
-                <!-- Register & Login Wrapper End -->
+                <!-- Blog Wrapper End -->
 
             </div>
         </div>
-        <!-- Login & Register Section End -->
-
-        <!-- Download App Start -->
-        <div class="section section-padding download-section">
-
-            <img class="shape-01" src="{% static 'assets/images/shape/shape-7.png' %}" alt="Shape">
-            <img class="shape-02" src="{% static 'assets/images/shape/shape-8.png' %}" alt="Shape">
-
-            <div class="container">
-
-                <!-- Download App Wrapper Start -->
-                <div class="download-app-wrapper">
-
-                    <!-- Section Title Start -->
-                    <div class="section-title shape-none">
-                        <h6 class="sub-title">mobile app available</h6>
-                        <h2 class="main-title">Download mobile app. and start class anytime.</h2>
-                    </div>
-                    <!-- Section Title End -->
-
-                    <!-- Download App Button End -->
-                    <div class="download-app-btn">
-                        <ul class="app-btn">
-                            <li><a href="#"><img src="{% static 'assets/images/play-store.jpg' %}" alt="Play Store"></a></li>
-                            <li><a href="#"><img src="{% static 'assets/images/app-store.jpg' %}" alt="App Store"></a></li>
-                        </ul>
-                    </div>
-                    <!-- Download App Button End -->
-
-                </div>
-                <!-- Download App Wrapper End -->
-
-            </div>
-        </div>
-        <!-- Download App End -->
+        <!-- Blog Post Section End -->
 
         <!-- Footer Start -->
         <div class="section footer-section">
@@ -338,7 +292,7 @@
             <!-- Footer Widget Section Start -->
             <div class="footer-widget-section section-padding">
 
-                <img class="shape-01 animation-rotate" src="{% static 'assets/images/shape/shape-9.png' %}" alt="Shape">
+                <img class="shape-01 animation-rotate" src="assets/images/shape/shape-9.png" alt="Shape">
 
                 <div class="container">
 
@@ -428,7 +382,7 @@
 
                 </div>
 
-                <img class="shape-02 animation-rotate" src="{% static 'assets/images/shape/shape-9.png' %}" alt="Shape">
+                <img class="shape-02 animation-rotate" src="assets/images/shape/shape-9.png" alt="Shape">
 
             </div>
             <!-- Footer Widget Section End -->
@@ -441,7 +395,14 @@
                     <div class="copyright-wrapper">
 
                         <div class="copyright-text">
-                            <p>&copy; 2022 <span> Nutrack </span> Made with <i class="icofont-heart-alt"></i> by <a href="https://github.com/nutrack" target="_blank">Kelompok F10 PTS PBP Semester Gasal, Tahun Ajaran 2022/2023</a></p>
+                            <p>&copy; 2021 <span> Nutras </span> Made with <i class="icofont-heart-alt"></i> by <a href="https://hasthemes.com/" target="_blank">HasThemes</a></p>
+                        </div>
+
+                        <div class="copyright-link">
+                            <a href="#">Terms of Service</a>
+                            <a href="#">Privacy Policy</a>
+                            <a href="#">Sitemap</a>
+                            <a href="#">Security</a>
                         </div>
 
                     </div>

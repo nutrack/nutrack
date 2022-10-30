@@ -48,7 +48,7 @@ def add_calory(request):
     form.instance.user = request.user
     if form.is_valid():
         form.save()
-        return JsonResponse({'calory':form.instance.calory})
+        return JsonResponse({'calory':form.instance.calory,"date": form.instance.date,"id":form.instance.pk})
     return redirect("calorycalc:calorycalc")
 
 

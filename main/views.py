@@ -10,6 +10,9 @@ import datetime
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
+from django.http import HttpResponse, HttpRequest
+from django.core import serializers
+
 from main.forms import CreateUserForm
 import sys
 
@@ -21,8 +24,13 @@ from calorycalc.models import caloryInfo
 
 # Create your views here.
 # @login_required(login_url='/login/')
-def home(request):
+def home(request:HttpRequest):
     return render(request, 'index.html')
+
+def choose_user(request:HttpRequest):
+    if request.user.is_authenticated:
+        return HttpResponseRedirect(reverse("main:caloryInfo"))
+    return HttpResponseRedirect(reverse("main:home"))
 
 @login_required(login_url='/login/')
 def show_calory_info(request):
@@ -31,6 +39,7 @@ def show_calory_info(request):
         'get_calory': data_calory,
     }
     return(request, 'index.html', context)
+    
 
 def register(request):
     form = CreateUserForm()
@@ -67,3 +76,7 @@ def logout_user(request):
     response = HttpResponseRedirect(reverse('main:home'))
     response.delete_cookie('last_login')
     return response
+
+def calorycalc_json(request):
+    data = caloryInfo.objects.all()
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")

@@ -54,7 +54,7 @@
 
                         <!-- Header Logo Start -->
                         <div class="header-logo">
-                            <a href="{% url 'main:home' %}"><img src="{% static 'assets/images/logo.png' %}" alt="Logo"></a>
+                            <a href="{% url 'main:home' %}"><img src="{% static 'assets/images/logo-nutrack-copy.png' %}" alt="Logo"></a>
                         </div>
                         <!-- Header Logo End -->
 
@@ -63,7 +63,7 @@
 
                             <ul class="nav-menu">
                                 <li><a class="active" href="{% url 'main:home' %}">Home</a></li>
-                                <li><a href="about.html">CaloryCalc</a></li>
+                                <li><a href="#">CaloryCalc</a></li>
                                 <li>
                                     <a href="#">Food Recommendation</a>
                                     <ul class="sub-menu">
@@ -118,7 +118,7 @@
 
 
                             <div class="header-btn">
-                                <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:login' %}">Sign Up</a>
+                                <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:register' %}">Want to join us?</a>
                             </div>
 
                         </div>
@@ -127,7 +127,7 @@
                         <!-- Header Toggle Start -->
                         <div class="header-toggle d-lg-none">
 
-                            <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:login' %}">Sign Up</a>
+                            <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:register' %}">Want to join us?</a>
 
                             <a href="#" class="menu-toggle">
                                 <span></span>
@@ -161,7 +161,7 @@
             <div class="mobile-menu-items">
                 <ul class="nav-menu">
                     <li><a class="active" href="{% url 'main:home' %}">Home</a></li>
-                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="#">About Us</a></li>
                     <li>
                         <a href="#">All Course</a>
                         <ul class="sub-menu">
@@ -294,40 +294,6 @@
         </div>
         <!-- Login & Register Section End -->
 
-        <!-- Download App Start -->
-        <div class="section section-padding download-section">
-
-            <img class="shape-01" src="{% static 'assets/images/shape/shape-7.png' %}" alt="Shape">
-            <img class="shape-02" src="{% static 'assets/images/shape/shape-8.png' %}" alt="Shape">
-
-            <div class="container">
-
-                <!-- Download App Wrapper Start -->
-                <div class="download-app-wrapper">
-
-                    <!-- Section Title Start -->
-                    <div class="section-title shape-none">
-                        <h6 class="sub-title">mobile app available</h6>
-                        <h2 class="main-title">Download mobile app. and start class anytime.</h2>
-                    </div>
-                    <!-- Section Title End -->
-
-                    <!-- Download App Button End -->
-                    <div class="download-app-btn">
-                        <ul class="app-btn">
-                            <li><a href="#"><img src="{% static 'assets/images/play-store.jpg' %}" alt="Play Store"></a></li>
-                            <li><a href="#"><img src="{% static 'assets/images/app-store.jpg' %}" alt="App Store"></a></li>
-                        </ul>
-                    </div>
-                    <!-- Download App Button End -->
-
-                </div>
-                <!-- Download App Wrapper End -->
-
-            </div>
-        </div>
-        <!-- Download App End -->
-
         <!-- Footer Start -->
         <div class="section footer-section">
 
@@ -341,83 +307,19 @@
                     <!-- Footer Widget Wrapper Start -->
                     <div class="footer-widget-wrapper">
                         <div class="row">
-                            <div class="col-lg-4">
+                            <!-- Footer Widget Start -->
+                            <div style="text-align: center;">
+                                <h3 class="footer-widget-title">All Features</h3>
 
-                                <!-- Footer Widget Start -->
-                                <div class="footer-widget">
-                                    <h3 class="footer-widget-title">Subscribe Newsletter</h3>
-
-                                    <div class="widget-newsletter">
-                                        <p>Lorem Ipsum has been them an industry printer took a galley make book.</p>
-
-                                        <div class="newsletter-form">
-                                            <form action="#">
-                                                <input type="text" placeholder="Enter email">
-                                                <button class="btn btn-primary btn-hover-white">Subscribe Now</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Footer Widget End -->
-
+                                <ul class="widget-link">
+                                    <li><a href="#">CaloryCalc</a></li>
+                                    <li><a href="#">Food Recommendation</a></li>
+                                    <li><a href="#">Articles</a></li>
+                                    <li><a href="#">Testimonial</a></li>
+                                    <li><a href="#">Dive into us!</a></li>
+                                </ul>
                             </div>
-                            <div class="col-lg-8">
-
-                                <!-- Footer Widget Start -->
-                                <div class="widget-wrapper">
-
-                                    <!-- Footer Widget Start -->
-                                    <div class="footer-widget">
-                                        <h3 class="footer-widget-title">All Courses</h3>
-
-                                        <ul class="widget-link">
-                                            <li><a href="#">Daily Exercise</a></li>
-                                            <li><a href="#">Find Your Balance</a></li>
-                                            <li><a href="#">Personal Program</a></li>
-                                            <li><a href="#">Natural Process</a></li>
-                                            <li><a href="#">Immune System</a></li>
-                                            <li><a href="#">Gives You Energy</a></li>
-                                        </ul>
-                                    </div>
-                                    <!-- Footer Widget End -->
-
-                                    <!-- Footer Widget Start -->
-                                    <div class="footer-widget">
-                                        <h3 class="footer-widget-title">Help Links</h3>
-
-                                        <ul class="widget-link">
-                                            <li><a href="#">Privacy Policy</a></li>
-                                            <li><a href="#">Discussion</a></li>
-                                            <li><a href="#">Terms & Conditions</a></li>
-                                            <li><a href="#">Customer Support</a></li>
-                                            <li><a href="#">Course FAQ’s</a></li>
-                                            <li><a href="#">Online Classes</a></li>
-                                        </ul>
-                                    </div>
-                                    <!-- Footer Widget End -->
-
-                                    <!-- Footer Widget Start -->
-                                    <div class="footer-widget">
-                                        <h3 class="footer-widget-title">Opening Hours</h3>
-
-                                        <ul class="widget-link">
-                                            <li><a href="#">Mon-Fri: 9 AM – 6 PM</a></li>
-                                            <li><a href="#">Saturday: 9 AM – 4 PM</a></li>
-                                            <li><a href="#">Sunday: Closed</a></li>
-                                        </ul>
-
-                                        <div class="widget-location">
-                                            <h3 class="footer-widget-title">Location</h3>
-
-                                            <p>176 W street name, New <br> York, NY 10014</p>
-                                        </div>
-                                    </div>
-                                    <!-- Footer Widget End -->
-
-                                </div>
-                                <!-- Footer Widget End -->
-
-                            </div>
+                            <!-- Footer Widget End -->
                         </div>
                     </div>
                     <!-- Footer Widget Wrapper End -->
@@ -437,7 +339,7 @@
                     <div class="copyright-wrapper">
 
                         <div class="copyright-text">
-                            <p>&copy; 2022 <span> Nutrack </span> Made with <i class="icofont-heart-alt"></i> by <a href="https://github.com/nutrack" target="_blank">Kelompok F10 PTS PBP Semester Gasal, Tahun Ajaran 2022/2023</a></p>
+                            <p>&copy; 2022 <span> Nutrack </span> Made with <i class="icofont-heart-alt"></i>by <a href="https://github.com/nutrack" target="_blank">Kelompok F10 PTS PBP Semester Gasal, Tahun Ajaran 2022/2023</a></p>
                         </div>
 
                     </div>

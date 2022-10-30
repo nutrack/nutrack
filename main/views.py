@@ -11,11 +11,26 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 
 from main.forms import CreateUserForm
+import sys
+
+# adding nutrack/calorycalc to the system path
+sys.path.insert(0, '/nutrack/calorycalc/')
+
+# import caloryInfo
+from calorycalc.models import caloryInfo
 
 # Create your views here.
 # @login_required(login_url='/login/')
 def home(request):
     return render(request, 'index.html')
+
+@login_required(login_url='/login/')
+def show_calory_info(request):
+    data_calory = caloryInfo.objects.filter(user=request.user).all()
+    context = {
+        'get_calory': data_calory,
+    }
+    return(request, 'index.html', context)
 
 def register(request):
     form = CreateUserForm()

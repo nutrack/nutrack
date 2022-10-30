@@ -275,7 +275,25 @@
         <div class="slider-section slider-active section">
             <div class="swiper-container">
                 <div class="swiper-wrapper">
-
+                    {% if user.is_authenticated %}
+                    <div class="swiper-slide animation-style-01 single-slider d-flex align-items-center" style="background-color: darkgreen">
+                        <!-- Slider Content Start -->
+                        <div class="testimonial-wrapper">
+                            <div class="section-title section-title-white">
+                                <h1 class="main-title">CaloryCalc</h1>
+                            </div>
+                            <div class="section-title shape-none">
+                                <h6 class="sub-title" style="color: orange">Today's calories</h6>
+                                <h3 class="main-title" style="color: white;">{{ get_calory.calory }} <span class="sub-title" style="color: orange;">cal</span></h3>
+                            </div>
+                            <div class="btn-cal" style="padding-top: 20px;">
+                                <a href="{% url 'calorycalc:calorycalc' %}" class="btn btn-primary btn-hover-secondary">Add Calory</a>
+                                <a href="#" class="btn btn-primary btn-hover-secondary">See Your Calories' History</a>
+                            </div>
+                        </div>
+                        <!-- Slider Content End -->
+                    </div>
+                    {% else %}
                     <!-- Single Slider Start -->
                     <div class="swiper-slide animation-style-01 single-slider d-flex align-items-center" style="background-image: url(/static/assets/images/slider/slider-1.jpg);">
                         <div class="container">
@@ -323,7 +341,7 @@
                         </div>
                     </div>
                     <!-- Single Slider End -->
-
+                    {% endif %}
                 </div>
             </div>
         </div>

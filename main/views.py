@@ -37,9 +37,6 @@ def register(request):
 
     if request.method == "POST":
         form = CreateUserForm(request.POST)
-        print(form.is_valid())
-        print(form.cleaned_data)
-        print(form.error_messages)
         if form.is_valid():
             form.save()
             messages.success(request, 'Akun telah berhasil dibuat!')

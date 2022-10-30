@@ -28,8 +28,9 @@
     <link rel="stylesheet" href="{% static 'assets/css/plugins/magnific-popup.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/plugins/nice-select.css' %}">
 
-    <!-- Main Style CSS -->
+    <!-- Main and Modal Style CSS -->
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/modal.css' %}">
 
 
     <!--====== Use the minified version files listed below for better performance and remove the files listed above ======-->
@@ -62,7 +63,21 @@
 
                             <ul class="nav-menu">
                                 <li><a class="active" href="/">Home</a></li>
+                                {% if user.is_authenticated %}
                                 <li><a href="{% url 'calorycalc:calorycalc' %}">CaloryCalc</a></li>
+                                {% else %}
+                                <li><a id="myBtn" href="#">CaloryCalc</a></li>
+                                <!-- The Modal -->
+                                <div id="myModal" class="modal">
+
+                                    <!-- Modal content -->
+                                    <div class="modal-content">
+                                        <span class="close">&times;</span>
+                                        <h3>Please log in first!</h3>
+                                    </div>
+                                
+                                </div>
+                                {% endif %}
                                 <li>
                                     <a href="#">Food Recommendation</a>
                                     <ul class="sub-menu">
@@ -177,7 +192,21 @@
             <div class="mobile-menu-items">
                 <ul class="nav-menu">
                     <li><a class="active" href="{% url 'main:home' %}">Home</a></li>
-                    <li><a href="about.html">CaloryCalc</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'calorycalc:calorycalc' %}">CaloryCalc</a></li>
+                    {% else %}
+                    <li><a id="myBtn" href="#">CaloryCalc</a></li>
+                    <!-- The Modal -->
+                    <div id="myModal" class="modal">
+
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h3>Please log in first!</h3>
+                        </div>
+                    
+                    </div>
+                    {% endif %}
                     <li>
                         <a href="#">Food Recommendation</a>
                         <ul class="sub-menu">
@@ -270,7 +299,7 @@
                             <!-- Slider Content Start -->
                             <div class="slider-content">
                                 <h1 class="main-title">Man is What He Eats</h1>
-                                <p>━ Hippocrates</p>
+                                <p>━ Ludwig Feuerbach</p>
                                 <a href="{% url 'main:register' %}" class="btn btn-primary btn-hover-secondary">Sign Up</a>
                             </div>
                             <!-- Slider Content End -->
@@ -301,7 +330,7 @@
         <!-- Slider Section End -->
 
         <!-- Features Section Start -->
-        <div class="section section-padding">
+        <div class="section section-padding-02">
             <div class="container">
                 <div class="features-wrapper">
                     <div class="row">
@@ -312,10 +341,8 @@
                                     <span><i class="flaticon-lunges"></i></span>
                                 </div>
                                 <div class="feature-content">
-                                    <div class="content-wrapper">
-                                        <h4 class="title"><a href="#">Women’s Course</a></h4>
-                                        <p>Lorem Ipsum is simply dummy themes industryes psum has been them industry the loep into type setting.</p>
-                                    </div>
+                                    <h4 class="title"><a href="#">Food Recommendation</a></h4>
+                                    <p>Are these foods into your liking?</p>
                                     <a href="#" class="arrow"><i class="icofont-long-arrow-right"></i></a>
                                 </div>
                             </div>
@@ -328,11 +355,15 @@
                                     <span><i class="flaticon-lotus"></i></span>
                                 </div>
                                 <div class="feature-content">
-                                    <div class="content-wrapper">
-                                        <h4 class="title"><a href="#">Basic Course</a></h4>
-                                        <p>Lorem Ipsum is simply dummy themes industryes psum has been them industry the loep into type setting.</p>
-                                    </div>
-                                    <a href="#" class="arrow"><i class="icofont-long-arrow-right"></i></a>
+                                    {% if user.is_authenticated %}
+                                    <h4 class="title"><a href="{% url 'calorycalc:calorycalc' %}">CaloryCalc</a></h4>
+                                    <p>How many calories have you consumed today?</p>
+                                    <a href="{% url 'calorycalc:calorycalc' %}" class="arrow"><i class="icofont-long-arrow-right"></i></a>
+                                    {% else %}
+                                    <h4 class="title"><a href="{% url 'main:login' %}">CaloryCalc</a></h4>
+                                    <p>How many calories have you consumed today?</p>
+                                    <a href="{% url 'main:login' %}" class="arrow"><i class="icofont-long-arrow-right"></i></a>
+                                    {% endif %}
                                 </div>
                             </div>
                             <!-- Single Feature End -->
@@ -344,10 +375,8 @@
                                     <span><i class="flaticon-computer"></i></span>
                                 </div>
                                 <div class="feature-content">
-                                    <div class="content-wrapper">
-                                        <h4 class="title"><a href="#">Men’s Course</a></h4>
-                                        <p>Lorem Ipsum is simply dummy themes industryes psum has been them industry the loep into type setting.</p>
-                                    </div>
+                                    <h4 class="title"><a href="#">Articles</a></h4>
+                                    <p>Up to date with the latest information on nutrition</p>
                                     <a href="#" class="arrow"><i class="icofont-long-arrow-right"></i></a>
                                 </div>
                             </div>
@@ -383,7 +412,7 @@
                                     <div class="courses-price">
                                         <span class="price">$98</span>
                                     </div>
-                                    <div class="content-wrapper">
+                                    <div style="padding-left: 10px;">
                                         <p class="author">By: <a href="#">Ryan Patterson</a></p>
                                         <h4 class="title"><a href="courses-details-left-sidebar.html">Children Nutrition and Cooking</a></h4>
                                         <ul class="meta">
@@ -405,7 +434,7 @@
                                     <div class="courses-price">
                                         <span class="price">$72</span>
                                     </div>
-                                    <div class="content-wrapper">
+                                    <div style="padding-left: 10px;">
                                         <p class="author">By: <a href="courses-details-left-sidebar.html">Arlene Daniels</a></p>
                                         <h4 class="title"><a href="#">Introduction to Food and Health. </a></h4>
                                         <ul class="meta">
@@ -427,7 +456,7 @@
                                     <div class="courses-price">
                                         <span class="price">$68</span>
                                     </div>
-                                    <div class="content-wrapper">
+                                    <div style="padding-left: 10px;">
                                         <p class="author">By: <a href="#">Selina Benton</a></p>
                                         <h4 class="title"><a href="courses-details-left-sidebar.html">Nutrition and Lifestyle in Pregnancy</a></h4>
                                         <ul class="meta">
@@ -636,7 +665,11 @@
                                 <h3 class="footer-widget-title">All Features</h3>
 
                                 <ul class="widget-link">
-                                    <li><a href="#">CaloryCalc</a></li>
+                                    {% if user.is_authenticated %}
+                                    <li><a href="{% url 'calorycalc:calorycalc' %}">CaloryCalc</a></li>
+                                    {% else %}
+                                    <li><a href="{% url 'main:login' %}">CaloryCalc</a></li>
+                                    {% endif %}
                                     <li><a href="#">Food Recommendation</a></li>
                                     <li><a href="#">Articles</a></li>
                                     <li><a href="#">Testimonial</a></li>
@@ -706,8 +739,9 @@
     <!-- <script src="assets/js/plugins.min.js"></script> -->
 
 
-    <!-- Main JS -->
+    <!-- Main and Modal JS -->
     <script src="{% static 'assets/js/main.js' %}"></script>
+    <script src="{% static 'assets/js/modal.js' %}"></script>
 
 </body>
 {% endblock content %}

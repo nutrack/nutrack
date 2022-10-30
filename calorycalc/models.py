@@ -7,4 +7,4 @@ from django.utils import timezone
 class caloryInfo(models.Model):
     user=models.ForeignKey(User, on_delete=models.CASCADE)
     date=models.DateField(auto_now_add=True)
-    calory=models.IntegerField(default=0)
+    calory=models.IntegerField()

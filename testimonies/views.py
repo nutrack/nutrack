@@ -1,4 +1,3 @@
-from multiprocessing import context
 from django.shortcuts import render
 
 # Create your views here.
@@ -23,11 +22,13 @@ def show_testimonies(request):
         }
     return render(request, "testimonies.html", context)
 
+@login_required(login_url='/login/')
 def create_testimonies(request):
     user = request.user
     if request.method == 'POST':
         form = TestimonyForm(request.POST)
         form.instance.user = user
+        print(form.is_valid())
         if form.is_valid():
             form.save()
             return redirect('testimonies:show_testimonies')

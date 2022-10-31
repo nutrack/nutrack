@@ -70,3 +70,16 @@ def history(request,id):
 def show_history_by_id_json(request,id):
     datas=list(caloryInfo.objects.filter(pk=id).values())
     return JsonResponse(datas, safe=False)
+
+
+
+@login_required(login_url='/login/')
+def histories(request):
+    data=caloryInfo.objects.filter(user=request.user)
+    if(len(list(data))!=0):
+        if(list(data)[0].date.day!=datetime.datetime.now().day):
+            data=caloryInfo.objects.filter(user=request.user).delete()
+    context = {
+    'data' : data,
+    }
+    return render(request, "history.html", context)

@@ -213,13 +213,13 @@
                     {% if user.is_authenticated %}
                     <div class="swiper-slide animation-style-01 single-slider d-flex align-items-center" style="background-color: darkgreen">
                         <!-- Slider Content Start -->
-                        <div class="testimonial-wrapper" id="show-calory">
+                        <div class="testimonial-wrapper">
                             <div class="section-title section-title-white">
                                 <h1 class="main-title">CaloryCalc</h1>
                             </div>
                             <div class="section-title shape-none">
                                 <h6 class="sub-title" style="color: orange">Today's calories</h6>
-                                <h3 class="main-title" style="color: white;" id="get-cal">{{ get_calory.calory }} <span class="sub-title" style="color: orange;">cal</span></h3>
+                                <h3 class="main-title" style="color: white;" id="get-cal"></h3>
                             </div>
                             <div class="btn-cal" style="padding-top: 20px;">
                                 <a href="{% url 'calorycalc:calorycalc' %}" class="btn btn-primary btn-hover-secondary" id="btn-add">Add Calory</a>
@@ -696,7 +696,18 @@
     <script src="{% static 'assets/js/main.js' %}"></script>
     <script src="{% static 'assets/js/modal.js' %}"></script>
     <script>
-        
+        function getCalc(){
+            $.getJSON("{% url 'main:calorycalc_json' %}", function(data){
+            $(data).each(function(i, entry) {
+                    $("#get-cal").text(`${entry.fields.calory}`)
+                    console.log(entry.fields.calory)
+                })
+            })
+        };
+
+        $(document).ready(function() {
+            getCalc()
+        });
     </script>
 
 </body>

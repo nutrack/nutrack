@@ -78,6 +78,7 @@ def logout_user(request):
     response.delete_cookie('last_login')
     return response
 
+@login_required(login_url='/login/')
 def calorycalc_json(request):
-    data = caloryInfo.objects.all()
+    data = caloryInfo.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")

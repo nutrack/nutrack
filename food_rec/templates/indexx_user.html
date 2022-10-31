@@ -4,65 +4,66 @@
 <html class="no-js" lang="en">
 
 <head>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        important: true,
-      };
-    </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
     <script>
     $(document).ready(function () {
       const card = (data) => `
       <div id='${data.pk}-card'
-      class="single-courses">
+      class="single-courses"
+        >
         <div class="courses-content">
             <div class="courses-price">
-                <span class="price">
-                  ${
-                    data.fields.is_food
-                  ? 
-                  `<i class="icofont-spoon-and-fork" style="font-size: 2em;"></i>`
-                  : 
-                  `<i class="icofont-soft-drinks" style="font-size: 2em;"></i>`
-                  }
-                </span>
+                <span class="price">${
+                data.fields.is_food
+                  ? `
+                  <i class="icofont-spoon-and-fork" style="font-size: 2em;"></i>`
+                  : `
+                  <i class="icofont-soft-drinks" style="font-size: 2em;"></i>`
+              }</span>
             </div>
-            <div style="padding-left: 10px;">
+            <div class="content-wrapper">
                 <h4 class="title"><a href="courses-details-left-sidebar.html">${data.fields.name}</a></h4>
                 <ul class="meta">
-                    <li>
+                <li>
                     <span class="fa fa-star checked"></span>
                     <span>${data.fields.rating}</span>
-                    </li>
+                </li>
                 <li><b>${data.fields.calories} Calories</b></li>
-                </ul>
+            </ul>
             </div>
         </div>
     </div>
-    ` ;
+    ` 
     const addCard = (data) => {
-        return $('#food-view').append(card(data))
+        return $('#food').append(card(data))
       }
 
-    $.get('/food_rec/json', function (todo) {
-        todo.map((task) => {
-          addCard(task)
-          removeCard(task)
+
+    $("#myInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#food").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+
+    $.get('/todolist/json', function (food) {
+        food.map(() => {
+          addCard(food)
+          removeCard(food)
         })
       })
 
-    $('#add-food-button').click(function () {
-          $.post("{% url 'food_rec:add_food_ajax' %}"(
+    $('#add-food').click(function () {
+        if ($('#name').val() && $('#calories').val() && ('#protein').val() && $('#fat').val() && $('#carbs').val()) {
+          $.post(
             '/food_rec/add/',
             {
-                name: $('#name').val(),
-                calories: $('#calories').val(),
-                protein: $('#protein').val(),
+              name: $('#name').val(),
+              calories: $('#calories').val(),
+              protein: $('#protein').val(),
                 fat: $('#fat').val(),
                 carbs: $('#carbs').val(),
+                is_food: $('#ReturnRequired').is(':checked') ? 1 : 0,
             },
             function (res, status) {
               if (status == 'success') {
@@ -72,16 +73,18 @@
                 $('#protein').val('')
                 $('#fat').val('')
                 $('#carbs').val('')
+                $('#ReturnRequired').prop('checked', true)
                 removeCard(res)
               }
             },
-          );
-      });
-    });
+          )
+        }
+      })
+    })
     </script>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Food Recommendation</title>
+    <title>Nutras Fitness & Nutrition Bootstrap 5 Template</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -127,7 +130,7 @@
 
                         <!-- Header Logo Start -->
                         <div class="header-logo">
-                            <a  href="{% url 'main:home' %}"><img src = "{% static 'assets/images/logo-nutrack-copy.png' %}" alt="Logo" ></a>
+                            <a href="index.html"><img src="{% static 'assets/images/logo.png' %}" alt="Logo"></a>
                         </div>
                         <!-- Header Logo End -->
 
@@ -135,55 +138,73 @@
                         <div class="header-menu d-none d-lg-flex">
 
                             <ul class="nav-menu">
-                                <li><a class="active" href="/">Home</a></li>
-                                {% if user.is_authenticated %}
-                                <li><a href="{% url 'calorycalc:calorycalc' %}">CaloryCalc</a></li>
-                                {% else %}
-                                <li><a id="myBtn" href="#">CaloryCalc</a></li>
-                                <!-- The Modal -->
-                                <div id="myModal" class="modal">
-
-                                    <!-- Modal content -->
-                                    <div class="modal-content">
-                                        <span class="close">&times;</span>
-                                        <h3>Please log in first!</h3>
-                                    </div>
-                                
-                                </div>
-                                {% endif %}
-                                <li><a href="{% url 'food_rec:show_all_food' %}">Food Recommendation</a></li>
+                                <li><a class="active" href="index.html">Home</a></li>
+                                <li><a href="about.html">About Us</a></li>
                                 <li>
-                                    <a href="{% url 'article:article' %}">Articles </a>
+                                    <a href="#">All Course</a>
                                     <ul class="sub-menu">
-                                        <li><a href="{% url 'article:write' %}">Write Article</a></li>
+                                        <li><a href="courses.html">Courses</a></li>
+                                        <li><a href="my-courses.html">My Courses</a></li>
+                                        <li><a href="#">Courses Details</a>
+                                            <ul class="sub-menu">
+                                                <li><a href="courses-details-left-sidebar.html">Courses Details Left Sidebar</a></li>
+                                                <li><a href="courses-details-right-sidebar.html">Courses Details Right Sidebar</a></li>
+                                            </ul>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="#">About Us</a>
+                                    <a href="#">Pages </a>
                                     <ul class="sub-menu">
-                                        <li><a href="#">Dive into us!</a></li>
-                                        <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>
+                                        <li><a href="after-enroll.html">After Enroll</a></li>
+                                        <li><a href="courses-admin.html">Instructor Dashboard (Course List)</a></li>
+                                        <li><a href="overview.html">Instructor Dashboard (Performance)</a></li>
+                                        <li><a href="students.html">Students</a></li>
+                                        <li><a href="reviews.html">Reviews</a></li>
+                                        <li><a href="engagement.html">Course engagement</a></li>
+                                        <li><a href="traffic-conversion.html">Traffic & conversion</a></li>
+                                        <li><a href="messages.html">Messages</a></li>
+                                        <li><a href="register.html">Register</a></li>
+                                        <li><a href="login.html">Login</a></li>
+                                        <li><a href="faq.html">FAQ</a></li>
+                                        <li><a href="404-error.html">404 Error</a></li>
                                     </ul>
                                 </li>
+                                <li>
+                                    <a href="#">Blog</a>
+                                    <ul class="sub-menu">
+                                        <li>
+                                            <a href="#">Blog</a>
+                                            <ul class="sub-menu">
+                                                <li><a href="blog-grid.html">Blog Grid</a></li>
+                                                <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
+                                                <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="#">Blog Details</a>
+                                            <ul class="sub-menu">
+                                                <li><a href="blog-details-left-sidebar.html">Blog Details Left Sidebar</a></li>
+                                                <li><a href="blog-details-right-sidebar.html">Blog Details Right Sidebar</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="contact.html">Contact</a></li>
                             </ul>
 
-                            {% if user.is_authenticated %}
+
                             <div class="header-btn">
-                                <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:logout' %}">Bye, {{user.get_username}}!</a>
+                                <a class="btn btn-secondary btn-hover-primary" href="login.html">Sign Up</a>
                             </div>
-                            {% else %}
-                            <div class="header-btn">
-                                <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:register' %}">Want to join us?</a>
-                            </div>
-                            {% endif %}
+
                         </div>
                         <!-- Header Menu End -->
-                    
+
                         <!-- Header Toggle Start -->
-                        {% if user.is_authenticated %}
                         <div class="header-toggle d-lg-none">
 
-                            <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:logout' %}">Bye, {{user.get_username}}!</a>
+                            <a class="btn btn-secondary btn-hover-primary" href="login.html">Sign Up</a>
 
                             <a href="#" class="menu-toggle">
                                 <span></span>
@@ -191,18 +212,6 @@
                                 <span></span>
                             </a>
                         </div>
-                        {% else %}
-                        <div class="header-toggle d-lg-none">
-
-                            <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:register' %}">Want to join us?</a>
-
-                            <a href="#" class="menu-toggle">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </a>
-                        </div>
-                        {% endif %}
                         <!-- Header Toggle End -->
 
                     </div>
@@ -228,24 +237,10 @@
             <!-- Mobile Menu Start -->
             <div class="mobile-menu-items">
                 <ul class="nav-menu">
-                    <li><a class="active" href="{% url 'main:home' %}">Home</a></li>
-                    {% if user.is_authenticated %}
-                    <li><a href="{% url 'calorycalc:calorycalc' %}">CaloryCalc</a></li>
-                    {% else %}
-                    <li><a id="myBtn" href="#">CaloryCalc</a></li>
-                    <!-- The Modal -->
-                    <div id="myModal" class="modal">
-
-                        <!-- Modal content -->
-                        <div class="modal-content">
-                        <span class="close">&times;</span>
-                        <h3>Please log in first!</h3>
-                        </div>
-                    
-                    </div>
-                    {% endif %}
+                    <li><a class="active" href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
                     <li>
-                        <a href="#">Food Recommendation</a>
+                        <a href="#">All Course</a>
                         <ul class="sub-menu">
                             <li><a href="courses.html">Courses</a></li>
                             <li><a href="my-courses.html">My Courses</a></li>
@@ -258,7 +253,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#">Articles </a>
+                        <a href="#">Pages </a>
                         <ul class="sub-menu">
                             <li><a href="after-enroll.html">After Enroll</a></li>
                             <li><a href="courses-admin.html">Instructor Dashboard (Course List)</a></li>
@@ -275,10 +270,10 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#">About Us</a>
+                        <a href="#">Blog</a>
                         <ul class="sub-menu">
                             <li>
-                                <a href="#">Dive into us!</a>
+                                <a href="#">Blog</a>
                                 <ul class="sub-menu">
                                     <li><a href="blog-grid.html">Blog Grid</a></li>
                                     <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
@@ -286,7 +281,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="#">Testimonial</a>
+                                <a href="#">Blog Details</a>
                                 <ul class="sub-menu">
                                     <li><a href="blog-details-left-sidebar.html">Blog Details Left Sidebar</a></li>
                                     <li><a href="blog-details-right-sidebar.html">Blog Details Right Sidebar</a></li>
@@ -294,6 +289,7 @@
                             </li>
                         </ul>
                     </li>
+                    <li><a href="contact.html">Contact</a></li>
                 </ul>
 
             </div>
@@ -308,7 +304,7 @@
 
 
         <!-- Page banner Section Start -->
-        <div class="section page-banner-section">
+        <div class="section page-banner-section" style="background-image: url(assets/images/page-banner.jpg);">
             <div class="container d-flex justify-content-center">
 
                 <!-- Page banner Section Start -->
@@ -362,7 +358,11 @@
                     >
                         Tambah Rekomendasi
                     </button>
-                    <div class="row gx-xxl-5" id="food-view">
+                    <div class="row gx-xxl-5">
+                        <div
+                        class="mb-16 grid lg:grid-cols-2 md:grid-cols-1 gap-5 mt-8 sm:mt-5"
+                        id="food"
+                        ></div>
                     </div>
                 </div>
                 <!-- Courses Wrapper End -->
@@ -561,9 +561,9 @@
     aria-hidden="true"
   >
     <div class="modal-dialog modal-dialog-centered relative w-auto pointer-events-none">
-      <div class="modal-content">
+      <div class="modal-content bg-[#373951]">
         <div class="modal-header">
-          <h1 class="modal-title fs-5 text-zinc-800" id="exampleModalLabel">
+          <h1 class="modal-title fs-5 text-zinc-200" id="exampleModalLabel">
             Tambah Rekomendasi
           </h1>
           <button
@@ -580,7 +580,7 @@
                 {% csrf_token %}
                 <label class="block">
                   <span
-                    class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-800"
+                    class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-200"
                   >
                     Nama hidangan
                   </span>
@@ -596,7 +596,7 @@
 
                 <label class="block mt-2">
                   <span
-                    class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-800"
+                    class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-200"
                   >
                     Kalori
                   </span>
@@ -612,7 +612,7 @@
 
                 <label class="block mt-2">
                   <span
-                    class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-800"
+                    class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-200"
                   >
                     Protein
                   </span>
@@ -628,7 +628,7 @@
 
                 <label class="block mt-2">
                   <span
-                    class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-800"
+                    class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-200"
                   >
                     Lemak
                   </span>
@@ -644,7 +644,7 @@
 
                 <label class="block mt-2">
                   <span
-                    class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-800"
+                    class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-200"
                   >
                     Karbohidrat
                   </span>
@@ -660,11 +660,11 @@
 
                 <label class="block mt-2">
                   <span
-                    class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-800"
+                    class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-200"
                   >
                     Jenis
                   </span><br>
-                  <div class="d-flex flex-row mt-2 gap-2 text-zinc-800">
+                  <div class="d-flex flex-row mt-2 gap-2">
                     <input
                         type="radio"
                         name="is_food"
@@ -699,7 +699,7 @@
           </button>
 
           <button
-            id="add-food-button"
+            id="add-food"
             type="button"
             class="btn btn-primary btn-hover-white"
             data-bs-dismiss="modal"

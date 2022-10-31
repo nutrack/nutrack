@@ -24,36 +24,41 @@ def show_all_food(request):
     context = { 'foods': foods }
     return render(request, 'indexx.html', context)
 
-@login_required(login_url='login')
+@login_required(login_url='/login/')
 def show_user_food(request):
     foods = Food.objects.filter(user=request.user)
     context = { 'foods': foods }
-    return render(request, 'food_rec/show_user_food.html', context)
+    return render(request, 'indexx_user.html', context)
 
-@login_required(login_url='login')
+def show_json(request):
+    foods = Food.objects.all()
+    data = serializers.serialize('json', foods)
+    return HttpResponse(data, content_type='application/json')
+
+@csrf_exempt
 def add_food_ajax(request):
     if request.method == 'POST':
-        name = request.POST['name']
-        calories = request.POST['calories']
-        protein = request.POST['protein']
-        fat = request.POST['fat']
-        carbs = request.POST['carbs']
-        is_food = request.POST['is_food']
-        rating = request.POST['rating']
-        food = Food.objects.create(user=request.user, name=name, calories=calories, protein=protein, fat=fat, carbs=carbs, is_food=is_food, rating=rating)
+        name = request.POST.get('name')
+        calories = request.POST.get('calories')
+        protein = request.POST.get('protein')
+        fat = request.POST.get('fat')
+        carbs = request.POST.get('carbs')
+        is_food = request.POST.get('is_food')
+        rating = 0
+        food = Food.objects.create(name=name, calories=calories, protein=protein, fat=fat, carbs=carbs, is_food=is_food, rating=rating)
         result = {
             'fields': {
-                'name': food.name,
-                'calories': food.calories,
-                'protein': food.protein,
-                'fat': food.fat,
-                'carbs': food.carbs,
-                'is_food': food.is_food,
-                'rating': food.rating,
+                'name': name,
+                'calories': calories,
+                'protein': protein,
+                'fat': fat,
+                'carbs': carbs,
+                'is_food': is_food,
+                'rating': rating,
             },
             'pk': food.pk
         }
-        return JsonResponse("Success")
+        return JsonResponse(result)
     else:
         return HttpResponseBadRequest()
 

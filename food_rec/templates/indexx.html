@@ -22,7 +22,7 @@
             <div class="courses-price">
                 <span class="price">
                   ${
-                    data.fields.is_food
+                    data.fields.is_food == 'true'
                   ? 
                   `<i class="icofont-spoon-and-fork" style="font-size: 2em;"></i>`
                   : 
@@ -61,6 +61,7 @@
                 protein: $('#protein').val(),
                 fat: $('#fat').val(),
                 carbs: $('#carbs').val(),
+                is_food: $('#is_food').val(),
             },
             function (res) {
                 addCard(res)
@@ -69,6 +70,7 @@
                 $('#protein').val('')
                 $('#fat').val('')
                 $('#carbs').val('')
+                $('#is_food').val('')
                 removeCard(res)
             },
           );
@@ -351,6 +353,7 @@
 
                 <!-- Courses Wrapper End -->
                 <div class="courses-wrapper-02">
+                  {% if user.is_authenticated %}
                     <button
                         class="btn btn-primary btn-hover-white"
                         data-bs-toggle="modal"
@@ -358,7 +361,17 @@
                     >
                         Tambah Rekomendasi
                     </button>
-                    <div class="row gx-xxl-5" id="food-view">
+                    {% else %}
+                    <button
+                        class="btn btn-primary btn-hover-white"
+                        href=href="{% url 'main:login' %}"
+                    >
+                        Login untuk Tambah Rekomendasi
+                    </button>
+                    {% endif %}
+                    <div class="row gx-xxl-5">
+                      <div class="col-lg-4 col-sm-6" id="food-view">
+                      </div>
                     </div>
                 </div>
                 <!-- Courses Wrapper End -->
@@ -666,7 +679,7 @@
                         name="is_food"
                         id="food"
                         class=""
-                        value="1"
+                        value="true"
                         required
                     />
                     <label for="food">Makanan</label><br>
@@ -675,7 +688,7 @@
                         name="is_food"
                         id="drink"
                         class=""
-                        value="0"
+                        value="false"
                         required
                     />
                     <label for="drink">Minuman</label><br>

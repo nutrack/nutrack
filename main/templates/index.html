@@ -37,7 +37,7 @@
     <!-- <link rel="stylesheet" href="assets/css/vendor/plugins.min.css">
     <link rel="stylesheet" href="assets/css/style.min.css"> -->
     <style>
-        #btn-add:hover, #btn-hist:hover{
+        #btn-add:hover, #btn-hist:hover, #btn-sign:hover{
             background-color: #0a4d3c;
             border-color: #0a4d3c;
             color: #fff;
@@ -213,7 +213,7 @@
                     {% if user.is_authenticated %}
                     <div class="swiper-slide animation-style-01 single-slider d-flex align-items-center" style="background-color: darkgreen">
                         <!-- Slider Content Start -->
-                        <div class="testimonial-wrapper">
+                        <div class="testimonial-wrapper" id="show-calory">
                             <div class="section-title section-title-white">
                                 <h1 class="main-title">CaloryCalc</h1>
                             </div>
@@ -237,7 +237,7 @@
                             <div class="slider-content">
                                 <h1 class="main-title">Let thy food be thy medicine</h1>
                                 <p>━ Hippocrates</p>
-                                <a href="{% url 'main:register' %}" class="btn btn-primary btn-hover-secondary">Sign Up</a>
+                                <a id="btn-sign" href="{% url 'main:register' %}" class="btn btn-primary btn-hover-secondary">Sign Up</a>
                             </div>
                             <!-- Slider Content End -->
 
@@ -253,7 +253,7 @@
                             <div class="slider-content">
                                 <h1 class="main-title">Man is What He Eats</h1>
                                 <p>━ Ludwig Feuerbach</p>
-                                <a href="{% url 'main:register' %}" class="btn btn-primary btn-hover-secondary">Sign Up</a>
+                                <a id="btn-sign" href="{% url 'main:register' %}" class="btn btn-primary btn-hover-secondary">Sign Up</a>
                             </div>
                             <!-- Slider Content End -->
 
@@ -269,7 +269,7 @@
                             <div class="slider-content">
                                 <h1 class="main-title">Good food ends with good talk</h1>
                                 <p>━ Jules Renard</p>
-                                <a href="{% url 'main:register' %}" class="btn btn-primary btn-hover-secondary">Sign Up</a>
+                                <a id="btn-sign" href="{% url 'main:register' %}" class="btn btn-primary btn-hover-secondary">Sign Up</a>
                             </div>
                             <!-- Slider Content End -->
 
@@ -623,9 +623,9 @@
                                     {% else %}
                                     <li><a href="{% url 'main:login' %}">CaloryCalc</a></li>
                                     {% endif %}
-                                    <li><a href="#">Food Recommendation</a></li>
-                                    <li><a href="#">Articles</a></li>
-                                    <li><a href="#">Testimonial</a></li>
+                                    <li><a href="{% url 'food_rec:show_all_food' %}">Food Recommendation</a></li>
+                                    <li><a href="{% url 'article:article' %}">Articles</a></li>
+                                    <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>
                                     <li><a href="#">Dive into us!</a></li>
                                 </ul>
                             </div>
@@ -695,6 +695,9 @@
     <!-- Main and Modal JS -->
     <script src="{% static 'assets/js/main.js' %}"></script>
     <script src="{% static 'assets/js/modal.js' %}"></script>
+    <script>
+        
+    </script>
 
 </body>
 {% endblock content %}

@@ -24,13 +24,14 @@ from calorycalc.models import caloryInfo
 
 # Create your views here.
 # @login_required(login_url='/login/')
-def home(request:HttpRequest):
+def home(request):
     return render(request, 'index.html')
 
 def choose_user(request:HttpRequest):
     if request.user.is_authenticated:
         return HttpResponseRedirect(reverse("main:caloryInfo"))
     return HttpResponseRedirect(reverse("main:home"))
+    
 
 @login_required(login_url='/login/')
 def show_calory_info(request):
@@ -38,7 +39,7 @@ def show_calory_info(request):
     context = {
         'get_calory': data_calory,
     }
-    return(request, 'index.html', context)
+    return render(request, 'index.html', context)
     
 
 def register(request):

@@ -4,9 +4,9 @@ from main.views import home, register, login_user, logout_user, show_calory_info
 app_name = 'main'
 
 urlpatterns = [
-    path('', choose_user, name="choose"),
-    path('home/', home, name='home'),
-    path('calc/', show_calory_info, name='caloryInfo'),
+    path('', choose_user, name="choose"), #choosing unauth user or auth user
+    path('home/', home, name='home'), #routing for unauth user
+    path('calc/', show_calory_info, name='caloryInfo'), #routing for auth user
     path('register/', register, name='register'),
     path('login/', login_user, name='login'),
     path('logout/', logout_user, name='logout'),

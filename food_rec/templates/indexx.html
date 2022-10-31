@@ -4,53 +4,84 @@
 <html class="no-js" lang="en">
 
 <head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        important: true,
+      };
+    </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
     <script>
     $(document).ready(function () {
       const card = (data) => `
       <div id='${data.pk}-card'
-      class="single-courses"
-      onclick="location.href='/food_rec/details/${data.pk}/'">
+      class="single-courses">
         <div class="courses-content">
             <div class="courses-price">
-                <span class="price">${
-                data.fields.is_food
-                  ? `
-                  <i class="icofont-spoon-and-fork" style="font-size: 2em;"></i>`
-                  : `
-                  <i class="icofont-soft-drinks" style="font-size: 2em;"></i>`
-              }</span>
+                <span class="price">
+                  ${
+                    data.fields.is_food
+                  ? 
+                  `<i class="icofont-spoon-and-fork" style="font-size: 2em;"></i>`
+                  : 
+                  `<i class="icofont-soft-drinks" style="font-size: 2em;"></i>`
+                  }
+                </span>
             </div>
-            <div class="content-wrapper">
-                <p class="author">By: <a href="#">${data.fields.title}</a></p>
+            <div style="padding-left: 10px;">
                 <h4 class="title"><a href="courses-details-left-sidebar.html">${data.fields.name}</a></h4>
                 <ul class="meta">
-                <li>
+                    <li>
                     <span class="fa fa-star checked"></span>
                     <span>${data.fields.rating}</span>
-                </li>
+                    </li>
                 <li><b>${data.fields.calories} Calories</b></li>
-            </ul>
+                </ul>
             </div>
         </div>
     </div>
-    ` 
+    ` ;
     const addCard = (data) => {
-        return $('#food').append(card(data))
+        return $('#food-view').append(card(data))
       }
 
-    $(document).ready(function(){
-    $("#myInput").on("keyup", function() {
-        var value = $(this).val().toLowerCase();
-        $("#food").filter(function() {
-        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        });
-    });
+    $.get('/food_rec/json', function (todo) {
+        todo.map((task) => {
+          addCard(task)
+          removeCard(task)
+        })
+      })
+
+    $('#add-food-button').click(function () {
+          $.post("{% url 'food_rec:add_food_ajax' %}"(
+            '/food_rec/add/',
+            {
+                name: $('#name').val(),
+                calories: $('#calories').val(),
+                protein: $('#protein').val(),
+                fat: $('#fat').val(),
+                carbs: $('#carbs').val(),
+            },
+            function (res, status) {
+              if (status == 'success') {
+                addCard(res)
+                $('#name').val('')
+                $('#calories').val('')
+                $('#protein').val('')
+                $('#fat').val('')
+                $('#carbs').val('')
+                removeCard(res)
+              }
+            },
+          );
+      });
     });
     </script>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Nutras Fitness & Nutrition Bootstrap 5 Template</title>
+    <title>Food Recommendation</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -96,7 +127,7 @@
 
                         <!-- Header Logo Start -->
                         <div class="header-logo">
-                            <a href="index.html"><img src="assets/images/logo.png" alt="Logo"></a>
+                            <a  href="{% url 'main:home' %}"><img src = "{% static 'assets/images/logo-nutrack-copy.png' %}" alt="Logo" ></a>
                         </div>
                         <!-- Header Logo End -->
 
@@ -104,73 +135,55 @@
                         <div class="header-menu d-none d-lg-flex">
 
                             <ul class="nav-menu">
-                                <li><a class="active" href="index.html">Home</a></li>
-                                <li><a href="about.html">About Us</a></li>
+                                <li><a class="active" href="/">Home</a></li>
+                                {% if user.is_authenticated %}
+                                <li><a href="{% url 'calorycalc:calorycalc' %}">CaloryCalc</a></li>
+                                {% else %}
+                                <li><a id="myBtn" href="#">CaloryCalc</a></li>
+                                <!-- The Modal -->
+                                <div id="myModal" class="modal">
+
+                                    <!-- Modal content -->
+                                    <div class="modal-content">
+                                        <span class="close">&times;</span>
+                                        <h3>Please log in first!</h3>
+                                    </div>
+                                
+                                </div>
+                                {% endif %}
+                                <li><a href="{% url 'food_rec:show_all_food' %}">Food Recommendation</a></li>
                                 <li>
-                                    <a href="#">All Course</a>
+                                    <a href="{% url 'article:article' %}">Articles </a>
                                     <ul class="sub-menu">
-                                        <li><a href="courses.html">Courses</a></li>
-                                        <li><a href="my-courses.html">My Courses</a></li>
-                                        <li><a href="#">Courses Details</a>
-                                            <ul class="sub-menu">
-                                                <li><a href="courses-details-left-sidebar.html">Courses Details Left Sidebar</a></li>
-                                                <li><a href="courses-details-right-sidebar.html">Courses Details Right Sidebar</a></li>
-                                            </ul>
-                                        </li>
+                                        <li><a href="{% url 'article:write' %}">Write Article</a></li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="#">Pages </a>
+                                    <a href="#">About Us</a>
                                     <ul class="sub-menu">
-                                        <li><a href="after-enroll.html">After Enroll</a></li>
-                                        <li><a href="courses-admin.html">Instructor Dashboard (Course List)</a></li>
-                                        <li><a href="overview.html">Instructor Dashboard (Performance)</a></li>
-                                        <li><a href="students.html">Students</a></li>
-                                        <li><a href="reviews.html">Reviews</a></li>
-                                        <li><a href="engagement.html">Course engagement</a></li>
-                                        <li><a href="traffic-conversion.html">Traffic & conversion</a></li>
-                                        <li><a href="messages.html">Messages</a></li>
-                                        <li><a href="register.html">Register</a></li>
-                                        <li><a href="login.html">Login</a></li>
-                                        <li><a href="faq.html">FAQ</a></li>
-                                        <li><a href="404-error.html">404 Error</a></li>
+                                        <li><a href="#">Dive into us!</a></li>
+                                        <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>
                                     </ul>
                                 </li>
-                                <li>
-                                    <a href="#">Blog</a>
-                                    <ul class="sub-menu">
-                                        <li>
-                                            <a href="#">Blog</a>
-                                            <ul class="sub-menu">
-                                                <li><a href="blog-grid.html">Blog Grid</a></li>
-                                                <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
-                                                <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a href="#">Blog Details</a>
-                                            <ul class="sub-menu">
-                                                <li><a href="blog-details-left-sidebar.html">Blog Details Left Sidebar</a></li>
-                                                <li><a href="blog-details-right-sidebar.html">Blog Details Right Sidebar</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a href="contact.html">Contact</a></li>
                             </ul>
 
-
+                            {% if user.is_authenticated %}
                             <div class="header-btn">
-                                <a class="btn btn-secondary btn-hover-primary" href="login.html">Sign Up</a>
+                                <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:logout' %}">Bye, {{user.get_username}}!</a>
                             </div>
-
+                            {% else %}
+                            <div class="header-btn">
+                                <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:register' %}">Want to join us?</a>
+                            </div>
+                            {% endif %}
                         </div>
                         <!-- Header Menu End -->
-
+                    
                         <!-- Header Toggle Start -->
+                        {% if user.is_authenticated %}
                         <div class="header-toggle d-lg-none">
 
-                            <a class="btn btn-secondary btn-hover-primary" href="login.html">Sign Up</a>
+                            <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:logout' %}">Bye, {{user.get_username}}!</a>
 
                             <a href="#" class="menu-toggle">
                                 <span></span>
@@ -178,6 +191,18 @@
                                 <span></span>
                             </a>
                         </div>
+                        {% else %}
+                        <div class="header-toggle d-lg-none">
+
+                            <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:register' %}">Want to join us?</a>
+
+                            <a href="#" class="menu-toggle">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </a>
+                        </div>
+                        {% endif %}
                         <!-- Header Toggle End -->
 
                     </div>
@@ -203,10 +228,24 @@
             <!-- Mobile Menu Start -->
             <div class="mobile-menu-items">
                 <ul class="nav-menu">
-                    <li><a class="active" href="index.html">Home</a></li>
-                    <li><a href="about.html">About Us</a></li>
+                    <li><a class="active" href="{% url 'main:home' %}">Home</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'calorycalc:calorycalc' %}">CaloryCalc</a></li>
+                    {% else %}
+                    <li><a id="myBtn" href="#">CaloryCalc</a></li>
+                    <!-- The Modal -->
+                    <div id="myModal" class="modal">
+
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h3>Please log in first!</h3>
+                        </div>
+                    
+                    </div>
+                    {% endif %}
                     <li>
-                        <a href="#">All Course</a>
+                        <a href="#">Food Recommendation</a>
                         <ul class="sub-menu">
                             <li><a href="courses.html">Courses</a></li>
                             <li><a href="my-courses.html">My Courses</a></li>
@@ -219,7 +258,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#">Pages </a>
+                        <a href="#">Articles </a>
                         <ul class="sub-menu">
                             <li><a href="after-enroll.html">After Enroll</a></li>
                             <li><a href="courses-admin.html">Instructor Dashboard (Course List)</a></li>
@@ -236,10 +275,10 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#">Blog</a>
+                        <a href="#">About Us</a>
                         <ul class="sub-menu">
                             <li>
-                                <a href="#">Blog</a>
+                                <a href="#">Dive into us!</a>
                                 <ul class="sub-menu">
                                     <li><a href="blog-grid.html">Blog Grid</a></li>
                                     <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
@@ -247,7 +286,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="#">Blog Details</a>
+                                <a href="#">Testimonial</a>
                                 <ul class="sub-menu">
                                     <li><a href="blog-details-left-sidebar.html">Blog Details Left Sidebar</a></li>
                                     <li><a href="blog-details-right-sidebar.html">Blog Details Right Sidebar</a></li>
@@ -255,7 +294,6 @@
                             </li>
                         </ul>
                     </li>
-                    <li><a href="contact.html">Contact</a></li>
                 </ul>
 
             </div>
@@ -270,7 +308,7 @@
 
 
         <!-- Page banner Section Start -->
-        <div class="section page-banner-section" style="background-image: url(assets/images/page-banner.jpg);">
+        <div class="section page-banner-section">
             <div class="container d-flex justify-content-center">
 
                 <!-- Page banner Section Start -->
@@ -324,216 +362,13 @@
                     >
                         Tambah Rekomendasi
                     </button>
-                    <div class="row gx-xxl-5">
-                        <div class="col-lg-4 col-sm-6">
-                            <!-- Single Courses Start -->
-                            <div class="single-courses">
-                                <div class="courses-images">
-                                    <a href="courses-details-left-sidebar.html"><img src="assets/images/courses/courses-1.jpg" alt="courses"></a>
-                                </div>
-                                <div class="courses-content">
-                                    <div class="courses-price">
-                                        <span class="price"><i class="icofont-spoon-and-fork" style="font-size: 2em;"></i></span>
-                                    </div>
-                                    <div class="content-wrapper">
-                                        <ul class="meta">
-                                            <li>
-                                                <span class="fa fa-star checked"></span>
-                                                <span>4.5</span>
-                                            </li>
-                                            <li><b>3455 Calories</b></li>
-                                        </ul>
-                                        <p class="author">By: <a href="#">Ryan Patterson</a></p>
-                                        <h4 class="title"><a href="courses-details-left-sidebar.html">Children Nutrition and Cooking</a></h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Single Courses End -->
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <!-- Single Courses Start -->
-                            <div class="single-courses">
-                                <div class="courses-images">
-                                    <a href="courses-details-left-sidebar.html"><img src="assets/images/courses/courses-2.jpg" alt="courses"></a>
-                                </div>
-                                <div class="courses-content">
-                                    <div class="courses-price">
-                                        <span class="price"><i class="icofont-soft-drinks" style="font-size: 2em;"></i></span>
-                                    </div>
-                                    <div class="content-wrapper">
-                                        <p class="author">By: <a href="#">Arlene Daniels</a></p>
-                                        <h4 class="title"><a href="courses-details-left-sidebar.html">Introduction to Food and Health. </a></h4>
-                                        <ul class="meta">
-                                            <li>09 hr 25 mins</li>
-                                            <li>16 Lectures</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Single Courses End -->
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <!-- Single Courses Start -->
-                            <div class="single-courses">
-                                <div class="courses-images">
-                                    <a href="courses-details-left-sidebar.html"><img src="assets/images/courses/courses-3.jpg" alt="courses"></a>
-                                </div>
-                                <div class="courses-content">
-                                    <div class="courses-price">
-                                        <span class="price">$68</span>
-                                    </div>
-                                    <div class="content-wrapper">
-                                        <p class="author">By: <a href="#">Selina Benton</a></p>
-                                        <h4 class="title"><a href="courses-details-left-sidebar.html">Nutrition and Lifestyle in Pregnancy</a></h4>
-                                        <ul class="meta">
-                                            <li>03 hr 38 mins</li>
-                                            <li>18 Lectures</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Single Courses End -->
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <!-- Single Courses Start -->
-                            <div class="single-courses">
-                                <div class="courses-images">
-                                    <a href="courses-details-left-sidebar.html"><img src="assets/images/courses/courses-4.jpg" alt="courses"></a>
-                                </div>
-                                <div class="courses-content">
-                                    <div class="courses-price">
-                                        <span class="price">$98</span>
-                                    </div>
-                                    <div class="content-wrapper">
-                                        <p class="author">By: <a href="#">Ryan Patterson</a></p>
-                                        <h4 class="title"><a href="courses-details-left-sidebar.html">Expertise on Fitness, Nutrition and Health
-
-                                            </a></h4>
-                                        <ul class="meta">
-                                            <li>02 hr 16 mins</li>
-                                            <li>14 Lectures</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Single Courses End -->
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <!-- Single Courses Start -->
-                            <div class="single-courses">
-                                <div class="courses-images">
-                                    <a href="courses-details-left-sidebar.html"><img src="assets/images/courses/courses-5.jpg" alt="courses"></a>
-                                </div>
-                                <div class="courses-content">
-                                    <div class="courses-price">
-                                        <span class="price">$72</span>
-                                    </div>
-                                    <div class="content-wrapper">
-                                        <p class="author">By: <a href="#">Arlene Daniels</a></p>
-                                        <h4 class="title"><a href="courses-details-left-sidebar.html">Hacking exercise for health new science of fitness</a></h4>
-                                        <ul class="meta">
-                                            <li>06 hr 12 mins</li>
-                                            <li>35 Lectures</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Single Courses End -->
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <!-- Single Courses Start -->
-                            <div class="single-courses">
-                                <div class="courses-images">
-                                    <a href="courses-details-left-sidebar.html"><img src="assets/images/courses/courses-6.jpg" alt="courses"></a>
-                                </div>
-                                <div class="courses-content">
-                                    <div class="courses-price">
-                                        <span class="price">$68</span>
-                                    </div>
-                                    <div class="content-wrapper">
-                                        <p class="author">By: <a href="#">Selina Benton</a></p>
-                                        <h4 class="title"><a href="courses-details-left-sidebar.html">Designing Your Personal Weight Loss Plan</a></h4>
-                                        <ul class="meta">
-                                            <li>09 hr 34 mins</li>
-                                            <li>28 Lectures</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Single Courses End -->
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <!-- Single Courses Start -->
-                            <div class="single-courses">
-                                <div class="courses-images">
-                                    <a href="courses-details-left-sidebar.html"><img src="assets/images/courses/courses-7.jpg" alt="courses"></a>
-                                </div>
-                                <div class="courses-content">
-                                    <div class="courses-price">
-                                        <span class="price">$68</span>
-                                    </div>
-                                    <div class="content-wrapper">
-                                        <p class="author">By: <a href="#">Selina Benton</a></p>
-                                        <h4 class="title"><a href="courses-details-left-sidebar.html">Children Nutrition and Cooking</a></h4>
-                                        <ul class="meta">
-                                            <li>09 hr 34 mins</li>
-                                            <li>28 Lectures</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Single Courses End -->
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <!-- Single Courses Start -->
-                            <div class="single-courses">
-                                <div class="courses-images">
-                                    <a href="courses-details-left-sidebar.html"><img src="assets/images/courses/courses-8.jpg" alt="courses"></a>
-                                </div>
-                                <div class="courses-content">
-                                    <div class="courses-price">
-                                        <span class="price">$68</span>
-                                    </div>
-                                    <div class="content-wrapper">
-                                        <p class="author">By: <a href="#">Arlene Daniels</a></p>
-                                        <h4 class="title"><a href="courses-details-left-sidebar.html">Introduction to Food and Health. </a></h4>
-                                        <ul class="meta">
-                                            <li>09 hr 34 mins</li>
-                                            <li>28 Lectures</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Single Courses End -->
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <!-- Single Courses Start -->
-                            <div class="single-courses">
-                                <div class="courses-images">
-                                    <a href="courses-details-left-sidebar.html"><img src="assets/images/courses/courses-9.jpg" alt="courses"></a>
-                                </div>
-                                <div class="courses-content">
-                                    <div class="courses-price">
-                                        <span class="price">$68</span>
-                                    </div>
-                                    <div class="content-wrapper">
-                                        <p class="author">By: <a href="#">Selina Benton</a></p>
-                                        <h4 class="title"><a href="courses-details-left-sidebar.html">Nutrition and Lifestyle in Pregnancy</a></h4>
-                                        <ul class="meta">
-                                            <li>09 hr 34 mins</li>
-                                            <li>28 Lectures</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Single Courses End -->
-                        </div>
+                    <div class="row gx-xxl-5" id="food-view">
                     </div>
                 </div>
                 <!-- Courses Wrapper End -->
 
                 <!-- Page Pagination End -->
-                <div class="page-pagination">
+                {% comment %} <div class="page-pagination">
                     <ul class="pagination justify-content-center">
                         <li><a href="#"><i class="icofont-rounded-left"></i></a></li>
                         <li><a class="active" href="#">1</a></li>
@@ -541,7 +376,7 @@
                         <li><a href="#">3</a></li>
                         <li><a href="#"><i class="icofont-rounded-right"></i></a></li>
                     </ul>
-                </div>
+                </div> {% endcomment %}
                 <!-- Page Pagination End -->
 
             </div>
@@ -555,8 +390,8 @@
                 <!-- Download Wrapper Start -->
                 <div class="download-wrapper">
 
-                    <img class="shape-01" src="assets/images/shape/shape-7.png" alt="Shape">
-                    <img class="shape-02" src="assets/images/shape/shape-8.png" alt="Shape">
+                    <img class="shape-01" src="{% static 'assets/images/shape/shape-7.png' %}" alt="Shape">
+                    <img class="shape-02" src="{% static 'assets/images/shape/shape-8.png' %}" alt="Shape">
 
                     <!-- Section Title Start -->
                     <div class="section-title shape-none">
@@ -568,8 +403,8 @@
                     <!-- download App End -->
                     <div class="download-app">
                         <ul>
-                            <li><a href="#"><img src="assets/images/play-store.jpg" alt="Play Store"></a></li>
-                            <li><a href="#"><img src="assets/images/app-store.jpg" alt="App Store"></a></li>
+                            <li><a href="#"><img src="{% static 'assets/images/play-store.jpg' %}" alt="Play Store"></a></li>
+                            <li><a href="#"><img src="{% static 'assets/images/app-store.jpg' %}" alt="App Store"></a></li>
                         </ul>
                     </div>
                     <!-- download App End -->
@@ -587,7 +422,7 @@
             <!-- Footer Widget Section Start -->
             <div class="footer-widget-section section-padding">
 
-                <img class="shape-01 animation-rotate" src="assets/images/shape/shape-9.png" alt="Shape">
+                <img class="shape-01 animation-rotate" src="{% static 'assets/images/shape/shape-9.png' %}" alt="Shape">
 
                 <div class="container">
 
@@ -677,7 +512,7 @@
 
                 </div>
 
-                <img class="shape-02 animation-rotate" src="assets/images/shape/shape-9.png" alt="Shape">
+                <img class="shape-02 animation-rotate" src="{% static 'assets/images/shape/shape-9.png' %}" alt="Shape">
 
             </div>
             <!-- Footer Widget Section End -->
@@ -726,10 +561,10 @@
     aria-hidden="true"
   >
     <div class="modal-dialog modal-dialog-centered relative w-auto pointer-events-none">
-      <div class="modal-content bg-[#373951]">
+      <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5 text-zinc-200" id="exampleModalLabel">
-            Tambah Task
+          <h1 class="modal-title fs-5 text-zinc-800" id="exampleModalLabel">
+            Tambah Rekomendasi
           </h1>
           <button
             type="button"
@@ -745,34 +580,110 @@
                 {% csrf_token %}
                 <label class="block">
                   <span
-                    class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-200"
+                    class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-800"
                   >
-                    Title
+                    Nama hidangan
                   </span>
                   <input
                     type="text"
-                    name="title"
-                    id="title"
-                    class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-500"
-                    placeholder="Title"
+                    name="name"
+                    id="name"
+                    class=""
+                    placeholder="Nama hidangan"
                     required
                   />
                 </label>
 
                 <label class="block mt-2">
                   <span
-                    class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-200"
+                    class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-800"
                   >
-                    Description
+                    Kalori
                   </span>
                   <input
-                    type="text"
-                    name="description"
-                    id="description"
-					class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-500"
-                    placeholder="Description"
+                    type="number"
+                    name="calories"
+                    id="calories"
+					class=""
+                    placeholder="Calories"
                     required
                   />
+                </label>
+
+                <label class="block mt-2">
+                  <span
+                    class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-800"
+                  >
+                    Protein
+                  </span>
+                  <input
+                    type="number"
+                    name="protein"
+                    id="protein"
+					class=""
+                    placeholder="Protein"
+                    required
+                  />
+                </label>
+
+                <label class="block mt-2">
+                  <span
+                    class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-800"
+                  >
+                    Lemak
+                  </span>
+                  <input
+                    type="number"
+                    name="fat"
+                    id="fat"
+					class=""
+                    placeholder="Fat"
+                    required
+                  />
+                </label>
+
+                <label class="block mt-2">
+                  <span
+                    class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-800"
+                  >
+                    Karbohidrat
+                  </span>
+                  <input
+                    type="number"
+                    name="carbs"
+                    id="carbs"
+					class=""
+                    placeholder="Carbs"
+                    required
+                  />
+                </label>
+
+                <label class="block mt-2">
+                  <span
+                    class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-800"
+                  >
+                    Jenis
+                  </span><br>
+                  <div class="d-flex flex-row mt-2 gap-2 text-zinc-800">
+                    <input
+                        type="radio"
+                        name="is_food"
+                        id="food"
+                        class=""
+                        value="1"
+                        required
+                    />
+                    <label for="food">Makanan</label><br>
+                    <input
+                        type="radio"
+                        name="is_food"
+                        id="drink"
+                        class=""
+                        value="0"
+                        required
+                    />
+                    <label for="drink">Minuman</label><br>
+                    </div>
                 </label>
               </form>
             </div>
@@ -781,19 +692,19 @@
         <div class="modal-footer">
           <button
             type="button"
-            class="inline-flex space-x-2 items-center justify-center px-6 py-3 bg-gradient-to-br from-red-400 to-orange-600 rounded-xl"
+            class="btn btn-danger"
             data-bs-dismiss="modal"
           >
             Cancel
           </button>
 
           <button
-            id="add-todo"
+            id="add-food-button"
             type="button"
-            class="inline-flex space-x-2 items-center justify-end px-6 py-3 bg-gradient-to-br from-green-400 to-indigo-600 rounded-xl"
+            class="btn btn-primary btn-hover-white"
             data-bs-dismiss="modal"
           >
-            Tambah Task
+            Tambah Rekomendasi
           </button>
         </div>
       </div>
@@ -819,7 +730,7 @@
     <script src="{% static 'assets/js/plugins/ajax-contact.js' %}"></script>
 
     <!--====== Use the minified version files listed below for better performance and remove the files listed above ======-->
-    <!-- <script src="assets/js/plugins.min.js"></script> -->
+    <!-- <script src="{% static 'assets/js/plugins.min.js"></script> -->
 
 
     <!-- Main JS -->

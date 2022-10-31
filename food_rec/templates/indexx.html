@@ -55,17 +55,14 @@
       })
 
     $('#add-food-button').click(function () {
-          $.post("{% url 'food_rec:add_food_ajax' %}"(
-            '/food_rec/add/',
-            {
+          $.post("{% url 'food_rec:add_food_ajax' %}",{
                 name: $('#name').val(),
                 calories: $('#calories').val(),
                 protein: $('#protein').val(),
                 fat: $('#fat').val(),
                 carbs: $('#carbs').val(),
             },
-            function (res, status) {
-              if (status == 'success') {
+            function (res) {
                 addCard(res)
                 $('#name').val('')
                 $('#calories').val('')
@@ -73,7 +70,6 @@
                 $('#fat').val('')
                 $('#carbs').val('')
                 removeCard(res)
-              }
             },
           );
       });

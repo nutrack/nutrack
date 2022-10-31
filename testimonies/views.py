@@ -1,3 +1,4 @@
+from multiprocessing import context
 from django.shortcuts import render
 
 # Create your views here.
@@ -12,6 +13,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
+from .forms import TestimonyForm
 import datetime
 
 def show_testimonies(request):
@@ -20,3 +22,15 @@ def show_testimonies(request):
         'data' : data
         }
     return render(request, "testimonies.html", context)
+
+def create_testimonies(request):
+    user = request.user
+    if request.method == 'POST':
+        form = TestimonyForm(request.POST)
+        form.instance.user = user
+        if form.is_valid():
+            form.save()
+            return redirect('testimonies:show_testimonies')
+
+    context = {}
+    return render(request, 'create-testimonies.html', context)

@@ -59,8 +59,7 @@ def add_food_ajax(request):
         fat = request.POST.get('fat')
         carbs = request.POST.get('carbs')
         rating = 0
-        rater = 0
-        food = Food.objects.create(user=request.user, name=name, calories=calories, protein=protein, fat=fat, carbs=carbs, rating=rating, rater=rater)
+        food = Food.objects.create(user=request.user, name=name, calories=calories, protein=protein, fat=fat, carbs=carbs, rating=rating)
         result = {
             'fields': {
                 'name': name,
@@ -69,7 +68,6 @@ def add_food_ajax(request):
                 'fat': fat,
                 'carbs': carbs,
                 'rating': rating,
-                'rater': rater,
             },
             'pk': food.pk
         }
@@ -77,24 +75,24 @@ def add_food_ajax(request):
     else:
         return HttpResponseBadRequest()
 
-@login_required(login_url='/login/')
-def rate_food_ajax(request):
-    if request.method == 'POST':
-        pk = request.POST['pk']
-        rating = request.POST['rating']
-        food = Food.objects.get(pk=pk)
-        food.rater += 1
-        food.rating = (food.rating * (food.rater - 1) + int(rating)) / food.rater
-        food.rating = rating
-        food.save()
-        return HttpResponseRedirect(reverse('food_rec:show_all_food'))
-    else:
-        return HttpResponseBadRequest()
+# @login_required(login_url='/login/')
+# def rate_food_ajax(request):
+#     if request.method == 'POST':
+#         pk = request.POST['pk']
+#         rating = request.POST['rating']
+#         food = Food.objects.get(pk=pk)
+#         food.rater += 1
+#         food.rating = (food.rating * (food.rater - 1) + int(rating)) / food.rater
+#         food.rating = rating
+#         food.save()
+#         return HttpResponseRedirect(reverse('food_rec:show_all_food'))
+#     else:
+#         return HttpResponseBadRequest()
 
-# def show_food_food(request):
-#     foods = Food.objects.filter(is_food=True)
-#     context = { 'foods': foods }
-#     return render(request, 'indexx.html', context)
+def show_food_food(request):
+    foods = Food.objects.filter(is_food=True)
+    context = { 'foods': foods }
+    return render(request, 'indexx.html', context)
 
 def sort_food(request):
     foods = Food.objects.order_by('-rating')

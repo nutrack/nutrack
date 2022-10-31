@@ -3,11 +3,414 @@
 {% block content %}
 {% load static%}
 <html>
-    <head>
+    <head> 
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>History</title>
+        <meta name="robots" content="noindex, follow" />
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Favicon -->
+        <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/images/favicon.ico' %}">
+    
+        <!-- CSS
+        ============================================ -->
+    
+        <!-- Icon Font CSS -->
+        <link rel="stylesheet" href="{% static 'assets/css/plugins/icofont.min.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/css/plugins/flaticon.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/css/plugins/font-awesome.min.css' %}">
+    
+        <!-- Plugins CSS -->
+        <link rel="stylesheet" href="{% static 'assets/css/plugins/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/css/plugins/animate.min.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/css/plugins/swiper-bundle.min.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/css/plugins/magnific-popup.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/css/plugins/nice-select.css' %}">
+    
+        <!-- Main and Modal Style CSS -->
+        <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/css/modal.css' %}">
+    
+
+        <style>
+            #btn-add:hover, #btn-hist:hover{
+                background-color: #0a4d3c;
+                border-color: #0a4d3c;
+                color: #fff;
+            }
+        </style>
+
+        <script>
+
+function isikonten(calory,date,id) {
+    if(calory==0){
+        $("#tabel-kalori").html(`
+      <h6 class="sub-title" style="color: orange">Mohon Maaf Datanya masih Kosong</h6>
+      
+      `)
+    }else{
+      $("#tabel-kalori-inti").append(`      
+      <tr>
+            <td>${date}</td>
+            <td>${calory} cal</td>
+      </tr>
+      `)}
+    }
+    
+
+    function time(){
+    var now = new Date();
+    var h = now.getHours();
+    var m = now.getMinutes();
+    var s = now.getSeconds();
+    if(h==0 && s==0){
+        location.reload();
+    }
+        $("#introduction_time").html(`
+        <h3 style="color: white;">${now}</h3>
+        `)
+        setTimeout(time,1000);
+    }
+
+$(document).ready(function() {
+      time()
+      var jumlahkalori=0;
+      console.log(112);
+      $.get("{% url 'calorycalc:show_calory_json' %}", function(calory) {
+        console.log(calory);   
+        if(calory.length==0){
+            isikonten(0)
+        }else{
+        for (const info of calory) {
+            jumlahkalori+=info["calory"];
+            isikonten(jumlahkalori,info["date"],info["id"])
+        }
+    }
+      }, "json")
+    })
+        </script>
     </head>
     <body>
+
+
         
+        <div class="main-wrapper">
+
+            <!-- Header Section Start -->
+            <div class="header section">
+    
+                <!-- Header Main Start -->
+                <div class="header-main">
+                    <div class="container">
+    
+                        <!-- Header Wrapper Start -->
+                        <div class="header-wrapper">
+    
+                            <!-- Header Logo Start -->
+                            <div class="header-logo">
+                                <a  href="{% url 'main:home' %}"><img src = "{% static 'assets/images/logo-nutrack-copy.png' %}" alt="Logo" ></a>
+                            </div>
+                            <!-- Header Logo End -->
+    
+                            <!-- Header Menu Start -->
+                            <div class="header-menu d-none d-lg-flex">
+    
+                                <ul class="nav-menu">
+                                    <li><a class="active" href="/">Home</a></li>
+                                    {% if user.is_authenticated %}
+                                    <li><a href="{% url 'calorycalc:calorycalc' %}">CaloryCalc</a></li>
+                                    {% else %}
+                                    <li><a id="myBtn" href="#">CaloryCalc</a></li>
+                                    <!-- The Modal -->
+                                    <div id="myModal" class="modal">
+    
+                                        <!-- Modal content -->
+                                        <div class="modal-content">
+                                            <span class="close">&times;</span>
+                                            <h3>Please log in first!</h3>
+                                        </div>
+                                    
+                                    </div>
+                                    {% endif %}
+                                    <li><a href="{% url 'food_rec:show_all_food' %}">Food Recommendation</a></li>
+                                    <li>
+                                        <a href="{% url 'article:article' %}">Articles </a>
+                                        <ul class="sub-menu">
+                                            <li><a href="{% url 'article:write' %}">Write Article</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#">About Us</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="#">Dive into us!</a></li>
+                                            <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+    
+                                {% if user.is_authenticated %}
+                                <div class="header-btn">
+                                    <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:logout' %}">Bye, {{user.get_username}}!</a>
+                                </div>
+                                {% else %}
+                                <div class="header-btn">
+                                    <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:register' %}">Want to join us?</a>
+                                </div>
+                                {% endif %}
+                            </div>
+                            <!-- Header Menu End -->
+                        
+                            <!-- Header Toggle Start -->
+                            {% if user.is_authenticated %}
+                            <div class="header-toggle d-lg-none">
+    
+                                <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:logout' %}">Bye, {{user.get_username}}!</a>
+    
+                                <a href="#" class="menu-toggle">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </a>
+                            </div>
+                            {% else %}
+                            <div class="header-toggle d-lg-none">
+    
+                                <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:register' %}">Want to join us?</a>
+    
+                                <a href="#" class="menu-toggle">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </a>
+                            </div>
+                            {% endif %}
+                            <!-- Header Toggle End -->
+    
+                        </div>
+                        <!-- Header Wrapper End -->
+    
+                    </div>
+                </div>
+                <!-- Header Main End -->
+    
+            </div>
+            <!-- Header Section End -->
+            <!-- Mobile Menu Start -->
+            <div class="mobile-menu">
+    
+                <!-- Menu Close Start -->
+                <a class="menu-close" href="javascript:void(0)">
+                    <i class="icofont-close-line"></i>
+                </a>
+                <!-- Menu Close End -->
+    
+                <!-- Mobile Menu Start -->
+                <div class="mobile-menu-items">
+                    <ul class="nav-menu">
+                        <li><a class="active" href="{% url 'main:home' %}">Home</a></li>
+                        {% if user.is_authenticated %}
+                        <li><a href="{% url 'calorycalc:calorycalc' %}">CaloryCalc</a></li>
+                        {% else %}
+                        <li><a id="myBtn" href="#">CaloryCalc</a></li>
+                        <!-- The Modal -->
+                        <div id="myModal" class="modal">
+    
+                            <!-- Modal content -->
+                            <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <h3>Please log in first!</h3>
+                            </div>
+                        
+                        </div>
+                        {% endif %}
+                        <li>
+                            <a href="#">Food Recommendation</a>
+                            <ul class="sub-menu">
+                                <li><a href="courses.html">Courses</a></li>
+                                <li><a href="my-courses.html">My Courses</a></li>
+                                <li><a href="#">Courses Details</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="courses-details-left-sidebar.html">Courses Details Left Sidebar</a></li>
+                                        <li><a href="courses-details-right-sidebar.html">Courses Details Right Sidebar</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Articles </a>
+                            <ul class="sub-menu">
+                                <li><a href="after-enroll.html">After Enroll</a></li>
+                                <li><a href="courses-admin.html">Instructor Dashboard (Course List)</a></li>
+                                <li><a href="overview.html">Instructor Dashboard (Performance)</a></li>
+                                <li><a href="students.html">Students</a></li>
+                                <li><a href="reviews.html">Reviews</a></li>
+                                <li><a href="engagement.html">Course engagement</a></li>
+                                <li><a href="traffic-conversion.html">Traffic & conversion</a></li>
+                                <li><a href="messages.html">Messages</a></li>
+                                <li><a href="register.html">Register</a></li>
+                                <li><a href="login.html">Login</a></li>
+                                <li><a href="faq.html">FAQ</a></li>
+                                <li><a href="404-error.html">404 Error</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">About Us</a>
+                            <ul class="sub-menu">
+                                <li>
+                                    <a href="#">Dive into us!</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="blog-grid.html">Blog Grid</a></li>
+                                        <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
+                                        <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">Testimonial</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="blog-details-left-sidebar.html">Blog Details Left Sidebar</a></li>
+                                        <li><a href="blog-details-right-sidebar.html">Blog Details Right Sidebar</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+    
+                </div>
+                <!-- Mobile Menu End -->
+    
+            </div>
+            <!-- Mobile Menu End -->
+    
+            <!-- Overlay Start -->
+            <div class="overlay"></div>
+            <!-- Overlay End -->
+    
+    
+    
+            <!-- Slider Section Start -->
+            <div class="slider-section slider-active section">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        {% if user.is_authenticated %}
+                        <div class="swiper-slide animation-style-01 single-slider d-flex align-items-center" style="background-color: darkgreen">
+                            <!-- Slider Content Start -->
+                            <div class="testimonial-wrapper">
+                                <div class="section-title section-title-white">
+                                    <h1 class="main-title">CaloryCalc</h1>
+                                </div>
+                                <div id="tabel-kalori" class="section-title shape-none">
+                                    <table class="table table-dark">
+                                        <thead>
+                                          <tr>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Jumlah Calory</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody id="tabel-kalori-inti">
+                                        </tbody>
+                                      </table>
+                                      
+                                </div>
+                            </div>
+                            <!-- Slider Content End -->
+                        </div>
+                        {% else %}
+                        <!-- Single Slider Start -->
+                        <!-- Single Slider End -->
+    
+                        <!-- Single Slider Start -->
+
+                        <!-- Single Slider End -->
+    
+                        <!-- Single Slider Start -->
+                        <!-- Single Slider End -->
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <!-- Slider Section End -->
+    
+            <!-- Features Section Start -->
+            <!-- Features Section End -->
+    
+            <!-- Courses Section Start -->
+            <!-- Courses Section End -->
+    
+            <!-- Testimonial Section Start -->
+            <!-- Testimonial Section End -->
+    
+            <!-- Blog Section End -->
+            <!-- Blog Section End -->
+    
+            <!-- Footer Start -->
+            <div class="section footer-section">
+    
+                <!-- Footer Widget Section Start -->
+                <div class="footer-widget-section section-padding">
+    
+                    <img class="shape-01 animation-rotate" src="{% static 'assets/images/shape/shape-9.png' %}" alt="Shape">
+    
+                    <div class="container">
+    
+                        <!-- Footer Widget Wrapper Start -->
+                        <div class="footer-widget-wrapper">
+                            <div class="row">
+                                <!-- Footer Widget Start -->
+                                <div style="text-align: center;">
+                                    <h3 class="footer-widget-title">All Features</h3>
+                                    <ul class="widget-link">
+                                        <li><a href="{% url 'calorycalc:calorycalc' %}">CaloryCalc</a></li>
+                                        <li><a href="#">Food Recommendation</a></li>
+                                        <li><a href="#">Articles</a></li>
+                                        <li><a href="#">Testimonial</a></li>
+                                        <li><a href="#">Dive into us!</a></li>
+                                    </ul>
+                                </div>
+                                <!-- Footer Widget End -->
+                            </div>
+                        </div>
+                        <!-- Footer Widget Wrapper End -->
+    
+                    </div>
+    
+                    <img class="shape-02 animation-rotate" src="{% static 'assets/images/shape/shape-9.png' %}" alt="Shape">
+    
+                </div>
+                <!-- Footer Widget Section End -->
+    
+                <!-- Footer Copyright Section Start -->
+                <div class="footer-copyright">
+                    <div class="container">
+    
+                        <!-- Copyright Wrapper Start -->
+                        <div class="copyright-wrapper">
+    
+                            <div class="copyright-text">
+                                <p>&copy; 2022 <span> Nutrack </span> Made with <i class="icofont-heart-alt"></i>by <a href="https://github.com/nutrack" target="_blank">Kelompok F10 PTS PBP Semester Gasal, Tahun Ajaran 2022/2023</a></p>
+                            </div>
+    
+                        </div>
+                        <!-- Copyright Wrapper End -->
+    
+                    </div>
+                </div>
+                <!-- Footer Copyright Section End -->
+    
+            </div>
+            <!-- Footer End -->
+    
+            <!--Back To Start-->
+            <a href="#" class="back-to-top">
+                <i class="icofont-simple-up"></i>
+            </a>
+            <!--Back To End-->
+    
+        </div>
+        </div>
+
+      
+
     </body>
 </html>
 {% endblock content %}

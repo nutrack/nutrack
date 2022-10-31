@@ -5,6 +5,7 @@ app_name = 'food_rec'
 
 urlpatterns = [
     path('', show_all_food, name='show_all_food'),
+    path('my-food/', show_user_food, name='show_user_food'),
     path('add/', add_food_ajax, name='add_food_ajax'),
     path('json/', show_json, name='show_json'),
     path('show-food/<int:id>', food_page_by_id, name='food_page_by_id'),

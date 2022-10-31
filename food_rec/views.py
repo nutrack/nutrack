@@ -58,8 +58,13 @@ def add_food_ajax(request):
         protein = request.POST.get('protein')
         fat = request.POST.get('fat')
         carbs = request.POST.get('carbs')
-        rating = 0
-        food = Food.objects.create(user=request.user, name=name, calories=calories, protein=protein, fat=fat, carbs=carbs, rating=rating)
+        print(request.POST.get('is_food'))
+        is_food = bool(request.POST.get('is_food'))
+        print(is_food)
+        rating = request.POST.get('rating')
+        if int(rating) > 5:
+            rating = 5
+        food = Food.objects.create(user= request.user, name=name, calories=calories, protein=protein, fat=fat, carbs=carbs, rating=rating, is_food=is_food)
         result = {
             'fields': {
                 'name': name,
@@ -68,6 +73,7 @@ def add_food_ajax(request):
                 'fat': fat,
                 'carbs': carbs,
                 'rating': rating,
+                'is_food': is_food,
             },
             'pk': food.pk
         }

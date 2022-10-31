@@ -5,7 +5,7 @@ from django.shortcuts import render
 from urllib import response
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from .models import Testimony
+from .models import Testimony 
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from django.core import serializers

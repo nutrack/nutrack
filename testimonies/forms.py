@@ -1,5 +1,5 @@
-from django.forms import forms
-from .models import Testimony
+from django import forms
+from testimonies.models import Testimony
 
 class TestimonyForm(forms.ModelForm):
     class Meta:

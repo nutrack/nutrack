@@ -42,8 +42,16 @@
         </style>
 
         <script>
+            function addZero(i) {
+  if (i < 10) {i = "0" + i}
+  return i;
+}
 
 function isikonten(calory,date,id) {
+    const dates=new Date(date);
+    let h = addZero(dates.getHours());
+    let m = addZero(dates.getMinutes());
+    let s = addZero(dates.getSeconds());
       $("#tabel-kalori").html(`
       <h6 class="sub-title" style="color: orange">Today's calories</h6>
       <h3 class="main-title" style="color: white;">${calory}<span class="sub-title" style="color: orange;">cal</span></h3>
@@ -51,7 +59,7 @@ function isikonten(calory,date,id) {
       `)
       if(date!=undefined){
       $(".historydrop").append(`
-    <li><a class="dropdown-item" href="/calorycalc/history/${id}">${date}:${calory} Calory</a></li>
+    <li><a class="dropdown-item" href="/calorycalc/history/${id}">${h}:${m}:${s}==${calory} Calory</a></li>
     `)}
     }
     

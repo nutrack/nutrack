@@ -58,7 +58,11 @@ def add_food_ajax(request):
         protein = request.POST.get('protein')
         fat = request.POST.get('fat')
         carbs = request.POST.get('carbs')
-        is_food = bool(request.POST.get('is_food'))
+        is_food = request.POST.get('is_food')
+        if is_food == 1:
+            is_food = True
+        else:
+            is_food = False
         rating = request.POST.get('rating')
         if int(rating) > 5:
             rating = 5

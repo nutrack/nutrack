@@ -269,7 +269,8 @@
                 <div class="swiper-wrapper">
 
                     <!-- Single Slider Start -->
-                    <div id="article-slider" class="swiper-slide animation-style-01 single-slider d-flex align-items-center" style="background-image: url(/static/assets/images/slider/slider-1.jpg);">
+                    <div id="article-slider" class="swiper-slide animation-style-01 single-slider d-flex align-items-center" style="background-image: linear-gradient(-45deg, #9AB94D, white, #F7E255);">
+                        <!-- image: url(/static/assets/images/slider/slider-1.jpg) -->
                         <div class="container" id="title-container-slider">
 
                             <!-- Slider Content Start -->
@@ -296,6 +297,7 @@
 
                 <!-- Blog Wrapper Start -->
                 <div class="blog-wrapper-02">
+                    
                     <div class="row gx-xxl-5" id="view-article"></div>
                 </div>
                 <!-- Blog Wrapper End -->
@@ -423,10 +425,25 @@
     }
 
     #article-slider {
-        background-color: white;
         padding-bottom: 0px;
         padding-top: 0px;
+        background-size: 400% 400%;
+        animation: gradient 15s ease infinite;
+        height: 100vh;
     }
+
+    @keyframes gradient {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
 </style>
 {% endblock content %}
 </html>

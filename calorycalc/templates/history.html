@@ -43,7 +43,17 @@
 
         <script>
 
+function addZero(i) {
+  if (i < 10) {i = "0" + i}
+  return i;
+}
+
+
 function isikonten(calory,date,id) {
+    const d = new Date(date);
+    let h = addZero(d.getHours());
+    let m = addZero(d.getMinutes());
+    let s = addZero(d.getSeconds());
     if(calory==0){
         $("#tabel-kalori").html(`
       <h6 class="sub-title" style="color: orange">Mohon Maaf Datanya masih Kosong</h6>
@@ -52,7 +62,7 @@ function isikonten(calory,date,id) {
     }else{
       $("#tabel-kalori-inti").append(`      
       <tr>
-            <td>${date}</td>
+            <td>${h}:${m}:${s}</td>
             <td>${calory} cal</td>
       </tr>
       `)}

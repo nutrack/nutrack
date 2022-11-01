@@ -286,7 +286,7 @@
         {% endif %}
 
         <!-- Features Section Start -->
-        <div class="section section-padding-02">
+        <div class="section section-padding">
             <div class="container">
                 <div class="features-wrapper">
                     <div class="row">
@@ -343,6 +343,8 @@
             </div>
         </div>
         <!-- Features Section End -->
+
+
 
         <!-- Footer Start -->
         <div class="section footer-section">
@@ -441,11 +443,12 @@
     <script src="{% static 'assets/js/modal.js' %}"></script>
     <script>
         function getCalc(){
+            var temp_calc = 0
             $.getJSON("{% url 'main:calorycalc_json' %}", function(data){
-            $(data).each(function(i, entry) {
-                    $("#get-cal").html(`${entry.fields.calory} <span class="sub-title" style="color: orange;">cal</span>`)
-                    console.log(entry.fields.calory)
-                })
+                $(data).each(function(i, entry) {
+                        temp_calc += entry.fields.calory
+                    })
+                    $("#get-cal").html(`${temp_calc} <span class="sub-title" style="color: orange;">cal</span>`)
             })
         };
 

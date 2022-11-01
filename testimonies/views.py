@@ -22,12 +22,17 @@ def show_testimonies(request):
         }
     return render(request, "testimonies.html", context)
 
+def testimonies_json(request):
+    data = Testimony.objects.all()
+    return HttpResponse(serializers.serialize('json', data), content_type='application/json')
+
 @login_required(login_url='/login/')
 def create_testimonies(request):
     user = request.user
     if request.method == 'POST':
         form = TestimonyForm(request.POST)
         form.instance.user = user
+        form.instance.username = user.username
         print(form.is_valid())
         if form.is_valid():
             form.save()
@@ -35,3 +40,14 @@ def create_testimonies(request):
 
     context = {}
     return render(request, 'create-testimonies.html', context)
+
+@login_required(login_url='/login/')
+@csrf_exempt
+def create_testimony_ajax(request):
+    user = request.user
+    if request.method == "POST":
+        title = request.POST.get('title')
+        testimony = request.POST.get('testimony')
+        result = Testimony.objects.create(user=user, username=user.username, title=title, testimony=testimony)
+        result_dict = {"username":result.username,"title":result.title,"testimony":result.testimony}
+        return JsonResponse(result_dict)

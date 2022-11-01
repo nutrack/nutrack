@@ -32,10 +32,6 @@
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/modal.css' %}">
 
-    <!-- Add Bootstrap -->
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script> -->
-
     <!--====== Use the minified version files listed below for better performance and remove the files listed above ======-->
     <!-- <link rel="stylesheet" href="assets/css/vendor/plugins.min.css">
     <link rel="stylesheet" href="assets/css/style.min.css"> -->
@@ -49,7 +45,6 @@
             text-align: center;
         }
     </style>
-
 </head>
 <body>
 
@@ -216,7 +211,7 @@
         
         <div class="section section-padding overflow-hidden" style="background-color: darkgreen">
             <!-- Slider Content Start -->
-            <div class="testimonial-wrapper">
+            <div class="testimonial-wrapper" id="wrapper">
                 <div class="section-title section-title-white">
                     <h1 class="main-title">Testimony</h1>
                 </div>
@@ -231,6 +226,17 @@
                         </div>
                     </div>
                 {% endfor %}
+                {% if not user.is_authenticated %}
+                <div style="text-align: center;margin-top:100px;">
+                    <p style="color: white; margin-bottom: 30px;">Please Login to Create Testimonies</p>
+                    <a href="{% url 'main:login' %}" class="btn btn-primary btn-hover-secondary" id="btn-add">Login</a>
+                </div>
+                {% else %}
+                <div style="text-align: center; padding-bottom: 30px;;">
+                    <p style="color: white; margin-bottom: 30px;">Share Your Thoughts About Us!</p>
+                    <a href="{% url 'testimonies:create_testimonies' %}" class="btn btn-primary btn-hover-secondary" id="btn-add">Create Testimonies</a>
+                </div>
+                {% endif %}
             </div>
             <!-- Slider Content End -->
         </div>
@@ -390,20 +396,6 @@
     <!-- Main and Modal JS -->
     <script src="{% static 'assets/js/main.js' %}"></script>
     <script src="{% static 'assets/js/modal.js' %}"></script>
-    <script>
-        function getCalc(){
-            $.getJSON("{% url 'main:calorycalc_json' %}", function(data){
-            $(data).each(function(i, entry) {
-                    $("#get-cal").html(`${entry.fields.calory} <span class="sub-title" style="color: orange;">cal</span>`)
-                    console.log(entry.fields.calory)
-                })
-            })
-        };
-
-        $(document).ready(function() {
-            getCalc()
-        });
-    </script>
 
 </body>
 {% endblock content %}

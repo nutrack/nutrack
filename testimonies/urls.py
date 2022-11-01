@@ -5,5 +5,5 @@ app_name = 'testimonies'
  
 urlpatterns = [
     path('', show_testimonies, name='show_testimonies'),
-    path('create-testimonies', create_testimonies, name='create_testimonies'),
+    path('create-testimonies/', create_testimonies, name='create_testimonies'),
 ]

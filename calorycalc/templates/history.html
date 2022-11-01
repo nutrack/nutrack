@@ -42,6 +42,10 @@
         </style>
 
         <script>
+            function addZero(i) {
+  if (i < 10) {i = "0" + i}
+  return i;
+}
 
 function addZero(i) {
   if (i < 10) {i = "0" + i}
@@ -50,10 +54,10 @@ function addZero(i) {
 
 
 function isikonten(calory,date,id) {
-    const d = new Date(date);
-    let h = addZero(d.getHours());
-    let m = addZero(d.getMinutes());
-    let s = addZero(d.getSeconds());
+    const dates=new Date(date);
+    let h = addZero(dates.getHours());
+    let m = addZero(dates.getMinutes());
+    let s = addZero(dates.getSeconds());
     if(calory==0){
         $("#tabel-kalori").html(`
       <h6 class="sub-title" style="color: orange">Mohon Maaf Datanya masih Kosong</h6>

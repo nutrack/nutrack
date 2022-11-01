@@ -265,9 +265,9 @@
                                     </div>
                                     <div class="blog-meta">
                                         <span> <i class="icofont-calendar"></i>{{article_post.date}}</span>
-                                        <span> <a href="{% url 'article:like' id %}"><i class="icofont-heart"></i></a>{{article_post.like}}</span>
+                                        <span> <a href="{% url 'article:like' id %}"><i class="icofont-heart" id="heart-button"></i></a>{{article_post.like}}</span>
                                         {% if is_author %}
-                                        <span><a href="{% url 'article:delete' id %}"><img src = "{% static 'assets/images/trash.png' %}" alt="Trash" width="50px" height="auto"></a></span>
+                                        <span><a href="{% url 'article:delete' id %}"><img src = "{% static 'assets/images/trash.png' %}" alt="Trash" width="50px" height="auto" id="trash-button"></a></span>
                                         {% endif %}
                                     </div>
                                 </div>
@@ -282,18 +282,12 @@
 
                             <!-- Blog Details Comment End -->
                             <div class="blog-details-comment">
+                                {% if user.is_authenticated %}
                                 <div class="comment-form" style="margin-top: 10px;">
                                     <h3 class="title">Leave a Comment</h3>
                                     <!-- Form Wrapper Start -->
                                     <div class="form-wrapper">
                                         <form method="POST">
-                                            <!-- <table>
-                                                {{ comment_form.as_table }}
-                                                <tr>  
-                                                    <td></td>
-                                                    <td><input type="submit" name="submit" value="Post" class="btn btn-light"/></td>  
-                                                </tr>  
-                                            </table> -->
                                             {% csrf_token %}
                                             <div>
                                                 {{ comment_form.comment_post }}
@@ -303,6 +297,7 @@
                                     </div>
                                     <!-- Form Wrapper End -->
                                 </div>
+                                {% endif %}
 
                                 <div class="comment-wrapper">
                                     <h3 class="title">Comments</h3>
@@ -311,7 +306,7 @@
                                         <li>
                                             {% for com in comments %}
                                             <!-- Single Comment Start -->
-                                            <div class="single-comment">
+                                            <div class="single-comment" style="border-radius: 30px;" id="comment-hover">
                                                 <div class="comment-author" style="border: 0px;">
                                                     <!-- <div class="author-thumb" style="border: 0px;"> -->
                                                         <!-- <img src="{% static 'assets/images/profpic.png' %}" alt="Author"> -->
@@ -341,7 +336,7 @@
                                 <div class="sidebar-widget" style="margin-top: 80px;">
                                     <h4 class="widget-title">Posts</h4>
 
-                                    <div class="widget-post">
+                                    <div class="widget-post" id="posts-section">
                                         <ul class="post-items">
 
                                             {% for post in recent_post %}
@@ -463,6 +458,18 @@
     input:hover {
         background-color: #ffa300;
         color: #0a4d3c;
+    }
+
+    #heart-button:hover {
+        transform: scale(1.1);
+    }
+
+    #trash-button:hover {
+        transform: scale(1.1) rotate(15deg);
+    }
+
+    #comment-hover:hover {
+        box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
     }
 </style>
 

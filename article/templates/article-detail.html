@@ -223,6 +223,7 @@
 
         <!-- Page banner Section Start -->
         <div class="section page-banner-section" style="background-image: url(/static/assets/images/page-banner.jpg);">
+            <!-- background-image: url(/static/assets/images/page-banner.jpg); -->
             <div class="container">
 
                 <!-- Page banner Section Start -->
@@ -265,6 +266,9 @@
                                     <div class="blog-meta">
                                         <span> <i class="icofont-calendar"></i>{{article_post.date}}</span>
                                         <span> <a href="{% url 'article:like' id %}"><i class="icofont-heart"></i></a>{{article_post.like}}</span>
+                                        {% if is_author %}
+                                        <span><a href="{% url 'article:delete' id %}"><img src = "{% static 'assets/images/trash.png' %}" alt="Trash" width="50px" height="auto"></a></span>
+                                        {% endif %}
                                     </div>
                                 </div>
         

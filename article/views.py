@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 import datetime
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
@@ -66,11 +66,16 @@ def article_page_by_id(request, id):
 
     if Comment.objects.filter(artid=id).exists():
         comments = Comment.objects.filter(artid=id)
+
+    is_author = False
+    if request.user == data.user:
+        is_author = True
     
     context = {
         'article_post': data,
         'recent_post': rec,
         'id': id,
+        'is_author': is_author,
         'username': request.user.username,
         'comment_form': comment_form,
         'comments': comments
@@ -116,8 +121,8 @@ def post_article(request):
             }
         }
 
-        response = JsonResponse(result)
-        return response
+        JsonResponse(result)
+        return HttpResponseRedirect(reverse('article:id', kwargs={'id':data.pk}))
 
 def like(request, id):
     art = Article.objects.get(id=id)
@@ -125,26 +130,8 @@ def like(request, id):
     art.save()
     return HttpResponseRedirect(reverse('article:id', kwargs={'id':id}))
 
-# def comment(request, id):
-#     if request.method == 'POST':
-#         comment_post = request.POST.get('comment_post')
-#         art = Article.objects.get(id=id)
-#         user = request.user
-#         data = Comment.objects.create(
-#             art=art,
-#             user=user,
-#             comment_post=comment_post
-#         )
-
-#         result = {
-#             'pk': data.pk,
-#             'fields': {
-#                 'username': user.username,
-#                 'comment_post': comment_post,
-#                 'article': art
-#             }
-#         }
-
-#         response = JsonResponse(result)
-
-#     return
+@csrf_exempt
+def delete_article(request, id):
+    data = get_object_or_404(Article, id=id)
+    data.delete()
+    return HttpResponseRedirect(reverse('article:article'))

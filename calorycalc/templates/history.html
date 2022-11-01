@@ -93,7 +93,7 @@ $(document).ready(function() {
             isikonten(0)
         }else{
         for (const info of calory) {
-            jumlahkalori+=info["calory"];
+            jumlahkalori=info["calory"];
             isikonten(jumlahkalori,info["date"],info["id"])
         }
     }

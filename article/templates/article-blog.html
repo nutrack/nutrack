@@ -278,7 +278,7 @@
                                 <h6 class="sub-title">Blog Post</h6>
                                 <h1 class="main-title">Read More About The Latest Article of Nutrition</h1>
                                 <p>Write Your Own Article Here</p>
-                                <a href="{% url 'article:write' %}" class="btn btn-primary btn-hover-secondary">Start Writing</a>
+                                <a href="{% url 'article:write' %}" class="btn btn-primary btn-hover-secondary" id="start-write-button">Start Writing</a>
                             </div>
                             <!-- Slider Content End -->
 
@@ -372,6 +372,17 @@
         padding-top: 0px;
         padding-bottom: 0px;
         height: 375px;
+        /* border-radius: 20px; */
+    }
+
+    .single-blog:hover {
+        box-shadow: 0 16px 16px 0 rgba(0, 0, 0, 0.2);
+        transform: scale(1.1);
+    }
+
+    #start-write-button:hover {
+        background-color: #9AB94D;
+        box-shadow: 0 16px 16px 0 rgba(0, 0, 0, 0.2);
     }
 
     .author {

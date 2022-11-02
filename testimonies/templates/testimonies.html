@@ -96,7 +96,7 @@
                                 <li>
                                     <a href="#">About Us</a>
                                     <ul class="sub-menu">
-                                        <li><a href="#">Dive into us!</a></li>
+                                        <li><a href="{% url 'main:about' %}">Dive into us!</a></li>
                                         <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>
                                     </ul>
                                 </li>
@@ -189,7 +189,7 @@
                     <li>
                         <a href="#">About Us</a>
                         <ul class="sub-menu">
-                            <li><a href="#">Dive into us!</a></li>
+                            <li><a href="{% url 'main:about' %}">Dive into us!</a></li>
                             <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>
                         </ul>
                     </li>
@@ -327,7 +327,7 @@
                                 <li><a href="{% url 'food_rec:show_all_food' %}">Food Recommendation</a></li>
                                 <li><a href="{% url 'article:article' %}">Articles</a></li>
                                 <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>
-                                <li><a href="#">Dive into us!</a></li>
+                                <li><a href="{% url 'main:about' %}">Dive into us!</a></li>
                             </ul>
                         </div>
                         <!-- Footer Widget End -->

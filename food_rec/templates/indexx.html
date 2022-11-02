@@ -50,7 +50,6 @@
     $.get('/food_rec/json', function (todo) {
         todo.map((task) => {
           addCard(task)
-          removeCard(task)
         })
       })
 
@@ -73,7 +72,6 @@
                 $('#carbs').val('')
                 $('#is_food').val('')
                 $('#rating').val('')
-                removeCard(res)
             },
           );
       });
@@ -161,7 +159,7 @@
                                 <li>
                                     <a href="#">About Us</a>
                                     <ul class="sub-menu">
-                                        <li><a href="#">Dive into us!</a></li>
+                                        <li><a href="{% url 'main:about' %}">Dive into us!</a></li>
                                         <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>
                                     </ul>
                                 </li>
@@ -278,7 +276,7 @@
                         <a href="#">About Us</a>
                         <ul class="sub-menu">
                             <li>
-                                <a href="#">Dive into us!</a>
+                                <a href="{% url 'main:about' %}">Dive into us!</a>
                                 <ul class="sub-menu">
                                     <li><a href="blog-grid.html">Blog Grid</a></li>
                                     <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
@@ -324,12 +322,6 @@
         <!-- Courses Section Start -->
         <div class="section section-padding-02">
             <div class="container">
-        {% if user.is_authenticated %}
-        <nav class="nav nav-pills flex-column flex-sm-row mb-4">
-        <a class="flex-sm-fill text-sm-center nav-link active" aria-current="page" href="{% url 'food_rec:show_all_food' %}">All</a>
-        <a class="flex-sm-fill text-sm-center nav-link" href="{% url 'food_rec:show_user_food' %}">My Recommendation</a>
-        </nav>
-        {% endif %}
                 <!-- Courses Search bar Start -->
                 <div class="courses-search-bar">
                     
@@ -366,12 +358,12 @@
                         Tambah Rekomendasi
                     </button>
                     {% else %}
-                    <button
+                    <a
                         class="btn btn-primary btn-hover-white"
                         href="{% url 'main:login' %}"
                     >
                         Login untuk Tambah Rekomendasi
-                    </button>
+                  </a>
                     {% endif %}
                     <div class="row gx-xxl-5">
                       <div class="mb-16 grid lg:grid-cols-3 md:grid-cols-1 gap-5 mt-8 sm:mt-5" id="food-view">
@@ -671,33 +663,24 @@
                   />
                 </label>
 
-                <label class="block mt-2">
-                  <span
+                  <label class="block mt-2">
+                      <span
                     class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-800"
                   >
                     Jenis
                   </span><br>
-                  <div class="d-flex flex-row mt-2 gap-2 text-zinc-800">
-                    <input
-                        type="radio"
+                      <select
                         name="is_food"
                         id="is_food"
-                        class=""
-                        value="True"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
                         required
-                    />
-                    <label for="food">Makanan</label><br>
-                    <input
-                        type="radio"
-                        name="is_food"
-                        id="is_food"
-                        class=""
-                        value="False"
-                        required
-                    />
-                    <label for="drink">Minuman</label><br>
-                    </div>
-
+                      >
+                        <option selected>Pilih</option>
+                        <option value="1">Makanan</option>
+                        <option value="0">Minuman</option>
+                      </select>
+                    </label>
+                    <br>
                     <label class="block mt-2">
                   <span
                     class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-800"

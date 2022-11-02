@@ -82,3 +82,7 @@ def logout_user(request):
 def calorycalc_json(request):
     data = caloryInfo.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+def about(request):
+    context = {}
+    return render(request, 'about.html', context)

@@ -60,7 +60,7 @@
 
                         <!-- Header Logo Start -->
                         <div class="header-logo">
-                            <a href="index.html"><img src = "{% static 'assets/images/logo-nutrack-copy.png' %}" alt="Logo"></a>
+                            <a  href="{% url 'main:home' %}"><img src = "{% static 'assets/images/logo-nutrack-copy.png' %}" alt="Logo" ></a>
                         </div>
                         <!-- Header Logo End -->
 
@@ -68,73 +68,55 @@
                         <div class="header-menu d-none d-lg-flex">
 
                             <ul class="nav-menu">
-                                <li><a class="active" href="index.html">Home</a></li>
-                                <li><a href="about.html">About Us</a></li>
+                                <li><a class="active" href="/">Home</a></li>
+                                {% if user.is_authenticated %}
+                                <li><a href="{% url 'calorycalc:calorycalc' %}">CaloryCalc</a></li>
+                                {% else %}
+                                <li><a id="myBtn" href="#">CaloryCalc</a></li>
+                                <!-- The Modal -->
+                                <div id="myModal" class="modal">
+
+                                    <!-- Modal content -->
+                                    <div class="modal-content">
+                                        <span class="close">&times;</span>
+                                        <h3>Please log in first!</h3>
+                                    </div>
+                                
+                                </div>
+                                {% endif %}
+                                <li><a href="{% url 'food_rec:show_all_food' %}">Food Recommendation</a></li>
                                 <li>
-                                    <a href="#">All Course</a>
+                                    <a href="{% url 'article:article' %}">Articles </a>
                                     <ul class="sub-menu">
-                                        <li><a href="courses.html">Courses</a></li>
-                                        <li><a href="my-courses.html">My Courses</a></li>
-                                        <li><a href="#">Courses Details</a>
-                                            <ul class="sub-menu">
-                                                <li><a href="courses-details-left-sidebar.html">Courses Details Left Sidebar</a></li>
-                                                <li><a href="courses-details-right-sidebar.html">Courses Details Right Sidebar</a></li>
-                                            </ul>
-                                        </li>
+                                        <li><a href="{% url 'article:write' %}">Write Article</a></li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="#">Pages </a>
+                                    <a href="#">About Us</a>
                                     <ul class="sub-menu">
-                                        <li><a href="after-enroll.html">After Enroll</a></li>
-                                        <li><a href="courses-admin.html">Instructor Dashboard (Course List)</a></li>
-                                        <li><a href="overview.html">Instructor Dashboard (Performance)</a></li>
-                                        <li><a href="students.html">Students</a></li>
-                                        <li><a href="reviews.html">Reviews</a></li>
-                                        <li><a href="engagement.html">Course engagement</a></li>
-                                        <li><a href="traffic-conversion.html">Traffic & conversion</a></li>
-                                        <li><a href="messages.html">Messages</a></li>
-                                        <li><a href="register.html">Register</a></li>
-                                        <li><a href="login.html">Login</a></li>
-                                        <li><a href="faq.html">FAQ</a></li>
-                                        <li><a href="404-error.html">404 Error</a></li>
+                                        <li><a href="#">Dive into us!</a></li>
+                                        <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>
                                     </ul>
                                 </li>
-                                <li>
-                                    <a href="#">Blog</a>
-                                    <ul class="sub-menu">
-                                        <li>
-                                            <a href="#">Blog</a>
-                                            <ul class="sub-menu">
-                                                <li><a href="blog-grid.html">Blog Grid</a></li>
-                                                <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
-                                                <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a href="#">Blog Details</a>
-                                            <ul class="sub-menu">
-                                                <li><a href="blog-details-left-sidebar.html">Blog Details Left Sidebar</a></li>
-                                                <li><a href="blog-details-right-sidebar.html">Blog Details Right Sidebar</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a href="contact.html">Contact</a></li>
                             </ul>
 
-
+                            {% if user.is_authenticated %}
                             <div class="header-btn">
-                                <a class="btn btn-secondary btn-hover-primary" href="login.html">Sign Up</a>
+                                <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:logout' %}">Bye, {{user.get_username}}!</a>
                             </div>
-
+                            {% else %}
+                            <div class="header-btn">
+                                <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:register' %}">Want to join us?</a>
+                            </div>
+                            {% endif %}
                         </div>
                         <!-- Header Menu End -->
-
+                    
                         <!-- Header Toggle Start -->
+                        {% if user.is_authenticated %}
                         <div class="header-toggle d-lg-none">
 
-                            <a class="btn btn-secondary btn-hover-primary" href="login.html">Sign Up</a>
+                            <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:logout' %}">Bye, {{user.get_username}}!</a>
 
                             <a href="#" class="menu-toggle">
                                 <span></span>
@@ -142,6 +124,18 @@
                                 <span></span>
                             </a>
                         </div>
+                        {% else %}
+                        <div class="header-toggle d-lg-none">
+
+                            <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:register' %}">Want to join us?</a>
+
+                            <a href="#" class="menu-toggle">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </a>
+                        </div>
+                        {% endif %}
                         <!-- Header Toggle End -->
 
                     </div>
@@ -167,59 +161,36 @@
             <!-- Mobile Menu Start -->
             <div class="mobile-menu-items">
                 <ul class="nav-menu">
-                    <li><a class="active" href="index.html">Home</a></li>
-                    <li><a href="about.html">About Us</a></li>
+                    <li><a class="active" href="{% url 'main:home' %}">Home</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'calorycalc:calorycalc' %}">CaloryCalc</a></li>
+                    {% else %}
+                    <li><a id="myBtn" href="#">CaloryCalc</a></li>
+                    <!-- The Modal -->
+                    <div id="myModal" class="modal">
+
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h3>Please log in first!</h3>
+                        </div>
+                    
+                    </div>
+                    {% endif %}
+                    <li><a href="{% url 'food_rec:show_all_food' %}">Food Recommendation</a></li>
                     <li>
-                        <a href="#">All Course</a>
+                        <a href="{% url 'article:article' %}">Articles </a>
                         <ul class="sub-menu">
-                            <li><a href="courses.html">Courses</a></li>
-                            <li><a href="my-courses.html">My Courses</a></li>
-                            <li><a href="#">Courses Details</a>
-                                <ul class="sub-menu">
-                                    <li><a href="courses-details-left-sidebar.html">Courses Details Left Sidebar</a></li>
-                                    <li><a href="courses-details-right-sidebar.html">Courses Details Right Sidebar</a></li>
-                                </ul>
-                            </li>
+                            <li><a href="{% url 'article:write' %}">Write Article</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="#">Pages </a>
+                        <a href="#">About Us</a>
                         <ul class="sub-menu">
-                            <li><a href="after-enroll.html">After Enroll</a></li>
-                            <li><a href="courses-admin.html">Instructor Dashboard (Course List)</a></li>
-                            <li><a href="overview.html">Instructor Dashboard (Performance)</a></li>
-                            <li><a href="students.html">Students</a></li>
-                            <li><a href="reviews.html">Reviews</a></li>
-                            <li><a href="engagement.html">Course engagement</a></li>
-                            <li><a href="traffic-conversion.html">Traffic & conversion</a></li>
-                            <li><a href="messages.html">Messages</a></li>
-                            <li><a href="register.html">Register</a></li>
-                            <li><a href="login.html">Login</a></li>
-                            <li><a href="faq.html">FAQ</a></li>
-                            <li><a href="404-error.html">404 Error</a></li>
+                            <li><a href="#">Dive into us!</a></li>
+                            <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="#">Blog</a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a href="#">Blog</a>
-                                <ul class="sub-menu">
-                                    <li><a href="blog-grid.html">Blog Grid</a></li>
-                                    <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
-                                    <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">Blog Details</a>
-                                <ul class="sub-menu">
-                                    <li><a href="blog-details-left-sidebar.html">Blog Details Left Sidebar</a></li>
-                                    <li><a href="blog-details-right-sidebar.html">Blog Details Right Sidebar</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a href="contact.html">Contact</a></li>
                 </ul>
 
             </div>
@@ -256,8 +227,21 @@
 
                                 <!-- Sidebar Widget Information Start -->
                                 <div class="sidebar-widget widget-information">
+                                    <div class="courses-price">
+                                        <span class="price">
+                                            {% if food.is_food %}
+                                            <i class="icofont-spoon-and-fork" style="font-size: 5em;"></i>
+                                            {% else %}
+                                            <i class="icofont-soft-drinks" style="font-size: 5em;"></i>
+                                            {% endif %}
+                                        </span>
+                                    </div>
                                     <div class="info-price">
                                         <span class="price">{{food.name}}</span>
+                                    </div>
+                                    {% if user.is_authenticated %}
+                                    <div class="info-price">
+                                        <span class="price">By {{food.user.get_username}}</span>
                                     </div>
                                     <div class="info-list">
                                         <ul>
@@ -268,6 +252,12 @@
                                             <li><i class="fa fa-star checked"></i> <strong>Rating</strong> <span>{{food.rating}}</span></li>
                                         </ul>
                                     </div>
+                                    {% else %}
+                                    <div class="info-price">
+                                        <span class="price">Silakan login untuk melihat detail makanan</span>
+                                        <a href="{% url 'main:register' %}" class="btn btn-primary btn-hover-primary mt-4">Lakukan Registrasi</a>
+                                    </div>
+                                    {% endif %}
                                     <div class="info-btn">
                                         <a href="{% url 'food_rec:show_all_food' %}" class="btn btn-secondary btn-hover-primary"><i class="icofont-arrow-left m-1"></i>Back to Food Recommendation</a>
                                     </div>

@@ -42,6 +42,39 @@
             border-color: #0a4d3c;
             color: #fff;
         }
+
+        @media only screen and (max-width: 575px) {
+            .main-wrapper{
+                width: 47%;
+            }
+
+            #login-register, #kaki-sec{
+                width: 88%;
+            }
+
+        }
+
+        @media only screen and (min-width: 576px) and (max-width: 768px) {
+            .main-wrapper{
+                width: 80%;
+            }
+            
+            .container, .slider-content{
+                width: 80%;
+            }
+
+        }
+
+        @media only screen and (min-width: 769px) and (max-width: 991px) {
+            .main-wrapper{
+                width: 90%;
+            }
+
+            .container, .slider-content{
+                width: 75%;
+            }
+
+        }
     </style>
 
 </head>
@@ -282,7 +315,7 @@
         <!-- Login & Register Section End -->
 
         <!-- Footer Start -->
-        <div class="section footer-section">
+        <div id="kaki-sec" class="section footer-section">
 
             <!-- Footer Widget Section Start -->
             <div class="footer-widget-section section-padding">

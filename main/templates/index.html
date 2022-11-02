@@ -45,6 +45,18 @@
         .btn-cal{
             text-align: center;
         }
+        
+        @media only screen and (max-width: 575px) {
+            .main-wrapper{
+                width: 45%;
+            }
+            .main-title{
+                margin-right: 100px;
+            }
+
+        }
+
+        
     </style>
 
 </head>
@@ -102,7 +114,7 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="#">About Us</a>
+                                    <a href="{% url 'main:about' %}">About Us</a>
                                     <ul class="sub-menu">
                                         <li><a href="{% url 'main:about' %}">Dive into us!</a></li>
                                         <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>
@@ -201,7 +213,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#">About Us</a>
+                        <a href="{% url 'main:about' %}">About Us</a>
                         <ul class="sub-menu">
                             <li><a href="{% url 'main:about' %}">Dive into us!</a></li>
                             <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>
@@ -223,7 +235,7 @@
 
         <!-- Slider Section Start -->
         {% if user.is_authenticated %}
-        <div class="section section-padding overflow-hidden" style="background-color: darkgreen">
+        <div id ="cal-dash" class="section section-padding overflow-hidden" style="background-color: darkgreen">
             <!-- Slider Content Start -->
             <div class="testimonial-wrapper">
                 <div class="section-title section-title-white">
@@ -241,7 +253,7 @@
             <!-- Slider Content End -->
         </div>
         {% else %}
-        <div class="slider-section slider-active section">
+        <div id="slide-quotes" class="slider-section slider-active section">
             <div class="swiper-container">
                 <div class="swiper-wrapper">
                     <!-- Single Slider Start -->
@@ -309,9 +321,9 @@
                                     <span><i class="flaticon-lunges"></i></span>
                                 </div>
                                 <div class="feature-content">
-                                    <h4 class="title"><a href="#">Food Recommendation</a></h4>
+                                    <h4 class="title"><a href="{% url 'food_rec:show_all_food' %}">Food Recommendation</a></h4>
                                     <p>Are these foods into your liking?</p>
-                                    <a href="#" class="arrow"><i class="icofont-long-arrow-right"></i></a>
+                                    <a href="{% url 'food_rec:show_all_food' %}" class="arrow"><i class="icofont-long-arrow-right"></i></a>
                                 </div>
                             </div>
                             <!-- Single Feature End -->
@@ -343,9 +355,9 @@
                                     <span><i class="flaticon-computer"></i></span>
                                 </div>
                                 <div class="feature-content">
-                                    <h4 class="title"><a href="#">Articles</a></h4>
+                                    <h4 class="title"><a href="{% url 'article:article' %}">Articles</a></h4>
                                     <p>Up to date with the latest information on nutrition</p>
-                                    <a href="#" class="arrow"><i class="icofont-long-arrow-right"></i></a>
+                                    <a href="{% url 'article:article' %}" class="arrow"><i class="icofont-long-arrow-right"></i></a>
                                 </div>
                             </div>
                             <!-- Single Feature End -->
@@ -357,7 +369,7 @@
         <!-- Features Section End -->
 
         <!-- FAQ Section Start -->
-        <div class="section section-padding">
+        <div id="faq-sec" class="section section-padding">
             <div class="container">
 
                 <!-- FAQ Wrapper Start -->
@@ -445,7 +457,7 @@
         <!-- FAQ Section End -->
 
         <!-- Footer Start -->
-        <div class="section footer-section">
+        <div id="kaki-sec" class="section footer-section">
 
             <!-- Footer Widget Section Start -->
             <div class="footer-widget-section section-padding">

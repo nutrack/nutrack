@@ -1,4 +1,5 @@
 <!doctype html>
+
 {% extends 'base.html' %} {% block content %}
 {% load static%}
 <html class="no-js" lang="en">
@@ -6,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Nutrack</title>
+    <title>Nutras Fitness & Nutrition Bootstrap 5 Template</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -28,9 +29,8 @@
     <link rel="stylesheet" href="{% static 'assets/css/plugins/magnific-popup.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/plugins/nice-select.css' %}">
 
-    <!-- Main and Modal Style CSS -->
+    <!-- Main Style CSS -->
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/modal.css' %}">
 
 
     <!--====== Use the minified version files listed below for better performance and remove the files listed above ======-->
@@ -46,8 +46,8 @@
             text-align: center;
         }
     </style>
-
 </head>
+
 <body>
 
     <div class="main-wrapper">
@@ -98,7 +98,7 @@
                                 <li>
                                     <a href="#">About Us</a>
                                     <ul class="sub-menu">
-                                        <li><a href="{% url 'main:about' %}">Dive into us!</a></li>
+                                        <li><a href="#">Dive into us!</a></li>
                                         <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>
                                     </ul>
                                 </li>
@@ -191,7 +191,7 @@
                     <li>
                         <a href="#">About Us</a>
                         <ul class="sub-menu">
-                            <li><a href="{% url 'main:about' %}">Dive into us!</a></li>
+                            <li><a href="#">Dive into us!</a></li>
                             <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>
                         </ul>
                     </li>
@@ -208,143 +208,164 @@
         <!-- Overlay End -->
 
 
+        <!-- Page banner Section Start -->
+        <div class="section page-banner-section" style="background-image: url(/static/assets/images/page-banner.jpg);">
+            <div class="container">
 
-        <!-- Slider Section Start -->
-        {% if user.is_authenticated %}
-        <div class="section section-padding overflow-hidden" style="background-color: darkgreen">
-            <!-- Slider Content Start -->
-            <div class="testimonial-wrapper">
-                <div class="section-title section-title-white">
-                    <h1 class="main-title">CaloryCalc</h1>
+                <!-- Page banner Section Start -->
+                <div class="page-banner-content">
+                    <h2 class="page-title">About Us</h2>
+
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'main:home' %}">Home</a></li>
+                        <li class="breadcrumb-item active">About Us</li>
+                    </ul>
                 </div>
-                <div class="section-title shape-none">
-                    <h6 class="sub-title" style="color: orange">Today's calories</h6>
-                    <h3 class="main-title" style="color: white;" id="get-cal"></h3>
-                </div>
-                <div class="btn-cal" style="padding-top: 20px;">
-                    <a href="{% url 'calorycalc:calorycalc' %}" class="btn btn-primary btn-hover-secondary" id="btn-add">Add Calory</a>
-                    <a href="#" class="btn btn-primary btn-hover-secondary" id="btn-hist">See Your Calories' History</a>
-                </div>
-            </div>
-            <!-- Slider Content End -->
-        </div>
-        {% else %}
-        <div class="slider-section slider-active section">
-            <div class="swiper-container">
-                <div class="swiper-wrapper">
-                    <!-- Single Slider Start -->
-                    <div class="swiper-slide animation-style-01 single-slider d-flex align-items-center" style="background-image: url(/static/assets/images/slider/slider-1.jpg);">
-                        <div class="container">
+                <!-- Page banner Section End -->
 
-                            <!-- Slider Content Start -->
-                            <div class="slider-content">
-                                <h1 class="main-title">Let thy food be thy medicine</h1>
-                                <p>━ Hippocrates</p>
-                                <a id="btn-sign" href="{% url 'main:register' %}" class="btn btn-primary btn-hover-secondary">Sign Up</a>
-                            </div>
-                            <!-- Slider Content End -->
-
-                        </div>
-                    </div>
-                    <!-- Single Slider End -->
-
-                    <!-- Single Slider Start -->
-                    <div class="swiper-slide animation-style-01 single-slider d-flex align-items-center" style="background-image: url(/static/assets/images/slider/slider-2.jpg);">
-                        <div class="container">
-
-                            <!-- Slider Content Start -->
-                            <div class="slider-content">
-                                <h1 class="main-title">Man is What He Eats</h1>
-                                <p>━ Ludwig Feuerbach</p>
-                                <a id="btn-sign" href="{% url 'main:register' %}" class="btn btn-primary btn-hover-secondary">Sign Up</a>
-                            </div>
-                            <!-- Slider Content End -->
-
-                        </div>
-                    </div>
-                    <!-- Single Slider End -->
-
-                    <!-- Single Slider Start -->
-                    <div class="swiper-slide animation-style-01 single-slider d-flex align-items-center" style="background-image: url(/static/assets/images/slider/slider-3.jpg);">
-                        <div class="container">
-
-                            <!-- Slider Content Start -->
-                            <div class="slider-content">
-                                <h1 class="main-title">Good food ends with good talk</h1>
-                                <p>━ Jules Renard</p>
-                                <a id="btn-sign" href="{% url 'main:register' %}" class="btn btn-primary btn-hover-secondary">Sign Up</a>
-                            </div>
-                            <!-- Slider Content End -->
-
-                        </div>
-                    </div>
-                    <!-- Single Slider End -->
-                </div>
             </div>
         </div>
-        <!-- Slider Section End -->
-        {% endif %}
+        <!-- Page banner Section End -->
 
-        <!-- Features Section Start -->
+        <!-- Our Mission & Vission Section Start -->
+        <div class="section section-padding bg-grey">
+            <div class="container">
+
+                <!-- Our Mission Wrapper Start -->
+                <div class="our-mission-wrapper">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="content">
+                                <h4 class="sub-title">So, What Is Nutrack?</h4>
+                                <h2 class="main-title">Nutrack is a website that help you to take care your nutrion needs.</h2>
+                                <p>It is important to keep a healthy diet, especially in this COVID-19 situation. With healthy diet, you can have strong immunity. Nutrack is here to help you track your nutrition. </p>
+
+                                <p>Sometimes, we can get bored by same food we eat everyday. Here at Nutrack you can find various healthy dishes you can try so you won't be bored by foods again.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="content-list">
+                                <h2 class="main-title" style="margin-bottom: 20px;">What can you do with Nutrack?</h2>
+                                <ul>
+                                    <li>Count and update your daily calories</li>
+                                    <li>Write an article about your healthy diet and share it to people</li>
+                                    <li>Find various healthy foods and drinks that you can try</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Our Mission Wrapper End -->
+
+            </div>
+        </div>
+        <!-- Our Mission & Vission Section End -->
+
+        <!-- Instructor Section Start -->
         <div class="section section-padding">
             <div class="container">
-                <div class="features-wrapper">
+
+                <!-- Section Title Start -->
+                <div class="section-title">
+                    <h6 class="sub-title">Meet Us!</h6>
+                    <h2 class="main-title">The Developers</h2>
+                </div>
+                <!-- Section Title End -->
+
+                <!-- Instructor Wrapper Start -->
+                <div class="instructor-wrapper">
                     <div class="row">
                         <div class="col-lg-4 col-md-6">
-                            <!-- Single Feature Start -->
-                            <div class="single-feature">
-                                <div class="feature-icon">
-                                    <span><i class="flaticon-lunges"></i></span>
+                            <!-- Single Instructor Start -->
+                            <div class="single-instructor">
+                                <div class="instructor-images">
+                                    <img src="{% static 'assets/images/instructor/Sasha460.jpg'%}" alt="">
                                 </div>
-                                <div class="feature-content">
-                                    <h4 class="title"><a href="#">Food Recommendation</a></h4>
-                                    <p>Are these foods into your liking?</p>
-                                    <a href="#" class="arrow"><i class="icofont-long-arrow-right"></i></a>
+                                <div class="instructor-content">
+                                    <p class="designation">Junior Developer</p>
+                                    <h3 class="name">Sasha Nabila Fortuna</h3>
                                 </div>
                             </div>
-                            <!-- Single Feature End -->
+                            <!-- Single Instructor End -->
                         </div>
                         <div class="col-lg-4 col-md-6">
-                            <!-- Single Feature Start -->
-                            <div class="single-feature active">
-                                <div class="feature-icon">
-                                    <span><i class="flaticon-lotus"></i></span>
+                            <!-- Single Instructor Start -->
+                            <div class="single-instructor">
+                                <div class="instructor-images">
+                                    <img src="{% static 'assets/images/instructor/kak-athal.png'%}" alt="">
                                 </div>
-                                <div class="feature-content">
-                                    {% if user.is_authenticated %}
-                                    <h4 class="title"><a href="{% url 'calorycalc:calorycalc' %}">CaloryCalc</a></h4>
-                                    <p>How many calories have you consumed today?</p>
-                                    <a href="{% url 'calorycalc:calorycalc' %}" class="arrow"><i class="icofont-long-arrow-right"></i></a>
-                                    {% else %}
-                                    <h4 class="title"><a href="{% url 'main:login' %}">CaloryCalc</a></h4>
-                                    <p>How many calories have you consumed today?</p>
-                                    <a href="{% url 'main:login' %}" class="arrow"><i class="icofont-long-arrow-right"></i></a>
-                                    {% endif %}
+                                <div class="instructor-content">
+                                    <p class="designation">Senior Developer</p>
+                                    <h3 class="name">Muhammad Athallah</h3>
                                 </div>
                             </div>
-                            <!-- Single Feature End -->
+                            <!-- Single Instructor End -->
                         </div>
                         <div class="col-lg-4 col-md-6">
-                            <!-- Single Feature Start -->
-                            <div class="single-feature">
-                                <div class="feature-icon">
-                                    <span><i class="flaticon-computer"></i></span>
+                            <!-- Single Instructor Start -->
+                            <div class="single-instructor">
+                                <div class="instructor-images">
+                                    <img src="{% static 'assets/images/instructor/shayna.jpg'%}" alt="">
                                 </div>
-                                <div class="feature-content">
-                                    <h4 class="title"><a href="#">Articles</a></h4>
-                                    <p>Up to date with the latest information on nutrition</p>
-                                    <a href="#" class="arrow"><i class="icofont-long-arrow-right"></i></a>
+                                <div class="instructor-content">
+                                    <p class="designation">Junior Developer</p>
+                                    <h3 class="name">Shayna Putri Fitria</h3>
                                 </div>
                             </div>
-                            <!-- Single Feature End -->
+                            <!-- Single Instructor End -->
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <!-- Single Instructor Start -->
+                            <div class="single-instructor">
+                                <div class="instructor-images">
+                                    <img src="{% static 'assets/images/instructor/farkhans460.JPG'%}" style="width: inherit; height:inherit" alt="">
+                                </div>
+                                <div class="instructor-content">
+                                    <p class="designation">Junior Developer</p>
+                                    <h3 class="name">Farkhan Syawal Harahap</h3>
+                                </div>
+                            </div>
+                            <!-- Single Instructor End -->
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <!-- Single Instructor Start -->
+                            <div class="single-instructor">
+                                <div class="instructor-images">
+                                    <img src="{% static 'assets/images/instructor/Reiou.png'%}" style="width: inherit; height:inherit" alt="">
+                                </div>
+                                <div class="instructor-content">
+                                    <p class="designation">Junior Developer</p>
+                                    <h3 class="name">Reiou Nagata</h3>
+                                </div>
+                            </div>
+                            <!-- Single Instructor End -->
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <!-- Single Instructor Start -->
+                            <div class="single-instructor">
+                                <div class="instructor-images">
+                                    <img src="{% static 'assets/images/instructor/Akmal.png'%}"  style="width: inherit; height:inherit" alt="">
+                                </div>
+                                <div class="instructor-content">
+                                    <p class="designation">Junior Developer</p>
+                                    <h3 class="name">Muhammad Akmal Hakim</h3>
+                                </div>
+                            </div>
+                            <!-- Single Instructor End -->
                         </div>
                     </div>
                 </div>
+                <!-- Instructor Wrapper End -->
+
+                <!-- Instructor Button End -->
+                <div class="instructor-btn">
+                    <a href="{% url 'main:register' %}" class="btn btn-primary btn-hover-secondary">Join With Us</a>
+                </div>
+                <!-- Instructor Button End -->
+
             </div>
         </div>
-        <!-- Features Section End -->
-
-
+        <!-- Instructor Section End -->
 
         <!-- Footer Start -->
         <div class="section footer-section">
@@ -372,7 +393,7 @@
                                     <li><a href="{% url 'food_rec:show_all_food' %}">Food Recommendation</a></li>
                                     <li><a href="{% url 'article:article' %}">Articles</a></li>
                                     <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>
-                                    <li><a href="{% url 'main:about' %}">Dive into us!</a></li>
+                                    <li><a href="#">Dive into us!</a></li>
                                 </ul>
                             </div>
                             <!-- Footer Widget End -->
@@ -433,29 +454,6 @@
     <script src="{% static 'assets/js/plugins/jquery.nice-select.min.js' %}"></script>
     <script src="{% static 'assets/js/plugins/video-playlist.js' %}"></script>
     <script src="{% static 'assets/js/plugins/ajax-contact.js' %}"></script>
-
-    <!--====== Use the minified version files listed below for better performance and remove the files listed above ======-->
-    <!-- <script src="assets/js/plugins.min.js"></script> -->
-
-
-    <!-- Main and Modal JS -->
-    <script src="{% static 'assets/js/main.js' %}"></script>
-    <script src="{% static 'assets/js/modal.js' %}"></script>
-    <script>
-        function getCalc(){
-            var temp_calc = 0
-            $.getJSON("{% url 'main:calorycalc_json' %}", function(data){
-                $(data).each(function(i, entry) {
-                        temp_calc += entry.fields.calory
-                    })
-                    $("#get-cal").html(`${temp_calc} <span class="sub-title" style="color: orange;">cal</span>`)
-            })
-        };
-
-        $(document).ready(function() {
-            getCalc()
-        });
-    </script>
 
 </body>
 {% endblock content %}

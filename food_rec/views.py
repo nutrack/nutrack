@@ -102,6 +102,11 @@ def show_food_food(request):
     context = { 'foods': foods }
     return render(request, 'indexx.html', context)
 
+def show_food_drink(request):
+    foods = Food.objects.filter(is_food=False)
+    context = { 'foods': foods }
+    return render(request, 'indexx.html', context)
+
 def sort_food(request):
     foods = Food.objects.order_by('-rating')
     context = { 'foods': foods }

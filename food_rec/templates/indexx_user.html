@@ -130,7 +130,7 @@
 
                         <!-- Header Logo Start -->
                         <div class="header-logo">
-                            <a href="index.html"><img src="{% static 'assets/images/logo.png' %}" alt="Logo"></a>
+                            <a  href="{% url 'main:home' %}"><img src = "{% static 'assets/images/logo-nutrack-copy.png' %}" alt="Logo" ></a>
                         </div>
                         <!-- Header Logo End -->
 
@@ -138,73 +138,61 @@
                         <div class="header-menu d-none d-lg-flex">
 
                             <ul class="nav-menu">
-                                <li><a class="active" href="index.html">Home</a></li>
-                                <li><a href="about.html">About Us</a></li>
+                                <li><a class="active" href="/">Home</a></li>
+                                {% if user.is_authenticated %}
                                 <li>
-                                    <a href="#">All Course</a>
+                                    <a href="{% url 'calorycalc:calorycalc' %}">CaloryCalc</a>
                                     <ul class="sub-menu">
-                                        <li><a href="courses.html">Courses</a></li>
-                                        <li><a href="my-courses.html">My Courses</a></li>
-                                        <li><a href="#">Courses Details</a>
-                                            <ul class="sub-menu">
-                                                <li><a href="courses-details-left-sidebar.html">Courses Details Left Sidebar</a></li>
-                                                <li><a href="courses-details-right-sidebar.html">Courses Details Right Sidebar</a></li>
-                                            </ul>
-                                        </li>
+                                        <li><a href="{% url 'calorycalc:calorycalc' %}">Add Calory</a></li>
+                                        <li><a href="{% url 'calorycalc:histories' %}">Your Calories' History</a></li>
+                                    </ul>
+                                </li>
+                                {% else %}
+                                <li><a id="myBtn" href="#">CaloryCalc</a></li>
+                                <!-- The Modal -->
+                                <div id="myModal" class="modal">
+
+                                    <!-- Modal content -->
+                                    <div class="modal-content">
+                                        <span class="close">&times;</span>
+                                        <h3>Please log in first!</h3>
+                                    </div>
+                                
+                                </div>
+                                {% endif %}
+                                <li><a href="{% url 'food_rec:show_all_food' %}">Food Recommendation</a></li>
+                                <li>
+                                    <a href="{% url 'article:article' %}">Articles </a>
+                                    <ul class="sub-menu">
+                                        <li><a href="{% url 'article:write' %}">Write Article</a></li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="#">Pages </a>
+                                    <a href="{% url 'main:about' %}">About Us</a>
                                     <ul class="sub-menu">
-                                        <li><a href="after-enroll.html">After Enroll</a></li>
-                                        <li><a href="courses-admin.html">Instructor Dashboard (Course List)</a></li>
-                                        <li><a href="overview.html">Instructor Dashboard (Performance)</a></li>
-                                        <li><a href="students.html">Students</a></li>
-                                        <li><a href="reviews.html">Reviews</a></li>
-                                        <li><a href="engagement.html">Course engagement</a></li>
-                                        <li><a href="traffic-conversion.html">Traffic & conversion</a></li>
-                                        <li><a href="messages.html">Messages</a></li>
-                                        <li><a href="register.html">Register</a></li>
-                                        <li><a href="login.html">Login</a></li>
-                                        <li><a href="faq.html">FAQ</a></li>
-                                        <li><a href="404-error.html">404 Error</a></li>
+                                        <li><a href="{% url 'main:about' %}">Dive into us!</a></li>
+                                        <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>
                                     </ul>
                                 </li>
-                                <li>
-                                    <a href="#">Blog</a>
-                                    <ul class="sub-menu">
-                                        <li>
-                                            <a href="#">Blog</a>
-                                            <ul class="sub-menu">
-                                                <li><a href="blog-grid.html">Blog Grid</a></li>
-                                                <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
-                                                <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a href="#">Blog Details</a>
-                                            <ul class="sub-menu">
-                                                <li><a href="blog-details-left-sidebar.html">Blog Details Left Sidebar</a></li>
-                                                <li><a href="blog-details-right-sidebar.html">Blog Details Right Sidebar</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a href="contact.html">Contact</a></li>
                             </ul>
 
-
+                            {% if user.is_authenticated %}
                             <div class="header-btn">
-                                <a class="btn btn-secondary btn-hover-primary" href="login.html">Sign Up</a>
+                                <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:logout' %}">Bye, {{user.get_username}}!</a>
                             </div>
-
+                            {% else %}
+                            <div class="header-btn">
+                                <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:register' %}">Want to join us?</a>
+                            </div>
+                            {% endif %}
                         </div>
                         <!-- Header Menu End -->
-
+                    
                         <!-- Header Toggle Start -->
+                        {% if user.is_authenticated %}
                         <div class="header-toggle d-lg-none">
 
-                            <a class="btn btn-secondary btn-hover-primary" href="login.html">Sign Up</a>
+                            <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:logout' %}">Bye, {{user.get_username}}!</a>
 
                             <a href="#" class="menu-toggle">
                                 <span></span>
@@ -212,6 +200,18 @@
                                 <span></span>
                             </a>
                         </div>
+                        {% else %}
+                        <div class="header-toggle d-lg-none">
+
+                            <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:register' %}">Want to join us?</a>
+
+                            <a href="#" class="menu-toggle">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </a>
+                        </div>
+                        {% endif %}
                         <!-- Header Toggle End -->
 
                     </div>
@@ -237,59 +237,42 @@
             <!-- Mobile Menu Start -->
             <div class="mobile-menu-items">
                 <ul class="nav-menu">
-                    <li><a class="active" href="index.html">Home</a></li>
-                    <li><a href="about.html">About Us</a></li>
+                    <li><a class="active" href="{% url 'main:home' %}">Home</a></li>
+                    {% if user.is_authenticated %}
                     <li>
-                        <a href="#">All Course</a>
+                        <a href="{% url 'calorycalc:calorycalc' %}">CaloryCalc</a>
                         <ul class="sub-menu">
-                            <li><a href="courses.html">Courses</a></li>
-                            <li><a href="my-courses.html">My Courses</a></li>
-                            <li><a href="#">Courses Details</a>
-                                <ul class="sub-menu">
-                                    <li><a href="courses-details-left-sidebar.html">Courses Details Left Sidebar</a></li>
-                                    <li><a href="courses-details-right-sidebar.html">Courses Details Right Sidebar</a></li>
-                                </ul>
-                            </li>
+                            <li><a href="{% url 'calorycalc:calorycalc' %}">Add Calory</a></li>
+                            <li><a href="{% url 'calorycalc:histories' %}">Your Calories' History</a></li>
+                        </ul>
+                    </li>
+                    {% else %}
+                    <li><a id="myBtn" href="#">CaloryCalc</a></li>
+                    <!-- The Modal -->
+                    <div id="myModal" class="modal">
+
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h3>Please log in first!</h3>
+                        </div>
+                    
+                    </div>
+                    {% endif %}
+                    <li><a href="{% url 'food_rec:show_all_food' %}">Food Recommendation</a></li>
+                    <li>
+                        <a href="{% url 'article:article' %}">Articles </a>
+                        <ul class="sub-menu">
+                            <li><a href="{% url 'article:write' %}">Write Article</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="#">Pages </a>
+                        <a href="{% url 'main:about' %}">About Us</a>
                         <ul class="sub-menu">
-                            <li><a href="after-enroll.html">After Enroll</a></li>
-                            <li><a href="courses-admin.html">Instructor Dashboard (Course List)</a></li>
-                            <li><a href="overview.html">Instructor Dashboard (Performance)</a></li>
-                            <li><a href="students.html">Students</a></li>
-                            <li><a href="reviews.html">Reviews</a></li>
-                            <li><a href="engagement.html">Course engagement</a></li>
-                            <li><a href="traffic-conversion.html">Traffic & conversion</a></li>
-                            <li><a href="messages.html">Messages</a></li>
-                            <li><a href="register.html">Register</a></li>
-                            <li><a href="login.html">Login</a></li>
-                            <li><a href="faq.html">FAQ</a></li>
-                            <li><a href="404-error.html">404 Error</a></li>
+                            <li><a href="{% url 'main:about' %}">Dive into us!</a></li>
+                            <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="#">Blog</a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a href="#">Blog</a>
-                                <ul class="sub-menu">
-                                    <li><a href="blog-grid.html">Blog Grid</a></li>
-                                    <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
-                                    <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">Blog Details</a>
-                                <ul class="sub-menu">
-                                    <li><a href="blog-details-left-sidebar.html">Blog Details Left Sidebar</a></li>
-                                    <li><a href="blog-details-right-sidebar.html">Blog Details Right Sidebar</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a href="contact.html">Contact</a></li>
                 </ul>
 
             </div>
@@ -383,41 +366,8 @@
         </div>
         <!-- Courses Section End -->
 
-        <!-- Download Section Start -->
-        <div class="section section-padding">
-            <div class="container">
-
-                <!-- Download Wrapper Start -->
-                <div class="download-wrapper">
-
-                    <img class="shape-01" src="{% static 'assets/images/shape/shape-7.png' %}" alt="Shape">
-                    <img class="shape-02" src="{% static 'assets/images/shape/shape-8.png' %}" alt="Shape">
-
-                    <!-- Section Title Start -->
-                    <div class="section-title shape-none">
-                        <h6 class="sub-title">mobile app available</h6>
-                        <h2 class="main-title">Download our mobile <br> app. and start coaching anytime.</h2>
-                    </div>
-                    <!-- Section Title End -->
-
-                    <!-- download App End -->
-                    <div class="download-app">
-                        <ul>
-                            <li><a href="#"><img src="{% static 'assets/images/play-store.jpg' %}" alt="Play Store"></a></li>
-                            <li><a href="#"><img src="{% static 'assets/images/app-store.jpg' %}" alt="App Store"></a></li>
-                        </ul>
-                    </div>
-                    <!-- download App End -->
-
-                </div>
-                <!-- Download Wrapper End -->
-
-            </div>
-        </div>
-        <!-- Download Section End -->
-
         <!-- Footer Start -->
-        <div class="section footer-section">
+        <div id="kaki-sec" class="section footer-section">
 
             <!-- Footer Widget Section Start -->
             <div class="footer-widget-section section-padding">
@@ -429,83 +379,23 @@
                     <!-- Footer Widget Wrapper Start -->
                     <div class="footer-widget-wrapper">
                         <div class="row">
-                            <div class="col-lg-4">
+                            <!-- Footer Widget Start -->
+                            <div style="text-align: center;">
+                                <h3 class="footer-widget-title">All Features</h3>
 
-                                <!-- Footer Widget Start -->
-                                <div class="footer-widget">
-                                    <h3 class="footer-widget-title">Subscribe Newsletter</h3>
-
-                                    <div class="widget-newsletter">
-                                        <p>Lorem Ipsum has been them an industry printer took a galley make book.</p>
-
-                                        <div class="newsletter-form">
-                                            <form action="#">
-                                                <input type="text" placeholder="Enter email">
-                                                <button class="btn btn-primary btn-hover-white">Subscribe Now</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Footer Widget End -->
-
+                                <ul class="widget-link">
+                                    {% if user.is_authenticated %}
+                                    <li><a href="{% url 'calorycalc:calorycalc' %}">CaloryCalc</a></li>
+                                    {% else %}
+                                    <li><a href="{% url 'main:login' %}">CaloryCalc</a></li>
+                                    {% endif %}
+                                    <li><a href="{% url 'food_rec:show_all_food' %}">Food Recommendation</a></li>
+                                    <li><a href="{% url 'article:article' %}">Articles</a></li>
+                                    <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>
+                                    <li><a href="{% url 'main:about' %}">Dive into us!</a></li>
+                                </ul>
                             </div>
-                            <div class="col-lg-8">
-
-                                <!-- Footer Widget Start -->
-                                <div class="widget-wrapper">
-
-                                    <!-- Footer Widget Start -->
-                                    <div class="footer-widget">
-                                        <h3 class="footer-widget-title">All Courses</h3>
-
-                                        <ul class="widget-link">
-                                            <li><a href="#">Daily Exercise</a></li>
-                                            <li><a href="#">Find Your Balance</a></li>
-                                            <li><a href="#">Personal Program</a></li>
-                                            <li><a href="#">Natural Process</a></li>
-                                            <li><a href="#">Immune System</a></li>
-                                            <li><a href="#">Gives You Energy</a></li>
-                                        </ul>
-                                    </div>
-                                    <!-- Footer Widget End -->
-
-                                    <!-- Footer Widget Start -->
-                                    <div class="footer-widget">
-                                        <h3 class="footer-widget-title">Help Links</h3>
-
-                                        <ul class="widget-link">
-                                            <li><a href="#">Privacy Policy</a></li>
-                                            <li><a href="#">Discussion</a></li>
-                                            <li><a href="#">Terms & Conditions</a></li>
-                                            <li><a href="#">Customer Support</a></li>
-                                            <li><a href="#">Course FAQ’s</a></li>
-                                            <li><a href="#">Online Classes</a></li>
-                                        </ul>
-                                    </div>
-                                    <!-- Footer Widget End -->
-
-                                    <!-- Footer Widget Start -->
-                                    <div class="footer-widget">
-                                        <h3 class="footer-widget-title">Opening Hours</h3>
-
-                                        <ul class="widget-link">
-                                            <li><a href="#">Mon-Fri: 9 AM – 6 PM</a></li>
-                                            <li><a href="#">Saturday: 9 AM – 4 PM</a></li>
-                                            <li><a href="#">Sunday: Closed</a></li>
-                                        </ul>
-
-                                        <div class="widget-location">
-                                            <h3 class="footer-widget-title">Location</h3>
-
-                                            <p>176 W street name, New <br> York, NY 10014</p>
-                                        </div>
-                                    </div>
-                                    <!-- Footer Widget End -->
-
-                                </div>
-                                <!-- Footer Widget End -->
-
-                            </div>
+                            <!-- Footer Widget End -->
                         </div>
                     </div>
                     <!-- Footer Widget Wrapper End -->
@@ -525,14 +415,7 @@
                     <div class="copyright-wrapper">
 
                         <div class="copyright-text">
-                            <p>&copy; 2021 <span> Nutras </span> Made with <i class="icofont-heart-alt"></i> by <a href="https://hasthemes.com/" target="_blank">HasThemes</a></p>
-                        </div>
-
-                        <div class="copyright-link">
-                            <a href="#">Terms of Service</a>
-                            <a href="#">Privacy Policy</a>
-                            <a href="#">Sitemap</a>
-                            <a href="#">Security</a>
+                            <p>&copy; 2022 <span> Nutrack </span> Made with <i class="icofont-heart-alt"></i>by <a href="https://github.com/nutrack" target="_blank">Kelompok F10 PTS PBP Semester Gasal, Tahun Ajaran 2022/2023</a></p>
                         </div>
 
                     </div>

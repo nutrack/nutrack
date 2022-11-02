@@ -127,7 +127,7 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="#">About Us</a>
+                                    <a href="{% url 'main:about' %}">About Us</a>
                                     <ul class="sub-menu">
                                         <li><a href="{% url 'main:about' %}">Dive into us!</a></li>
                                         <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>
@@ -198,7 +198,13 @@
                 <ul class="nav-menu">
                     <li><a class="active" href="{% url 'main:home' %}">Home</a></li>
                     {% if user.is_authenticated %}
-                    <li><a href="{% url 'calorycalc:calorycalc' %}">CaloryCalc</a></li>
+                    <li>
+                        <a href="{% url 'calorycalc:calorycalc' %}">CaloryCalc</a>
+                        <ul class="sub-menu">
+                            <li><a href="{% url 'calorycalc:calorycalc' %}">Add Calory</a></li>
+                            <li><a href="{% url 'calorycalc:histories' %}">Your Calories' History</a></li>
+                        </ul>
+                    </li>
                     {% else %}
                     <li><a id="myBtn" href="#">CaloryCalc</a></li>
                     <!-- The Modal -->
@@ -220,7 +226,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#">About Us</a>
+                        <a href="{% url 'main:about' %}">About Us</a>
                         <ul class="sub-menu">
                             <li><a href="{% url 'main:about' %}">Dive into us!</a></li>
                             <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>

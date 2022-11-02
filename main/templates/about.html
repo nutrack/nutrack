@@ -1,4 +1,5 @@
 <!doctype html>
+
 {% extends 'base.html' %} {% block content %}
 {% load static%}
 <html class="no-js" lang="en">
@@ -6,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Nutrack</title>
+    <title>Nutras Fitness & Nutrition Bootstrap 5 Template</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -30,20 +31,21 @@
 
     <!-- Main Style CSS -->
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/modal.css' %}">
 
 
     <!--====== Use the minified version files listed below for better performance and remove the files listed above ======-->
     <!-- <link rel="stylesheet" href="assets/css/vendor/plugins.min.css">
     <link rel="stylesheet" href="assets/css/style.min.css"> -->
     <style>
-        #btn-add:hover, #btn-hist:hover, #btn-reg:hover{
+        #btn-add:hover, #btn-hist:hover, #btn-sign:hover{
             background-color: #0a4d3c;
             border-color: #0a4d3c;
             color: #fff;
         }
+        .btn-cal{
+            text-align: center;
+        }
     </style>
-
 </head>
 
 <body>
@@ -62,7 +64,7 @@
 
                         <!-- Header Logo Start -->
                         <div class="header-logo">
-                            <a href="{% url 'main:home' %}"><img src="{% static 'assets/images/logo-nutrack-copy.png' %}" alt="Logo"></a>
+                            <a  href="{% url 'main:home' %}"><img src = "{% static 'assets/images/logo-nutrack-copy.png' %}" alt="Logo" ></a>
                         </div>
                         <!-- Header Logo End -->
 
@@ -70,7 +72,7 @@
                         <div class="header-menu d-none d-lg-flex">
 
                             <ul class="nav-menu">
-                                <li><a class="active" href="{% url 'main:home' %}">Home</a></li>
+                                <li><a class="active" href="/">Home</a></li>
                                 {% if user.is_authenticated %}
                                 <li><a href="{% url 'calorycalc:calorycalc' %}">CaloryCalc</a></li>
                                 {% else %}
@@ -96,12 +98,11 @@
                                 <li>
                                     <a href="#">About Us</a>
                                     <ul class="sub-menu">
-                                        <li><a href="{% url 'main:about' %}">Dive into us!</a></li>
+                                        <li><a href="#">Dive into us!</a></li>
                                         <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>
                                     </ul>
                                 </li>
                             </ul>
-
 
                             {% if user.is_authenticated %}
                             <div class="header-btn">
@@ -112,10 +113,9 @@
                                 <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:register' %}">Want to join us?</a>
                             </div>
                             {% endif %}
-
                         </div>
                         <!-- Header Menu End -->
-
+                    
                         <!-- Header Toggle Start -->
                         {% if user.is_authenticated %}
                         <div class="header-toggle d-lg-none">
@@ -191,7 +191,7 @@
                     <li>
                         <a href="#">About Us</a>
                         <ul class="sub-menu">
-                            <li><a href="{% url 'main:about' %}">Dive into us!</a></li>
+                            <li><a href="#">Dive into us!</a></li>
                             <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>
                         </ul>
                     </li>
@@ -214,11 +214,11 @@
 
                 <!-- Page banner Section Start -->
                 <div class="page-banner-content">
-                    <h2 class="page-title">Registration Form</h2>
+                    <h2 class="page-title">About Us</h2>
 
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{% url 'main:home' %}">Home</a></li>
-                        <li class="breadcrumb-item active">Register</li>
+                        <li class="breadcrumb-item active">About Us</li>
                     </ul>
                 </div>
                 <!-- Page banner Section End -->
@@ -227,59 +227,145 @@
         </div>
         <!-- Page banner Section End -->
 
-        <!-- Login & Register Section Start -->
-        <div class="section section-padding" id="login-register">
+        <!-- Our Mission & Vission Section Start -->
+        <div class="section section-padding bg-grey">
             <div class="container">
 
-                <!-- Register & Login Wrapper Start -->
-                <div class="register-login-wrapper">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-6 col-xl-5">
-                            <!-- Register & Login Form Start -->
-                            <div class="register-login-form">
-                                <h3 class="title">Registration <span>Now</span></h3>
+                <!-- Our Mission Wrapper Start -->
+                <div class="our-mission-wrapper">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="content">
+                                <h4 class="sub-title">So, What Is Nutrack?</h4>
+                                <h2 class="main-title">Nutrack is a website that help you to take care your nutrion needs.</h2>
+                                <p>It is important to keep a healthy diet, especially in this COVID-19 situation. With healthy diet, you can have strong immunity. Nutrack is here to help you track your nutrition. </p>
 
-                                <div class="form-wrapper">
-                                    <form method="POST">
-                                        {% csrf_token %}
-                                        <!-- Single Form Start -->
-                                        <div class="single-form">
-                                            <input type="text" name="username" placeholder="Username">
-                                        </div>
-                                        <!-- Single Form End -->
-                                        <!-- Single Form Start -->
-                                        <div class="single-form">
-                                            <input type="email" name="email" placeholder="Email">
-                                        </div>
-                                        <!-- Single Form End -->
-                                        <!-- Single Form Start -->
-                                        <div class="single-form">
-                                            <input type="password" name="password1" placeholder="Password">
-                                        </div>
-                                        <!-- Single Form End -->
-                                        <!-- Single Form Start -->
-                                        <div class="single-form">
-                                            <input type="password" name="password2" placeholder="Confirm Password">
-                                        </div>
-                                        <!-- Single Form End -->
-                                        <!-- Single Form Start -->
-                                        <div class="single-form">
-                                            <input id="btn-reg" class="btn btn-primary btn-hover-dark w-100" type="submit" name="submit" value="Create an account"/>
-                                        </div>
-                                        <!-- Single Form End -->
-                                        <p>Already have an account? <a href="{% url 'main:login' %}">Log in instead!</a></p>
-                                    </form>
-                                </div>
+                                <p>Sometimes, we can get bored by same food we eat everyday. Here at Nutrack you can find various healthy dishes you can try so you won't be bored by foods again.</p>
                             </div>
-                            <!-- Register & Login Form End -->
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="content-list">
+                                <h2 class="main-title" style="margin-bottom: 20px;">What can you do with Nutrack?</h2>
+                                <ul>
+                                    <li>Count and update your daily calories</li>
+                                    <li>Write an article about your healthy diet and share it to people</li>
+                                    <li>Find various healthy foods and drinks that you can try</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <!-- Register & Login Wrapper End -->
+                <!-- Our Mission Wrapper End -->
 
             </div>
         </div>
-        <!-- Login & Register Section End -->
+        <!-- Our Mission & Vission Section End -->
+
+        <!-- Instructor Section Start -->
+        <div class="section section-padding">
+            <div class="container">
+
+                <!-- Section Title Start -->
+                <div class="section-title">
+                    <h6 class="sub-title">Meet Us!</h6>
+                    <h2 class="main-title">The Developers</h2>
+                </div>
+                <!-- Section Title End -->
+
+                <!-- Instructor Wrapper Start -->
+                <div class="instructor-wrapper">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6">
+                            <!-- Single Instructor Start -->
+                            <div class="single-instructor">
+                                <div class="instructor-images">
+                                    <img src="{% static 'assets/images/instructor/Sasha460.jpg'%}" alt="">
+                                </div>
+                                <div class="instructor-content">
+                                    <p class="designation">Junior Developer</p>
+                                    <h3 class="name">Sasha Nabila Fortuna</h3>
+                                </div>
+                            </div>
+                            <!-- Single Instructor End -->
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <!-- Single Instructor Start -->
+                            <div class="single-instructor">
+                                <div class="instructor-images">
+                                    <img src="{% static 'assets/images/instructor/kak-athal.png'%}" alt="">
+                                </div>
+                                <div class="instructor-content">
+                                    <p class="designation">Senior Developer</p>
+                                    <h3 class="name">Muhammad Athallah</h3>
+                                </div>
+                            </div>
+                            <!-- Single Instructor End -->
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <!-- Single Instructor Start -->
+                            <div class="single-instructor">
+                                <div class="instructor-images">
+                                    <img src="{% static 'assets/images/instructor/shayna.jpg'%}" alt="">
+                                </div>
+                                <div class="instructor-content">
+                                    <p class="designation">Junior Developer</p>
+                                    <h3 class="name">Shayna Putri Fitria</h3>
+                                </div>
+                            </div>
+                            <!-- Single Instructor End -->
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <!-- Single Instructor Start -->
+                            <div class="single-instructor">
+                                <div class="instructor-images">
+                                    <img src="{% static 'assets/images/instructor/farkhans460.JPG'%}" style="width: inherit; height:inherit" alt="">
+                                </div>
+                                <div class="instructor-content">
+                                    <p class="designation">Junior Developer</p>
+                                    <h3 class="name">Farkhan Syawal Harahap</h3>
+                                </div>
+                            </div>
+                            <!-- Single Instructor End -->
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <!-- Single Instructor Start -->
+                            <div class="single-instructor">
+                                <div class="instructor-images">
+                                    <img src="{% static 'assets/images/instructor/Reiou.png'%}" style="width: inherit; height:inherit" alt="">
+                                </div>
+                                <div class="instructor-content">
+                                    <p class="designation">Junior Developer</p>
+                                    <h3 class="name">Reiou Nagata</h3>
+                                </div>
+                            </div>
+                            <!-- Single Instructor End -->
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <!-- Single Instructor Start -->
+                            <div class="single-instructor">
+                                <div class="instructor-images">
+                                    <img src="{% static 'assets/images/instructor/Akmal.png'%}"  style="width: inherit; height:inherit" alt="">
+                                </div>
+                                <div class="instructor-content">
+                                    <p class="designation">Junior Developer</p>
+                                    <h3 class="name">Muhammad Akmal Hakim</h3>
+                                </div>
+                            </div>
+                            <!-- Single Instructor End -->
+                        </div>
+                    </div>
+                </div>
+                <!-- Instructor Wrapper End -->
+
+                <!-- Instructor Button End -->
+                <div class="instructor-btn">
+                    <a href="{% url 'main:register' %}" class="btn btn-primary btn-hover-secondary">Join With Us</a>
+                </div>
+                <!-- Instructor Button End -->
+
+            </div>
+        </div>
+        <!-- Instructor Section End -->
 
         <!-- Footer Start -->
         <div class="section footer-section">
@@ -307,7 +393,7 @@
                                     <li><a href="{% url 'food_rec:show_all_food' %}">Food Recommendation</a></li>
                                     <li><a href="{% url 'article:article' %}">Articles</a></li>
                                     <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>
-                                    <li><a href="{% url 'main:about' %}">Dive into us!</a></li>
+                                    <li><a href="#">Dive into us!</a></li>
                                 </ul>
                             </div>
                             <!-- Footer Widget End -->
@@ -368,14 +454,6 @@
     <script src="{% static 'assets/js/plugins/jquery.nice-select.min.js' %}"></script>
     <script src="{% static 'assets/js/plugins/video-playlist.js' %}"></script>
     <script src="{% static 'assets/js/plugins/ajax-contact.js' %}"></script>
-
-    <!--====== Use the minified version files listed below for better performance and remove the files listed above ======-->
-    <!-- <script src="assets/js/plugins.min.js"></script> -->
-
-
-    <!-- Main JS -->
-    <script src="{% static 'assets/js/main.js' %}"></script>
-    <script src="{% static 'assets/js/modal.js' %}"></script>
 
 </body>
 {% endblock content %}

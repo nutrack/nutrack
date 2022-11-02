@@ -163,7 +163,7 @@ $(document).ready(function() {
                                     <li>
                                         <a href="#">About Us</a>
                                         <ul class="sub-menu">
-                                            <li><a href="#">Dive into us!</a></li>
+                                            <li><a href="{% url 'main:about' %}">Dive into us!</a></li>
                                             <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>
                                         </ul>
                                     </li>
@@ -278,7 +278,7 @@ $(document).ready(function() {
                             <a href="#">About Us</a>
                             <ul class="sub-menu">
                                 <li>
-                                    <a href="#">Dive into us!</a>
+                                    <a href="{% url 'main:about' %}">Dive into us!</a>
                                     <ul class="sub-menu">
                                         <li><a href="blog-grid.html">Blog Grid</a></li>
                                         <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
@@ -398,7 +398,7 @@ $(document).ready(function() {
                                         <li><a href="#">Food Recommendation</a></li>
                                         <li><a href="#">Articles</a></li>
                                         <li><a href="#">Testimonial</a></li>
-                                        <li><a href="#">Dive into us!</a></li>
+                                        <li><a href="{% url 'main:about' %}">Dive into us!</a></li>
                                     </ul>
                                 </div>
                                 <!-- Footer Widget End -->

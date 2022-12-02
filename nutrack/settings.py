@@ -65,7 +65,6 @@ CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SAMESITE = 'None'
 SESSION_COOKIE_SAMESITE = 'None'
-CSRF_TRUSTED_ORIGINS = ['https://nu-track.up.railway.app/']
 
 ROOT_URLCONF = 'nutrack.urls'
 

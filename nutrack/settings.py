@@ -66,6 +66,12 @@ SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SAMESITE = 'None'
 SESSION_COOKIE_SAMESITE = 'None'
 
+CORS_ORIGIN_WHITELIST = [
+    'http://127.0.0.1:8000',
+    'http://localhost:8000',
+    'https://nu-track.up.railway.app/'
+]
+
 ROOT_URLCONF = 'nutrack.urls'
 
 TEMPLATES = [

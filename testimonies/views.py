@@ -13,6 +13,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
 from .forms import TestimonyForm
+from .serializers import *
+from rest_framework import *
 import datetime
 
 def show_testimonies(request):
@@ -24,7 +26,8 @@ def show_testimonies(request):
 
 def testimonies_json(request):
     data = Testimony.objects.all()
-    return HttpResponse(serializers.serialize('json', data), content_type='application/json')
+    serializer = TestimonySerializer()
+    return HttpResponse(serializer.serialize(data),  content_type='application/json')
 
 @login_required(login_url='/login/')
 def create_testimonies(request):

@@ -14,7 +14,6 @@ from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
 from .forms import TestimonyForm
 from .serializers import *
-from rest_framework import *
 import datetime
 
 def show_testimonies(request):

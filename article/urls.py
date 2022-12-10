@@ -1,5 +1,5 @@
 from django.urls import path
-from article.views import article_page, write_article_page, show_json_article, post_article, article_page_by_id, like, delete_article, add_flutter, show_json_comment
+from article.views import article_page, write_article_page, show_json_article, post_article, article_page_by_id, like, delete_article, add_flutter, show_json_comment, add_comment_flutter
 
 app_name = 'article'
 
@@ -14,5 +14,6 @@ urlpatterns = [
 
     # recently added for flutter
     path('add-flutter/', add_flutter, name='addflutter'),
-    path('json-comment/', show_json_comment, name='jsoncomment')
+    path('json-comment/', show_json_comment, name='jsoncomment'),
+    path('add-comment-flutter/', add_comment_flutter, name='addcomment')
 ]

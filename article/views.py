@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render, get_object_or_404
 
 import datetime
@@ -88,8 +89,8 @@ def show_json_article(request):
     data = Article.objects.all()
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
-def show_json_comment(request, artid):
-    data = Comment.objects.get(id=artid)
+def show_json_comment(request):
+    data = Comment.objects.all()
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 # Post a New Article #
@@ -135,3 +136,48 @@ def delete_article(request, id):
     data = get_object_or_404(Article, id=id)
     data.delete()
     return HttpResponseRedirect(reverse('article:article'))
+
+@csrf_exempt
+def add_flutter(request):
+    if request.method == 'POST':
+        
+        data = json.loads(request.body)
+        
+        title = data["title"]
+        article_post = data["article_post"]
+        date = data["date"]
+        like = data["like"]
+        author = data["author"]
+        user = request.user
+
+        data = Article.objects.create(
+            user=user,
+            title=title, 
+            author=author, 
+            date=date, 
+            like=like, 
+            article_post=article_post
+        )
+
+        data.save()
+
+        return JsonResponse({"status": "success"}, status=200)
+
+    else:
+        return JsonResponse({"status": "error"}, status=401)
+
+@csrf_exempt
+def add_comment_flutter(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+
+        comment_post = data["comment_post"]
+        username = request.user.username
+        art_id = data["art_id"]
+
+        form = Comment.objects.create(comment_post=comment_post, username=username, art_id=art_id)
+        form.save()
+
+        return JsonResponse({'status': 'success'}, status=200)
+    else:
+        return JsonResponse({'status': 'failed'}, status=401)

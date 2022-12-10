@@ -116,3 +116,27 @@ def sort_food_by_name(request):
     foods = Food.objects.order_by('name')
     context = { 'foods': foods }
     return render(request, 'indexx.html', context)
+
+@csrf_exempt
+def add_food_flutter(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        
+        name = data['name']
+        calories = data['calories']
+        protein = data['protein']
+        fat = data['fat']
+        carbs = data['carbs']
+        is_food = data['is_food']
+        if is_food == 1:
+            is_food = True
+        else:
+            is_food = False
+        rating = request.POST.get('rating')
+        if int(rating) > 5:
+            rating = 5
+        food = Food.objects.create(name=name, calories=calories, protein=protein, fat=fat, carbs=carbs, rating=rating, is_food=is_food)
+        food.save()
+        return JsonResponse({'status': 'success'}, status=200)
+    else:
+        return JsonResponse({'status': 'error'}, status=401)

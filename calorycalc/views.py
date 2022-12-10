@@ -7,12 +7,15 @@ from django.http import JsonResponse
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
+import json
 import datetime
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from calorycalc.forms import TaskForm  
 # Create your views here.
 from calorycalc.models import caloryInfo
+
 
 
 def test(request):
@@ -42,7 +45,7 @@ def show_calory_json(request):
     return JsonResponse(tasks, safe=False)
 
 
-
+@csrf_exempt
 def add_calory(request):
     form = TaskForm(request.POST)
     form.instance.user = request.user
@@ -50,6 +53,20 @@ def add_calory(request):
         form.save()
         return JsonResponse({'calory':form.instance.calory,"date": form.instance.date,"id":form.instance.pk})
     return redirect("calorycalc:calorycalc")
+
+    
+@csrf_exempt
+def add_calory_flutter(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        date = data['date']
+        calory = data['calory']
+        form = caloryInfo(user=request.user, date=date, calory=calory)
+        form.save()
+
+        return JsonResponse({'status': 'success'}, status=200)
+    else:
+        return JsonResponse({'status': 'failed'}, status=401)
 
 
 

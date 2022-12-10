@@ -12,6 +12,10 @@ from django.urls import reverse
 
 from django.http import HttpResponse, HttpRequest
 from django.core import serializers
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+import json
+from django.contrib.auth.backends import UserModel
 
 from main.forms import CreateUserForm
 import sys
@@ -86,3 +90,63 @@ def calorycalc_json(request):
 def about(request):
     context = {}
     return render(request, 'about.html', context)
+
+@csrf_exempt
+def login_flutter(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(username=username, password=password)
+    if user is not None:
+        if user.is_active:
+            login(request, user)
+            # Redirect to a success page.
+            return JsonResponse({
+              "status": True,
+              "username": request.user.username,
+              "message": "Successfully Logged In!"
+            }, status=200)
+        else:
+            return JsonResponse({
+              "status": False,
+              "message": "Failed to Login, Account Disabled."
+            }, status=401)
+
+    else:
+        return JsonResponse({
+          "status": False,
+          "message": "Failed to Login, check your email/password."
+        }, status=401)
+
+@csrf_exempt
+def register_flutter(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+
+        username = data["username"]
+        email = data["email"]
+        password1 = data["password1"]
+
+        newUser = UserModel.objects.create_user(
+        username = username, 
+        email = email,
+        password = password1,
+        )
+
+        newUser.save()
+        return JsonResponse({"status": "success"}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)
+
+@csrf_exempt
+def logout_flutter(request):
+    try:
+        logout(request)
+        return JsonResponse({
+                    "status": True,
+                    "message": "Successfully Logged out!"
+                }, status=200)
+    except:
+        return JsonResponse({
+          "status": False,
+          "message": "Failed to Logout"
+        }, status=401)

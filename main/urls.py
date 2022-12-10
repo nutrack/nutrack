@@ -12,4 +12,7 @@ urlpatterns = [
     path('logout/', logout_user, name='logout'),
     path('json/', calorycalc_json, name='calorycalc_json'),
     path('about/', about, name='about'),
+    path('register-flutter/', register_flutter, name='register_flutter'),
+    path('login-flutter/', login_flutter, name='login_flutter'),
+    path('logout-flutter/', logout_flutter, name='logout_flutter'),
 ]

@@ -14,7 +14,7 @@ from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
 from .forms import TestimonyForm
 from .serializers import *
-import datetime
+import datetime, json
 
 def show_testimonies(request):
     data = Testimony.objects.all()
@@ -53,3 +53,17 @@ def create_testimony_ajax(request):
         result = Testimony.objects.create(user=user, username=user.username, title=title, testimony=testimony)
         result_dict = {"username":result.username,"title":result.title,"testimony":result.testimony}
         return JsonResponse(result_dict)
+
+@csrf_exempt
+def create_testimonies_flutter(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        title = data['title']
+        testimony = data['testimony']
+
+        form = Testimony(user=request.user, title=title, testimony=testimony)
+        form.save()
+
+        return JsonResponse({'status': 'success'}, status=200)
+    else:
+        return JsonResponse({'status': 'failed'}, status=401)

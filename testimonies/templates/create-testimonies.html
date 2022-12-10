@@ -1,27 +1,385 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+{% extends 'base.html' %} {% block content %}
+{% load static%}
+<html class="no-js" lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Nutrack</title>
+    <meta name="robots" content="noindex, follow" />
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/images/favicon.ico' %}">
+
+    <!-- CSS
+	============================================ -->
+
+    <!-- Icon Font CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/plugins/icofont.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/plugins/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/plugins/font-awesome.min.css' %}">
+
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/plugins/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/plugins/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/plugins/swiper-bundle.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/plugins/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/plugins/nice-select.css' %}">
+
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/modal.css' %}">
+
+
+    <!--====== Use the minified version files listed below for better performance and remove the files listed above ======-->
+    <!-- <link rel="stylesheet" href="assets/css/vendor/plugins.min.css">
+    <link rel="stylesheet" href="assets/css/style.min.css"> -->
+    <style>
+        #btn-add:hover, #btn-hist:hover, #btn-log:hover{
+            background-color: #0a4d3c;
+            border-color: #0a4d3c;
+            color: #fff;
+        }
+    </style>
+
 </head>
+
 <body>
-    <form method="POST" action="">
-        {% csrf_token %}
-        <table>
-            <tr>
-                <td><h6>Title: </h6></td>
-                <td><input type="text" name="title" placeholder="" class="form-control"></td>
-            </tr>
-            <tr>
-                <td><h6>Testimony: </h6></td>
-                <td><input type="text" name="testimony" placeholder="" class="form-control"></td>
-            </tr>
-            <tr>
-                <td colspan="2"><input class="btn create-task-btn btn-secondary" type="submit" value="Buat Task"></td>
-            </tr>
-        </table>
-    </form>
+
+    <div class="main-wrapper">
+
+        <!-- Header Section Start -->
+        <div class="header section">
+
+            <!-- Header Main Start -->
+            <div class="header-main">
+                <div class="container">
+
+                    <!-- Header Wrapper Start -->
+                    <div class="header-wrapper">
+
+                        <!-- Header Logo Start -->
+                        <div class="header-logo">
+                            <a href="{% url 'main:home' %}"><img src="{% static 'assets/images/logo-nutrack-copy.png' %}" alt="Logo"></a>
+                        </div>
+                        <!-- Header Logo End -->
+
+                        <!-- Header Menu Start -->
+                        <div class="header-menu d-none d-lg-flex">
+
+                            <ul class="nav-menu">
+                                <li><a class="active" href="/">Home</a></li>
+                                {% if user.is_authenticated %}
+                                <li>
+                                    <a href="{% url 'calorycalc:calorycalc' %}">CaloryCalc</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="{% url 'calorycalc:calorycalc' %}">Add Calory</a></li>
+                                        <li><a href="{% url 'calorycalc:histories' %}">Your Calories' History</a></li>
+                                    </ul>
+                                </li>
+                                {% else %}
+                                <li><a id="myBtn" href="#">CaloryCalc</a></li>
+                                <!-- The Modal -->
+                                <div id="myModal" class="modal">
+
+                                    <!-- Modal content -->
+                                    <div class="modal-content">
+                                        <span class="close">&times;</span>
+                                        <h3>Please log in first!</h3>
+                                    </div>
+                                
+                                </div>
+                                {% endif %}
+                                <li><a href="{% url 'food_rec:show_all_food' %}">Food Recommendation</a></li>
+                                <li>
+                                    <a href="{% url 'article:article' %}">Articles </a>
+                                    <ul class="sub-menu">
+                                        <li><a href="{% url 'article:write' %}">Write Article</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="{% url 'main:about' %}">About Us</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="{% url 'main:about' %}">Dive into us!</a></li>
+                                        <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+
+                            {% if user.is_authenticated %}
+                            <div class="header-btn">
+                                <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:logout' %}">Bye, {{user.get_username}}!</a>
+                            </div>
+                            {% else %}
+                            <div class="header-btn">
+                                <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:register' %}">Want to join us?</a>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <!-- Header Menu End -->
+
+                        <!-- Header Toggle Start -->
+                        {% if user.is_authenticated %}
+                        <div class="header-toggle d-lg-none">
+
+                            <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:logout' %}">Bye, {{user.get_username}}!</a>
+
+                            <a href="#" class="menu-toggle">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </a>
+                        </div>
+                        {% else %}
+                        <div class="header-toggle d-lg-none">
+
+                            <a class="btn btn-secondary btn-hover-primary" href="{% url 'main:register' %}">Want to join us?</a>
+
+                            <a href="#" class="menu-toggle">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </a>
+                        </div>
+                        {% endif %}
+                        <!-- Header Toggle End -->
+
+                    </div>
+                    <!-- Header Wrapper End -->
+
+                </div>
+            </div>
+            <!-- Header Main End -->
+
+        </div>
+        <!-- Header Section End -->
+
+
+        <!-- Mobile Menu Start -->
+        <div class="mobile-menu">
+
+            <!-- Menu Close Start -->
+            <a class="menu-close" href="javascript:void(0)">
+                <i class="icofont-close-line"></i>
+            </a>
+            <!-- Menu Close End -->
+
+            <!-- Mobile Menu Start -->
+            <div class="mobile-menu-items">
+                <ul class="nav-menu">
+                    <li><a class="active" href="{% url 'main:home' %}">Home</a></li>
+                    {% if user.is_authenticated %}
+                    <li>
+                        <a href="{% url 'calorycalc:calorycalc' %}">CaloryCalc</a>
+                        <ul class="sub-menu">
+                            <li><a href="{% url 'calorycalc:calorycalc' %}">Add Calory</a></li>
+                            <li><a href="{% url 'calorycalc:histories' %}">Your Calories' History</a></li>
+                        </ul>
+                    </li>
+                    {% else %}
+                    <li><a id="myBtn" href="#">CaloryCalc</a></li>
+                    <!-- The Modal -->
+                    <div id="myModal" class="modal">
+
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h3>Please log in first!</h3>
+                        </div>
+                    
+                    </div>
+                    {% endif %}
+                    <li><a href="{% url 'food_rec:show_all_food' %}">Food Recommendation</a></li>
+                    <li>
+                        <a href="{% url 'article:article' %}">Articles </a>
+                        <ul class="sub-menu">
+                            <li><a href="{% url 'article:write' %}">Write Article</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="{% url 'main:about' %}">About Us</a>
+                        <ul class="sub-menu">
+                            <li><a href="{% url 'main:about' %}">Dive into us!</a></li>
+                            <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
+            <!-- Mobile Menu End -->
+
+        </div>
+        <!-- Mobile Menu End -->
+
+        <!-- Overlay Start -->
+        <div class="overlay"></div>
+        <!-- Overlay End -->
+
+
+        <!-- Page banner Section Start -->
+        <div class="section page-banner-section" style="background-image: url(/static/assets/images/page-banner.jpg);">
+            <div class="container">
+
+                <!-- Page banner Section Start -->
+                <div class="page-banner-content">
+                    <h2 class="page-title">Testimony Form</h2>
+
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'testimonies:show_testimonies' %}">Testimony</a></li>
+                        <li class="breadcrumb-item active">Create Testimony</li>
+                    </ul>
+                </div>
+                <!-- Page banner Section End -->
+
+            </div>
+        </div>
+        <!-- Page banner Section End -->
+
+        <!-- Login & Register Section Start -->
+        <div class="section section-padding">
+            <div class="container">
+
+                <!-- Register & Login Wrapper Start -->
+                <div class="register-login-wrapper">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6 col-xl-5">
+                            <!-- Register & Login Form Start -->
+                            <div class="register-login-form">
+                                <h3 class="title">Share Your <span>Thoughts</span></h3>
+
+                                <div class="form-wrapper">
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        <!-- Single Form Start -->
+                                        <div class="single-form">
+                                            <input type="text" name="title" placeholder="Title">
+                                        </div>
+                                        <!-- Single Form End -->
+                                        <!-- Single Form Start -->
+                                        <div class="single-form">
+                                            <textarea name="testimony" placeholder="Testimony"></textarea>
+                                        </div>
+                                        <!-- Single Form End -->
+                                        <!-- Single Form Start -->
+                                        <div class="single-form">
+                                            <input id="btn-log" class="btn btn-primary btn-hover-dark w-100" type="submit" name="submit" value="Submit"/>
+                                        </div>
+                                        <!-- Single Form End -->
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- Register & Login Form End -->
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Register & Login Wrapper End -->
+
+            </div>
+        </div>
+        <!-- Login & Register Section End -->
+
+        <!-- Footer Start -->
+        <div class="section footer-section">
+
+            <!-- Footer Widget Section Start -->
+            <div class="footer-widget-section section-padding">
+
+                <img class="shape-01 animation-rotate" src="{% static 'assets/images/shape/shape-9.png' %}" alt="Shape">
+
+                <div class="container">
+
+                    <!-- Footer Widget Wrapper Start -->
+                    <div class="footer-widget-wrapper">
+                        <div class="row">
+                            <!-- Footer Widget Start -->
+                            <div style="text-align: center;">
+                                <h3 class="footer-widget-title">All Features</h3>
+
+                                <ul class="widget-link">
+                                    {% if user.is_authenticated %}
+                                    <li><a href="{% url 'calorycalc:calorycalc' %}">CaloryCalc</a></li>
+                                    {% else %}
+                                    <li><a href="{% url 'main:login' %}">CaloryCalc</a></li>
+                                    {% endif %}
+                                    <li><a href="{% url 'food_rec:show_all_food' %}">Food Recommendation</a></li>
+                                    <li><a href="{% url 'article:article' %}">Articles</a></li>
+                                    <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>
+                                    <li><a href="{% url 'main:about' %}">Dive into us!</a></li>
+                                </ul>
+                            </div>
+                            <!-- Footer Widget End -->
+                        </div>
+                    </div>
+                    <!-- Footer Widget Wrapper End -->
+
+                </div>
+
+                <img class="shape-02 animation-rotate" src="{% static 'assets/images/shape/shape-9.png' %}" alt="Shape">
+
+            </div>
+            <!-- Footer Widget Section End -->
+
+            <!-- Footer Copyright Section Start -->
+            <div class="footer-copyright">
+                <div class="container">
+
+                    <!-- Copyright Wrapper Start -->
+                    <div class="copyright-wrapper">
+
+                        <div class="copyright-text">
+                            <p>&copy; 2022 <span> Nutrack </span> Made with <i class="icofont-heart-alt"></i>by <a href="https://github.com/nutrack" target="_blank">Kelompok F10 PTS PBP Semester Gasal, Tahun Ajaran 2022/2023</a></p>
+                        </div>
+
+                    </div>
+                    <!-- Copyright Wrapper End -->
+
+                </div>
+            </div>
+            <!-- Footer Copyright Section End -->
+
+        </div>
+        <!-- Footer End -->
+
+        <!--Back To Start-->
+        <a href="#" class="back-to-top">
+            <i class="icofont-simple-up"></i>
+        </a>
+        <!--Back To End-->
+
+    </div>
+
+    <!-- JS
+    ============================================ -->
+
+    <!-- Modernizer & jQuery JS -->
+    <script src="{% static 'assets/js/vendor/modernizr-3.11.2.min.js' %}"></script>
+    <script src="{% static 'assets/js/vendor/jquery-3.5.1.min.js' %}"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="{% static 'assets/js/plugins/popper.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/bootstrap.min.js' %}"></script>
+
+    <!-- Plugins JS -->
+    <script src="{% static 'assets/js/plugins/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/video-playlist.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/ajax-contact.js' %}"></script>
+
+    <!--====== Use the minified version files listed below for better performance and remove the files listed above ======-->
+    <!-- <script src="assets/js/plugins.min.js"></script> -->
+
+
+    <!-- Main JS -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+    <script src="{% static 'assets/js/modal.js' %}"></script>
+
+
+    
+
 </body>
+{% endblock content %}
 </html>

@@ -4,17 +4,24 @@
 <html class="no-js" lang="en">
 
 <head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        important: true,
+      };
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>NuTrack - Article Detail Page</title>
+    <title>Food Recommendation</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/images/favicon.ico' %}">
 
-    <!-- CSS
-	============================================ -->
+    <!-- CSS ============================================ -->
 
     <!-- Icon Font CSS -->
     <link rel="stylesheet" href="{% static 'assets/css/plugins/icofont.min.css' %}">
@@ -37,7 +44,6 @@
     <link rel="stylesheet" href="assets/css/style.min.css"> -->
 
 </head>
-
 <body>
 
     <div class="main-wrapper">
@@ -191,9 +197,9 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="{% url 'main:about' %}">About Us</a>
+                        <a href="#">About Us</a>
                         <ul class="sub-menu">
-                            <li><a href="{% url 'main:about' %}">Dive into us!</a></li>
+                            <li><a href="#">Dive into us!</a></li>
                             <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>
                         </ul>
                     </li>
@@ -211,147 +217,90 @@
 
 
         <!-- Page banner Section Start -->
-        <div class="section page-banner-section" style="background-image: url(/static/assets/images/page-banner.jpg);">
-            <!-- background-image: url(/static/assets/images/page-banner.jpg); -->
+        <div class="section page-banner-section">
             <div class="container">
-
                 <!-- Page banner Section Start -->
                 <div class="page-banner-content">
-                    <h2 class="page-title">{{article_post.title}}</h2>
-
-                    <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{% url 'main:home' %}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{% url 'article:article' %}">Article</a></li>
-                    </ul>
+                    <h2 class="page-title">Food Details</h2>
                 </div>
                 <!-- Page banner Section End -->
-
             </div>
         </div>
         <!-- Page banner Section End -->
 
-        <!-- Blog Post Section Start -->
-        <div class="section section-padding-02" style="padding-top: 25px;">
-            <div class="container" style="padding-bottom: 80px;">
-
-                <!-- Blog Wrapper Start -->
-                <div class="blog-wrapper-02">
-                    <div class="row gx-xxl-5 flex-row-reverse">
-                        <div class="col-lg-8">
-
-                            <!-- Blog Details Wrapper Start -->
-                            <div class="blog-details-wrapper">
-        
-                                <!-- <div class="details-images">
-                                    <img src="{% static 'assets/images/blog/blog-details.jpg' %}" alt="Blog Details">
-                                </div> -->
-        
-                                <div class="blog-details-admin-meta" style="padding-top: 20px;">
-                                    <div class="author">
-                                        <div class="author-name" style="padding-left: 0px;">
-                                            <p class="name">By: {{article_post.author}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="blog-meta">
-                                        <span> <i class="icofont-calendar"></i>{{article_post.date}}</span>
-                                        <span> <a href="{% url 'article:like' id %}"><i class="icofont-heart" id="heart-button"></i></a>{{article_post.like}}</span>
-                                        {% if is_author %}
-                                        <span><a href="{% url 'article:delete' id %}"><img src = "{% static 'assets/images/trash.png' %}" alt="Trash" width="50px" height="auto" id="trash-button"></a></span>
-                                        {% endif %}
-                                    </div>
-                                </div>
-        
-        
-                                <div class="blog-details-description">
-                                    <p>{{article_post.article_post}}</p>
-        
-                                </div>
-                            </div>
-                            <!-- Blog Details Wrapper End -->
-
-                            <!-- Blog Details Comment End -->
-                            <div class="blog-details-comment">
-                                {% if user.is_authenticated %}
-                                <div class="comment-form" style="margin-top: 10px;">
-                                    <h3 class="title">Leave a Comment</h3>
-                                    <!-- Form Wrapper Start -->
-                                    <div class="form-wrapper">
-                                        <form method="POST">
-                                            {% csrf_token %}
-                                            <div>
-                                                {{ comment_form.comment_post }}
-                                            </div>
-                                            <td><input type="submit" name="submit" id="post-button" value="Post" class="btn btn-light" style="padding: 0 30px; margin-top: 20px; background-color: #0a4d3c; color: white;"/></td>  
-                                        </form>
-                                    </div>
-                                    <!-- Form Wrapper End -->
-                                </div>
-                                {% endif %}
-
-                                <div class="comment-wrapper">
-                                    <h3 class="title">Comments</h3>
-
-                                    <ul class="comment-items">
-                                        <li>
-                                            {% for com in comments %}
-                                            <!-- Single Comment Start -->
-                                            <div class="single-comment" style="border-radius: 30px;" id="comment-hover">
-                                                <div class="comment-author" style="border: 0px;">
-                                                    <div class="author-content" style="padding-left: 0px;">
-                                                        <h4 class="name" style="color: #0a4d3c;">⛧ {{com.user.username}}</h4>
-                                                    </div>
-                                                </div>
-                                                <p>{{com.comment_post}}</p>
-                                            </div>
-                                            <!-- Single Comment End -->
-
-                                            {% endfor %}  
-                                        </li>
-                                    </ul>
-                                </div>
-
-                            </div>
-                            <!-- Blog Details Comment End -->
-
-                        </div>
-                        <div class="col-lg-4">
-                            <!-- Blog Sidebar Start -->
+        <!-- Courses Details Start -->
+        <div class="section section-padding-02">
+            <div class="container">
+                <div class="courses-details-wrapper">
+                    <div class="row flex-row-reverse gx-xxl-5">
+                        <div>
+                            <!-- Courses Details Sidebar Start -->
                             <div class="sidebar">
 
-                                <!-- Sidebar Widget Post Start -->
-                                <div class="sidebar-widget" style="margin-top: 80px;">
-                                    <h4 class="widget-title">Posts</h4>
-
-                                    <div class="widget-post" id="posts-section">
-                                        <ul class="post-items">
-
-                                            {% for post in recent_post %}
-                                            <li>
-                                                <!-- Sidebar Widget Post Start -->
-                                                <div class="single-post">
-                                                    <div class="post-content" style="padding-left: 10px;">
-                                                        <h5 class="title"><a href="{% url 'article:id' post.id %}">{{post.title}}</a></h5>
-                                                        <span class="date"><i class="icofont-calendar"></i> {{post.date}}</span>
-                                                    </div>
-                                                </div>
-                                                <!-- Sidebar Widget Post End -->
-                                            </li>
-                                            {% endfor %}
+                                <!-- Sidebar Widget Information Start -->
+                                <div class="sidebar-widget widget-information">
+                                    <div class="courses-price">
+                                        <span class="price">
+                                            {% if food.is_food %}
+                                            <i class="icofont-spoon-and-fork" style="font-size: 5em;"></i>
+                                            {% else %}
+                                            <i class="icofont-soft-drinks" style="font-size: 5em;"></i>
+                                            {% endif %}
+                                        </span>
+                                    </div>
+                                    <div class="info-price">
+                                        <span class="price">{{food.name}}</span>
+                                    </div>
+                                    {% if user.is_authenticated %}
+                                    <div class="info-price">
+                                        <span class="price">By {{food.user.get_username}}</span>
+                                    </div>
+                                    <div class="info-list">
+                                        <ul>
+                                            <li><i class="icofont-man-in-glasses"></i> <strong>Calories</strong> <span>{{food.calories}}</span></li>
+                                            <li><i class="icofont-clock-time"></i> <strong>Protein</strong> <span>{{food.protein}}</span></li>
+                                            <li><i class="icofont-ui-video-play"></i> <strong>Fat</strong> <span>{{food.fat}}</span></li>
+                                            <li><i class="icofont-bars"></i> <strong>Carbohydrate</strong> <span>{{food.carbs}}</span></li>
+                                            <li><i class="fa fa-star checked"></i> <strong>Rating</strong> <span>{{food.rating}}</span></li>
                                         </ul>
                                     </div>
+                                    {% else %}
+                                    <div class="info-price">
+                                        <span class="price">Silakan login untuk melihat detail makanan</span>
+                                        <a href="{% url 'main:register' %}" class="btn btn-primary btn-hover-primary mt-4">Lakukan Registrasi</a>
+                                    </div>
+                                    {% endif %}
+                                    <div class="info-btn">
+                                        <a href="{% url 'food_rec:show_all_food' %}" class="btn btn-secondary btn-hover-primary"><i class="icofont-arrow-left m-1"></i>Back to Food Recommendation</a>
+                                    </div>
                                 </div>
-                                <!-- Sidebar Widget Post End -->
-                            </div>
-                            <!-- Blog Sidebar End -->
+                                <!-- Sidebar Widget Information End -->
 
+                                <!-- Sidebar Widget Share Start -->
+                                <!-- Sidebar Widget Share End -->
+
+                            </div>
+                            <!-- Courses Details Sidebar End -->
                         </div>
                     </div>
                 </div>
-                <!-- Blog Wrapper End -->
 
             </div>
         </div>
-        <!-- Blog Post Section End -->
+        <!-- Courses Details End -->
+
+
+        <!-- Download Section Start -->
+        <div class="section section-padding">
+            <div class="container">
+
+                <!-- Download Wrapper Start -->
+                
+                <!-- Download Wrapper End -->
+
+            </div>
+        </div>
+        <!-- Download Section End -->
 
         <!-- Footer Start -->
         <div class="section footer-section">
@@ -404,60 +353,12 @@
     <script src="{% static 'assets/js/plugins/ajax-contact.js' %}"></script>
 
     <!--====== Use the minified version files listed below for better performance and remove the files listed above ======-->
-    <!-- <script src="assets/js/plugins.min.js"></script> -->
+    <!-- <script src="{% static 'assets/js/plugins.min.js"></script> -->
 
 
     <!-- Main JS -->
     <script src="{% static 'assets/js/main.js' %}"></script>
 
 </body>
-
-<style>
-    @media only screen and (max-width: 875px) {
-        .container {
-            margin-left: 100px;
-            margin-right: 100px;
-        }
-    }
-
-    @media only screen and (max-width: 835px) {
-        .container {
-            margin-left: 60px;
-            margin-right: 60px;
-        }
-    }
-
-    @media only screen and (max-width: 800px) {
-        .container {
-            margin-left: 60px;
-            margin-right: 60px;
-        }
-    }
-
-    @media only screen and (max-width: 770px) {
-        .container {
-            margin-left: 40px;
-            margin-right: 20px;
-        }
-    }
-
-    input:hover {
-        background-color: #ffa300;
-        color: #0a4d3c;
-    }
-
-    #heart-button:hover {
-        transform: scale(1.1);
-    }
-
-    #trash-button:hover {
-        transform: scale(1.1) rotate(15deg);
-    }
-
-    #comment-hover:hover {
-        box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
-    }
-</style>
-
 {% endblock content %}
 </html>

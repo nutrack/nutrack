@@ -1,87 +1,10 @@
 <!doctype html>
+
 {% extends 'base.html' %} {% block content %}
 {% load static%}
 <html class="no-js" lang="en">
 
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script>
-    $(document).ready(function () {
-      const card = (data) => `
-      <div id='${data.pk}-card'
-      class="single-courses"
-        >
-        <div class="courses-content">
-            <div class="courses-price">
-                <span class="price">${
-                data.fields.is_food
-                  ? `
-                  <i class="icofont-spoon-and-fork" style="font-size: 2em;"></i>`
-                  : `
-                  <i class="icofont-soft-drinks" style="font-size: 2em;"></i>`
-              }</span>
-            </div>
-            <div class="content-wrapper">
-                <h4 class="title"><a href="courses-details-left-sidebar.html">${data.fields.name}</a></h4>
-                <ul class="meta">
-                <li>
-                    <span class="fa fa-star checked"></span>
-                    <span>${data.fields.rating}</span>
-                </li>
-                <li><b>${data.fields.calories} Calories</b></li>
-            </ul>
-            </div>
-        </div>
-    </div>
-    ` 
-    const addCard = (data) => {
-        return $('#food').append(card(data))
-      }
-
-
-    $("#myInput").on("keyup", function() {
-        var value = $(this).val().toLowerCase();
-        $("#food").filter(function() {
-        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        });
-    });
-
-    $.get('/todolist/json', function (food) {
-        food.map(() => {
-          addCard(food)
-          removeCard(food)
-        })
-      })
-
-    $('#add-food').click(function () {
-        if ($('#name').val() && $('#calories').val() && ('#protein').val() && $('#fat').val() && $('#carbs').val()) {
-          $.post(
-            '/food_rec/add/',
-            {
-              name: $('#name').val(),
-              calories: $('#calories').val(),
-              protein: $('#protein').val(),
-                fat: $('#fat').val(),
-                carbs: $('#carbs').val(),
-                is_food: $('#ReturnRequired').is(':checked') ? 1 : 0,
-            },
-            function (res, status) {
-              if (status == 'success') {
-                addCard(res)
-                $('#name').val('')
-                $('#calories').val('')
-                $('#protein').val('')
-                $('#fat').val('')
-                $('#carbs').val('')
-                $('#ReturnRequired').prop('checked', true)
-                removeCard(res)
-              }
-            },
-          )
-        }
-      })
-    })
-    </script>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Nutras Fitness & Nutrition Bootstrap 5 Template</title>
@@ -91,7 +14,8 @@
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/images/favicon.ico' %}">
 
-    <!-- CSS ============================================ -->
+    <!-- CSS
+	============================================ -->
 
     <!-- Icon Font CSS -->
     <link rel="stylesheet" href="{% static 'assets/css/plugins/icofont.min.css' %}">
@@ -112,8 +36,18 @@
     <!--====== Use the minified version files listed below for better performance and remove the files listed above ======-->
     <!-- <link rel="stylesheet" href="assets/css/vendor/plugins.min.css">
     <link rel="stylesheet" href="assets/css/style.min.css"> -->
-
+    <style>
+        #btn-add:hover, #btn-hist:hover, #btn-sign:hover{
+            background-color: #0a4d3c;
+            border-color: #0a4d3c;
+            color: #fff;
+        }
+        .btn-cal{
+            text-align: center;
+        }
+    </style>
 </head>
+
 <body>
 
     <div class="main-wrapper">
@@ -168,9 +102,9 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="{% url 'main:about' %}">About Us</a>
+                                    <a href="#">About Us</a>
                                     <ul class="sub-menu">
-                                        <li><a href="{% url 'main:about' %}">Dive into us!</a></li>
+                                        <li><a href="#">Dive into us!</a></li>
                                         <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>
                                     </ul>
                                 </li>
@@ -239,13 +173,7 @@
                 <ul class="nav-menu">
                     <li><a class="active" href="{% url 'main:home' %}">Home</a></li>
                     {% if user.is_authenticated %}
-                    <li>
-                        <a href="{% url 'calorycalc:calorycalc' %}">CaloryCalc</a>
-                        <ul class="sub-menu">
-                            <li><a href="{% url 'calorycalc:calorycalc' %}">Add Calory</a></li>
-                            <li><a href="{% url 'calorycalc:histories' %}">Your Calories' History</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="{% url 'calorycalc:calorycalc' %}">CaloryCalc</a></li>
                     {% else %}
                     <li><a id="myBtn" href="#">CaloryCalc</a></li>
                     <!-- The Modal -->
@@ -267,9 +195,9 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="{% url 'main:about' %}">About Us</a>
+                        <a href="#">About Us</a>
                         <ul class="sub-menu">
-                            <li><a href="{% url 'main:about' %}">Dive into us!</a></li>
+                            <li><a href="#">Dive into us!</a></li>
                             <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>
                         </ul>
                     </li>
@@ -287,12 +215,17 @@
 
 
         <!-- Page banner Section Start -->
-        <div class="section page-banner-section" style="background-image: url(assets/images/page-banner.jpg);">
-            <div class="container d-flex justify-content-center">
+        <div class="section page-banner-section" style="background-image: url(/static/assets/images/page-banner.jpg);">
+            <div class="container">
 
                 <!-- Page banner Section Start -->
                 <div class="page-banner-content">
-                    <h2 class="page-title ">Rekomendasi</h2>
+                    <h2 class="page-title">About Us</h2>
+
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'main:home' %}">Home</a></li>
+                        <li class="breadcrumb-item active">About Us</li>
+                    </ul>
                 </div>
                 <!-- Page banner Section End -->
 
@@ -300,74 +233,148 @@
         </div>
         <!-- Page banner Section End -->
 
-        <!-- Courses Section Start -->
-        <div class="section section-padding-02">
+        <!-- Our Mission & Vission Section Start -->
+        <div class="section section-padding bg-grey">
             <div class="container">
-        <nav class="nav nav-pills flex-column flex-sm-row mb-4">
-        <a class="flex-sm-fill text-sm-center nav-link active" aria-current="page" href="#">All</a>
-        <a class="flex-sm-fill text-sm-center nav-link" href="#">My Recommendation</a>
-        </nav>
-                <!-- Courses Search bar Start -->
-                <div class="courses-search-bar">
-                    
-                    <!-- Courses Select Start -->
-                    <div class="courses-select align-self-center">
-                        <select data-display="Sort by">
-                            <option data-display="Sort by">Sort by</option>
-                            <option value="1">Rating</option>
-                            <option value="2">Name</option>
-                        </select>
-                    </div>
-                    <!-- Courses Select End -->
 
-                    <!-- Courses Search Start -->
-                    <div class="courses-search">
-                        <form action="#">
-                            <input id="myInput" type="text" placeholder="Search here">
-                            <button><i class="icofont-search"></i></button>
-                        </form>
-                    </div>
-                    <!-- Courses Search End -->
+                <!-- Our Mission Wrapper Start -->
+                <div class="our-mission-wrapper">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="content">
+                                <h4 class="sub-title">So, What Is Nutrack?</h4>
+                                <h2 class="main-title">Nutrack is a website that help you to take care your nutrion needs.</h2>
+                                <p>It is important to keep a healthy diet, especially in this COVID-19 situation. With healthy diet, you can have strong immunity. Nutrack is here to help you track your nutrition. </p>
 
-                </div>
-                <!-- Courses Search bar End -->
-
-                <!-- Courses Wrapper End -->
-                <div class="courses-wrapper-02">
-                    <button
-                        class="btn btn-primary btn-hover-white"
-                        data-bs-toggle="modal"
-                        data-bs-target="#exampleModal"
-                    >
-                        Tambah Rekomendasi
-                    </button>
-                    <div class="row gx-xxl-5">
-                        <div
-                        class="mb-16 grid lg:grid-cols-2 md:grid-cols-1 gap-5 mt-8 sm:mt-5"
-                        id="food"
-                        ></div>
+                                <p>Sometimes, we can get bored by same food we eat everyday. Here at Nutrack you can find various healthy dishes you can try so you won't be bored by foods again.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="content-list">
+                                <h2 class="main-title" style="margin-bottom: 20px;">What can you do with Nutrack?</h2>
+                                <ul>
+                                    <li>Count and update your daily calories</li>
+                                    <li>Write an article about your healthy diet and share it to people</li>
+                                    <li>Find various healthy foods and drinks that you can try</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <!-- Courses Wrapper End -->
-
-                <!-- Page Pagination End -->
-                {% comment %} <div class="page-pagination">
-                    <ul class="pagination justify-content-center">
-                        <li><a href="#"><i class="icofont-rounded-left"></i></a></li>
-                        <li><a class="active" href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#"><i class="icofont-rounded-right"></i></a></li>
-                    </ul>
-                </div> {% endcomment %}
-                <!-- Page Pagination End -->
+                <!-- Our Mission Wrapper End -->
 
             </div>
         </div>
-        <!-- Courses Section End -->
+        <!-- Our Mission & Vission Section End -->
+
+        <!-- Instructor Section Start -->
+        <div class="section section-padding">
+            <div class="container">
+
+                <!-- Section Title Start -->
+                <div class="section-title">
+                    <h6 class="sub-title">Meet Us!</h6>
+                    <h2 class="main-title">The Developers</h2>
+                </div>
+                <!-- Section Title End -->
+
+                <!-- Instructor Wrapper Start -->
+                <div class="instructor-wrapper">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6">
+                            <!-- Single Instructor Start -->
+                            <div class="single-instructor">
+                                <div class="instructor-images">
+                                    <img src="{% static 'assets/images/instructor/Sasha460.jpg'%}" alt="">
+                                </div>
+                                <div class="instructor-content">
+                                    <p class="designation">Junior Developer</p>
+                                    <h3 class="name">Sasha Nabila Fortuna</h3>
+                                </div>
+                            </div>
+                            <!-- Single Instructor End -->
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <!-- Single Instructor Start -->
+                            <div class="single-instructor">
+                                <div class="instructor-images">
+                                    <img src="{% static 'assets/images/instructor/kak-athal.png'%}" alt="">
+                                </div>
+                                <div class="instructor-content">
+                                    <p class="designation">Senior Developer</p>
+                                    <h3 class="name">Muhammad Athallah</h3>
+                                </div>
+                            </div>
+                            <!-- Single Instructor End -->
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <!-- Single Instructor Start -->
+                            <div class="single-instructor">
+                                <div class="instructor-images">
+                                    <img src="{% static 'assets/images/instructor/shayna.jpg'%}" alt="">
+                                </div>
+                                <div class="instructor-content">
+                                    <p class="designation">Junior Developer</p>
+                                    <h3 class="name">Shayna Putri Fitria</h3>
+                                </div>
+                            </div>
+                            <!-- Single Instructor End -->
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <!-- Single Instructor Start -->
+                            <div class="single-instructor">
+                                <div class="instructor-images">
+                                    <img src="{% static 'assets/images/instructor/farkhans460.JPG'%}" style="width: inherit; height:inherit" alt="">
+                                </div>
+                                <div class="instructor-content">
+                                    <p class="designation">Junior Developer</p>
+                                    <h3 class="name">Farkhan Syawal Harahap</h3>
+                                </div>
+                            </div>
+                            <!-- Single Instructor End -->
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <!-- Single Instructor Start -->
+                            <div class="single-instructor">
+                                <div class="instructor-images">
+                                    <img src="{% static 'assets/images/instructor/Reiou.png'%}" style="width: inherit; height:inherit" alt="">
+                                </div>
+                                <div class="instructor-content">
+                                    <p class="designation">Junior Developer</p>
+                                    <h3 class="name">Reiou Nagata</h3>
+                                </div>
+                            </div>
+                            <!-- Single Instructor End -->
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <!-- Single Instructor Start -->
+                            <div class="single-instructor">
+                                <div class="instructor-images">
+                                    <img src="{% static 'assets/images/instructor/Akmal.png'%}"  style="width: inherit; height:inherit" alt="">
+                                </div>
+                                <div class="instructor-content">
+                                    <p class="designation">Junior Developer</p>
+                                    <h3 class="name">Muhammad Akmal Hakim</h3>
+                                </div>
+                            </div>
+                            <!-- Single Instructor End -->
+                        </div>
+                    </div>
+                </div>
+                <!-- Instructor Wrapper End -->
+
+                <!-- Instructor Button End -->
+                <div class="instructor-btn">
+                    <a href="{% url 'main:register' %}" class="btn btn-primary btn-hover-secondary">Join With Us</a>
+                </div>
+                <!-- Instructor Button End -->
+
+            </div>
+        </div>
+        <!-- Instructor Section End -->
 
         <!-- Footer Start -->
-        <div id="kaki-sec" class="section footer-section">
+        <div class="section footer-section">
 
             <!-- Footer Widget Section Start -->
             <div class="footer-widget-section section-padding">
@@ -392,7 +399,7 @@
                                     <li><a href="{% url 'food_rec:show_all_food' %}">Food Recommendation</a></li>
                                     <li><a href="{% url 'article:article' %}">Articles</a></li>
                                     <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>
-                                    <li><a href="{% url 'main:about' %}">Dive into us!</a></li>
+                                    <li><a href="#">Dive into us!</a></li>
                                 </ul>
                             </div>
                             <!-- Footer Widget End -->
@@ -436,164 +443,6 @@
 
     </div>
 
-    <div
-    class="modal fade"
-    id="exampleModal"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-dialog-centered relative w-auto pointer-events-none">
-      <div class="modal-content bg-[#373951]">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5 text-zinc-200" id="exampleModalLabel">
-            Tambah Rekomendasi
-          </h1>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="modal-body">
-          <div class="flex justify-center">
-            <div class="lg:w-64 mt-3">
-              <form method="POST" action="">
-                {% csrf_token %}
-                <label class="block">
-                  <span
-                    class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-200"
-                  >
-                    Nama hidangan
-                  </span>
-                  <input
-                    type="text"
-                    name="name"
-                    id="name"
-                    class=""
-                    placeholder="Nama hidangan"
-                    required
-                  />
-                </label>
-
-                <label class="block mt-2">
-                  <span
-                    class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-200"
-                  >
-                    Kalori
-                  </span>
-                  <input
-                    type="number"
-                    name="calories"
-                    id="calories"
-					class=""
-                    placeholder="Calories"
-                    required
-                  />
-                </label>
-
-                <label class="block mt-2">
-                  <span
-                    class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-200"
-                  >
-                    Protein
-                  </span>
-                  <input
-                    type="number"
-                    name="protein"
-                    id="protein"
-					class=""
-                    placeholder="Protein"
-                    required
-                  />
-                </label>
-
-                <label class="block mt-2">
-                  <span
-                    class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-200"
-                  >
-                    Lemak
-                  </span>
-                  <input
-                    type="number"
-                    name="fat"
-                    id="fat"
-					class=""
-                    placeholder="Fat"
-                    required
-                  />
-                </label>
-
-                <label class="block mt-2">
-                  <span
-                    class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-200"
-                  >
-                    Karbohidrat
-                  </span>
-                  <input
-                    type="number"
-                    name="carbs"
-                    id="carbs"
-					class=""
-                    placeholder="Carbs"
-                    required
-                  />
-                </label>
-
-                <label class="block mt-2">
-                  <span
-                    class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-zinc-200"
-                  >
-                    Jenis
-                  </span><br>
-                  <div class="d-flex flex-row mt-2 gap-2">
-                    <input
-                        type="radio"
-                        name="is_food"
-                        id="food"
-                        class=""
-                        value="1"
-                        required
-                    />
-                    <label for="food">Makanan</label><br>
-                    <input
-                        type="radio"
-                        name="is_food"
-                        id="drink"
-                        class=""
-                        value="0"
-                        required
-                    />
-                    <label for="drink">Minuman</label><br>
-                    </div>
-                </label>
-              </form>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-danger"
-            data-bs-dismiss="modal"
-          >
-            Cancel
-          </button>
-
-          <button
-            id="add-food"
-            type="button"
-            class="btn btn-primary btn-hover-white"
-            data-bs-dismiss="modal"
-          >
-            Tambah Rekomendasi
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
     <!-- JS
     ============================================ -->
 
@@ -611,13 +460,6 @@
     <script src="{% static 'assets/js/plugins/jquery.nice-select.min.js' %}"></script>
     <script src="{% static 'assets/js/plugins/video-playlist.js' %}"></script>
     <script src="{% static 'assets/js/plugins/ajax-contact.js' %}"></script>
-
-    <!--====== Use the minified version files listed below for better performance and remove the files listed above ======-->
-    <!-- <script src="{% static 'assets/js/plugins.min.js"></script> -->
-
-
-    <!-- Main JS -->
-    <script src="{% static 'assets/js/main.js' %}"></script>
 
 </body>
 {% endblock content %}

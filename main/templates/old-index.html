@@ -45,41 +45,6 @@
         .btn-cal{
             text-align: center;
         }
-        
-        @media only screen and (max-width: 575px) {
-            .main-wrapper{
-                width: 47%;
-            }
-
-            #faq-sec, #fitur-sec, #kaki-sec, #cal-dash{
-                width: 88%;
-            }
-
-        }
-
-        @media only screen and (min-width: 576px) and (max-width: 768px) {
-            .main-wrapper{
-                width: 80%;
-            }
-            
-            .container, .slider-content{
-                width: 80%;
-            }
-
-        }
-
-        @media only screen and (min-width: 769px) and (max-width: 991px) {
-            .main-wrapper{
-                width: 90%;
-            }
-
-            .container, .slider-content{
-                width: 75%;
-            }
-
-        }
-
-        
     </style>
 
 </head>
@@ -109,13 +74,7 @@
                             <ul class="nav-menu">
                                 <li><a class="active" href="/">Home</a></li>
                                 {% if user.is_authenticated %}
-                                <li>
-                                    <a href="{% url 'calorycalc:calorycalc' %}">CaloryCalc</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="{% url 'calorycalc:calorycalc' %}">Add Calory</a></li>
-                                        <li><a href="{% url 'calorycalc:histories' %}">Your Calories' History</a></li>
-                                    </ul>
-                                </li>
+                                <li><a href="{% url 'calorycalc:calorycalc' %}">CaloryCalc</a></li>
                                 {% else %}
                                 <li><a id="myBtn" href="#">CaloryCalc</a></li>
                                 <!-- The Modal -->
@@ -137,9 +96,9 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="{% url 'main:about' %}">About Us</a>
+                                    <a href="#">About Us</a>
                                     <ul class="sub-menu">
-                                        <li><a href="{% url 'main:about' %}">Dive into us!</a></li>
+                                        <li><a href="#">Dive into us!</a></li>
                                         <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>
                                     </ul>
                                 </li>
@@ -208,13 +167,7 @@
                 <ul class="nav-menu">
                     <li><a class="active" href="{% url 'main:home' %}">Home</a></li>
                     {% if user.is_authenticated %}
-                    <li>
-                        <a href="{% url 'calorycalc:calorycalc' %}">CaloryCalc</a>
-                        <ul class="sub-menu">
-                            <li><a href="{% url 'calorycalc:calorycalc' %}">Add Calory</a></li>
-                            <li><a href="{% url 'calorycalc:histories' %}">Your Calories' History</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="{% url 'calorycalc:calorycalc' %}">CaloryCalc</a></li>
                     {% else %}
                     <li><a id="myBtn" href="#">CaloryCalc</a></li>
                     <!-- The Modal -->
@@ -236,9 +189,9 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="{% url 'main:about' %}">About Us</a>
+                        <a href="#">About Us</a>
                         <ul class="sub-menu">
-                            <li><a href="{% url 'main:about' %}">Dive into us!</a></li>
+                            <li><a href="#">Dive into us!</a></li>
                             <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>
                         </ul>
                     </li>
@@ -258,7 +211,7 @@
 
         <!-- Slider Section Start -->
         {% if user.is_authenticated %}
-        <div id ="cal-dash" class="section section-padding overflow-hidden" style="background-color: darkgreen">
+        <div class="section section-padding overflow-hidden" style="background-color: darkgreen">
             <!-- Slider Content Start -->
             <div class="testimonial-wrapper">
                 <div class="section-title section-title-white">
@@ -270,13 +223,13 @@
                 </div>
                 <div class="btn-cal" style="padding-top: 20px;">
                     <a href="{% url 'calorycalc:calorycalc' %}" class="btn btn-primary btn-hover-secondary" id="btn-add">Add Calory</a>
-                    <a href="{% url 'calorycalc:histories' %}" class="btn btn-primary btn-hover-secondary" id="btn-hist">See Your Calories' History</a>
+                    <a href="#" class="btn btn-primary btn-hover-secondary" id="btn-hist">See Your Calories' History</a>
                 </div>
             </div>
             <!-- Slider Content End -->
         </div>
         {% else %}
-        <div id="slide-quotes" class="slider-section slider-active section">
+        <div class="slider-section slider-active section">
             <div class="swiper-container">
                 <div class="swiper-wrapper">
                     <!-- Single Slider Start -->
@@ -333,7 +286,7 @@
         {% endif %}
 
         <!-- Features Section Start -->
-        <div id="fitur-sec" class="section section-padding-02">
+        <div class="section section-padding-02">
             <div class="container">
                 <div class="features-wrapper">
                     <div class="row">
@@ -344,9 +297,9 @@
                                     <span><i class="flaticon-lunges"></i></span>
                                 </div>
                                 <div class="feature-content">
-                                    <h4 class="title"><a href="{% url 'food_rec:show_all_food' %}">Food Recommendation</a></h4>
+                                    <h4 class="title"><a href="#">Food Recommendation</a></h4>
                                     <p>Are these foods into your liking?</p>
-                                    <a href="{% url 'food_rec:show_all_food' %}" class="arrow"><i class="icofont-long-arrow-right"></i></a>
+                                    <a href="#" class="arrow"><i class="icofont-long-arrow-right"></i></a>
                                 </div>
                             </div>
                             <!-- Single Feature End -->
@@ -378,9 +331,9 @@
                                     <span><i class="flaticon-computer"></i></span>
                                 </div>
                                 <div class="feature-content">
-                                    <h4 class="title"><a href="{% url 'article:article' %}">Articles</a></h4>
+                                    <h4 class="title"><a href="#">Articles</a></h4>
                                     <p>Up to date with the latest information on nutrition</p>
-                                    <a href="{% url 'article:article' %}" class="arrow"><i class="icofont-long-arrow-right"></i></a>
+                                    <a href="#" class="arrow"><i class="icofont-long-arrow-right"></i></a>
                                 </div>
                             </div>
                             <!-- Single Feature End -->
@@ -391,96 +344,267 @@
         </div>
         <!-- Features Section End -->
 
-        <!-- FAQ Section Start -->
-        <div id="faq-sec" class="section section-padding">
+        <!-- Courses Section Start -->
+        <div class="section section-padding">
             <div class="container">
 
-                <!-- FAQ Wrapper Start -->
-                <div class="faq-wrapper">
+                <!-- Section Title Start -->
+                <div class="section-title">
+                    <h6 class="sub-title">Find your comfy foods from us</h6>
+                    <h2 class="main-title">Food Recommendation</h2>
+                </div>
+                <!-- Section Title End -->
 
-                    <!-- Section Title Start -->
-                    <div class="section-title">
-                        <h6 class="sub-title">Frequently Asked Questions (FAQ)</h6>
-                        <h2 class="main-title">You might find your questions here</h2>
-                    </div>
-                    <!-- Section Title End -->
-
-                    <div class="row justify-content-center">
-                        <div class="col-lg-9">
-                            <!-- FAQ Accordion Start -->
-                            <div class="faq-accordion">
-
-                                <div class="accordion" id="accordionFaq">
-                                    <div class="accordion-item">
-                                        <button type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
-                                            Apa saya harus membuat akun untuk menggunakan situs web ini?
-                                        </button>
-                                        <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionFaq">
-                                            <div class="accordion-body">
-                                                <p>Pengguna tetap bisa mengakses situs web ini walau tidak membuat akun. Hanya saja, pengguna bisa menggunakan fitur tertentu, seperti CaloryCalc, jika pengguna mendaftarkan akun di Nutrack.</p>
-                                            </div>
-                                        </div>
+                <!-- Courses Wrapper Start -->
+                <div class="courses-wrapper">
+                    <div class="row gx-xxl-5">
+                        <div class="col-lg-4 col-sm-6">
+                            <!-- Single Courses Start -->
+                            <div class="single-courses">
+                                <div class="courses-images">
+                                    <a href="courses-details-left-sidebar.html"><img src="{% static 'assets/images/courses/courses-1.jpg' %}" alt="courses"></a>
+                                </div>
+                                <div class="courses-content">
+                                    <div class="courses-price">
+                                        <span class="price">$98</span>
                                     </div>
-                                    <div class="accordion-item">
-                                        <button class="collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
-                                            Bagaimana saya bisa menggunakan fitur "CaloryCalc"?
-                                        </button>
-                                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFaq">
-                                            <div class="accordion-body">
-                                                <p>Pengguna dapat mendaftarkan akun dan melakukan login di situs web Nutrack. Dengan begitu, pengguna sudah bisa menggunakan fitur CaloryCalc.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <button class="collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
-                                            Apa yang dapat saya lakukan pada Food Recommendation?
-                                        </button>
-                                        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFaq">
-                                            <div class="accordion-body">
-                                                <p>Pengguna dapat melakukan filtering rekomendasi makanan berdasarkan nama makanan dan rating-nya.</p>
-
-                                                <p>Selain itu, pengguna juga bisa menambahkan rekomendasi makanan yang ingin pengguna bagikan ke khalayak.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <button class="collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour">
-                                            Pada fitur "Articles", apakah saya hanya bisa membaca artikel?
-                                        </button>
-                                        <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFaq">
-                                            <div class="accordion-body">
-                                                <p>Tentu saja tidak. Selain membaca artikel, pengguna juga bisa menuliskan artikel yang berhubungan gizi dan diet.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <button class="collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive">
-                                            Apakah saya dapat memberikan kritik dan saran kepada pengembang?
-                                        </button>
-                                        <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionFaq">
-                                            <div class="accordion-body">
-                                                <p>Tentu saja bisa. Para pengunjung situs web Nutrack dapat memberikan masukkan kepada pengembang terkait pengalaman ketika mengunjungi situs web Nutrack.</p>
-
-                                                <p>Segala kritik dan saran sangat kami harapkan guna peningkatan kualitas Nutrack.</p>
-                                            </div>
-                                        </div>
+                                    <div style="padding-left: 10px;">
+                                        <p class="author">By: <a href="#">Ryan Patterson</a></p>
+                                        <h4 class="title"><a href="courses-details-left-sidebar.html">Children Nutrition and Cooking</a></h4>
+                                        <ul class="meta">
+                                            <li>08 hr 20 mins</li>
+                                            <li>28 Lectures</li>
+                                        </ul>
                                     </div>
                                 </div>
-
                             </div>
-                            <!-- FAQ Accordion End -->
+                            <!-- Single Courses End -->
+                        </div>
+                        <div class="col-lg-4 col-sm-6">
+                            <!-- Single Courses Start -->
+                            <div class="single-courses">
+                                <div class="courses-images">
+                                    <a href="courses-details-left-sidebar.html"><img src="{% static 'assets/images/courses/courses-2.jpg' %}" alt="courses"></a>
+                                </div>
+                                <div class="courses-content">
+                                    <div class="courses-price">
+                                        <span class="price">$72</span>
+                                    </div>
+                                    <div style="padding-left: 10px;">
+                                        <p class="author">By: <a href="courses-details-left-sidebar.html">Arlene Daniels</a></p>
+                                        <h4 class="title"><a href="#">Introduction to Food and Health. </a></h4>
+                                        <ul class="meta">
+                                            <li>09 hr 25 mins</li>
+                                            <li>16 Lectures</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Single Courses End -->
+                        </div>
+                        <div class="col-lg-4 col-sm-6">
+                            <!-- Single Courses Start -->
+                            <div class="single-courses">
+                                <div class="courses-images">
+                                    <a href="courses-details-left-sidebar.html"><img src="{% static 'assets/images/courses/courses-3.jpg' %}" alt="courses"></a>
+                                </div>
+                                <div class="courses-content">
+                                    <div class="courses-price">
+                                        <span class="price">$68</span>
+                                    </div>
+                                    <div style="padding-left: 10px;">
+                                        <p class="author">By: <a href="#">Selina Benton</a></p>
+                                        <h4 class="title"><a href="courses-details-left-sidebar.html">Nutrition and Lifestyle in Pregnancy</a></h4>
+                                        <ul class="meta">
+                                            <li>03 hr 38 mins</li>
+                                            <li>18 Lectures</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Single Courses End -->
                         </div>
                     </div>
-
                 </div>
-                <!-- FAQ Wrapper End -->
+                <!-- Courses Wrapper End -->
 
             </div>
         </div>
-        <!-- FAQ Section End -->
+        <!-- Courses Section End -->
+
+        <!-- Testimonial Section Start -->
+        <div class="section section-padding testimonial-section testimonial-active">
+
+            <img class="shape-01 animation-down" src="{% static 'assets/images/shape/shape-5.png' %}" alt="Shape">
+            <img class="shape-02 animation-up" src="{% static 'assets/images/shape/shape-6.png' %}" alt="Shape">
+
+            <div class="container">
+
+                <!-- Section Title Start -->
+                <div class="section-title section-title-white">
+                    <h6 class="sub-title">Testimonial</h6>
+                    <h2 class="main-title">What They Say About Us</h2>
+                </div>
+                <!-- Section Title End -->
+
+                <!-- Testimonial Wrapper End -->
+                <div class="testimonial-wrapper">
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+
+                            <!-- Single Testimonial Start -->
+                            <div class="single-testimonial swiper-slide">
+                                <div class="testimonial-author">
+                                    <img src="{% static 'assets/images/author/author-01.jpg' %}" alt="Author">
+                                    <i class="flaticon-left-quote"></i>
+                                </div>
+                                <p>Lorem Ipsum is simply dummy text of the printing typesetting industry has been the industry's standard dummy text ever ince the 1500s when unknown printer took a galley of type and scrambled it to</p>
+                                <h4 class="name">Pollock Austin</h4>
+                                <span class="designation">UI/UX DESIGNER</span>
+                            </div>
+                            <!-- Single Testimonial End -->
+
+                            <!-- Single Testimonial Start -->
+                            <div class="single-testimonial swiper-slide">
+                                <div class="testimonial-author">
+                                    <img src="{% static 'assets/images/author/author-02.jpg' %}" alt="Author">
+                                    <i class="flaticon-left-quote"></i>
+                                </div>
+                                <p>Lorem Ipsum is simply dummy text of the printing typesetting industry has been the industry's standard dummy text ever ince the 1500s when unknown printer took a galley of type and scrambled it to</p>
+                                <h4 class="name">Pollock Austin</h4>
+                                <span class="designation">UI/UX DESIGNER</span>
+                            </div>
+                            <!-- Single Testimonial End -->
+
+                            <!-- Single Testimonial Start -->
+                            <div class="single-testimonial swiper-slide">
+                                <div class="testimonial-author">
+                                    <img src="{% static 'assets/images/author/author-03.jpg' %}" alt="Author">
+                                    <i class="flaticon-left-quote"></i>
+                                </div>
+                                <p>Lorem Ipsum is simply dummy text of the printing typesetting industry has been the industry's standard dummy text ever ince the 1500s when unknown printer took a galley of type and scrambled it to</p>
+                                <h4 class="name">Pollock Austin</h4>
+                                <span class="designation">UI/UX DESIGNER</span>
+                            </div>
+                            <!-- Single Testimonial End -->
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimonial Wrapper End -->
+
+            </div>
+
+            <div class="arrow">
+                <div class="swiper-button-next"><i class="fa fa-long-arrow-right"></i></div>
+                <div class="swiper-button-prev"><i class="fa fa-long-arrow-left"></i></div>
+            </div>
+
+        </div>
+        <!-- Testimonial Section End -->
+
+        <!-- Blog Section End -->
+        <div class="section section-padding">
+            <div class="container">
+
+                <!-- Section Title Start -->
+                <div class="section-title">
+                    <h6 class="sub-title">Our Blog Post</h6>
+                    <h2 class="main-title">Latest Article of Nutrition</h2>
+                </div>
+                <!-- Section Title End -->
+
+                <!-- Blog Wrapper Start -->
+                <div class="blog-wrapper">
+                    <div class="row gx-xxl-5">
+                        <div class="col-lg-4">
+
+                            <!-- Single Blog Start -->
+                            <div class="single-blog">
+                                <div class="blog">
+                                    <div class="blog-date-meta">
+                                        <span>
+                                        <strong>24</strong>
+                                        Feb
+                                    </span>
+                                        <div class="meta">
+                                            <p class="author">By: <a href="#">Maddie Rife</a></p>
+                                            <ul>
+                                                <li>87 Likes</li>
+                                                <li>58 Share</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <h4 class="title"><a href="blog-details-left-sidebar.html">It was popularised sheets the release contain</a></h4>
+                                    <p>Lorem sum same dummy text theme industry psum have been them industry the leaf into type setting.</p>
+                                </div>
+                            </div>
+                            <!-- Single Blog End -->
+
+                        </div>
+                        <div class="col-lg-4">
+
+                            <!-- Single Blog Start -->
+                            <div class="single-blog">
+                                <div class="blog">
+                                    <div class="blog-date-meta">
+                                        <span>
+                                        <strong>24</strong>
+                                        Feb
+                                    </span>
+                                        <div class="meta">
+                                            <p class="author">By: <a href="#">Maddie Rife</a></p>
+                                            <ul>
+                                                <li>87 Likes</li>
+                                                <li>58 Share</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <h4 class="title"><a href="blog-details-left-sidebar.html">It was popularised sheets the release contain</a></h4>
+                                    <p>Lorem sum same dummy text theme industry psum have been them industry the leaf into type setting.</p>
+                                </div>
+                            </div>
+                            <!-- Single Blog End -->
+
+                        </div>
+                        <div class="col-lg-4">
+
+                            <!-- Single Blog Start -->
+                            <div class="single-blog">
+                                <div class="blog">
+                                    <div class="blog-date-meta">
+                                        <span>
+                                        <strong>24</strong>
+                                        Feb
+                                    </span>
+                                        <div class="meta">
+                                            <p class="author">By: <a href="#">Maddie Rife</a></p>
+                                            <ul>
+                                                <li>87 Likes</li>
+                                                <li>58 Share</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <h4 class="title"><a href="blog-details-left-sidebar.html">It was popularised sheets the release contain</a></h4>
+                                    <p>Lorem sum same dummy text theme industry psum have been them industry the leaf into type setting.</p>
+                                </div>
+                            </div>
+                            <!-- Single Blog End -->
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Blog Wrapper End -->
+
+            </div>
+        </div>
+        <!-- Blog Section End -->
 
         <!-- Footer Start -->
-        <div id="kaki-sec" class="section footer-section">
+        <div class="section footer-section">
 
             <!-- Footer Widget Section Start -->
             <div class="footer-widget-section section-padding">
@@ -505,7 +629,7 @@
                                     <li><a href="{% url 'food_rec:show_all_food' %}">Food Recommendation</a></li>
                                     <li><a href="{% url 'article:article' %}">Articles</a></li>
                                     <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>
-                                    <li><a href="{% url 'main:about' %}">Dive into us!</a></li>
+                                    <li><a href="#">Dive into us!</a></li>
                                 </ul>
                             </div>
                             <!-- Footer Widget End -->
@@ -576,12 +700,11 @@
     <script src="{% static 'assets/js/modal.js' %}"></script>
     <script>
         function getCalc(){
-            var temp_calc = 0
             $.getJSON("{% url 'main:calorycalc_json' %}", function(data){
-                $(data).each(function(i, entry) {
-                        temp_calc += entry.fields.calory
-                    })
-                    $("#get-cal").html(`${temp_calc} <span class="sub-title" style="color: orange;">cal</span>`)
+            $(data).each(function(i, entry) {
+                    $("#get-cal").html(`${entry.fields.calory} <span class="sub-title" style="color: orange;">cal</span>`)
+                    console.log(entry.fields.calory)
+                })
             })
         };
 

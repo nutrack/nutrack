@@ -90,7 +90,13 @@ $(document).ready(function() {
                                 <ul class="nav-menu">
                                     <li><a class="active" href="/">Home</a></li>
                                     {% if user.is_authenticated %}
-                                    <li><a href="{% url 'calorycalc:calorycalc' %}">CaloryCalc</a></li>
+                                    <li>
+                                        <a href="{% url 'calorycalc:calorycalc' %}">CaloryCalc</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="{% url 'calorycalc:calorycalc' %}">Add Calory</a></li>
+                                            <li><a href="{% url 'calorycalc:histories' %}">Your Calories' History</a></li>
+                                        </ul>
+                                    </li>
                                     {% else %}
                                     <li><a id="myBtn" href="#">CaloryCalc</a></li>
                                     <!-- The Modal -->
@@ -112,9 +118,9 @@ $(document).ready(function() {
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="#">About Us</a>
+                                        <a href="{% url 'main:about' %}">About Us</a>
                                         <ul class="sub-menu">
-                                            <li><a href="#">Dive into us!</a></li>
+                                            <li><a href="{% url 'main:about' %}">Dive into us!</a></li>
                                             <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>
                                         </ul>
                                     </li>
@@ -169,7 +175,7 @@ $(document).ready(function() {
             <!-- Header Section End -->
             <!-- Mobile Menu Start -->
             <div class="mobile-menu">
-    
+
                 <!-- Menu Close Start -->
                 <a class="menu-close" href="javascript:void(0)">
                     <i class="icofont-close-line"></i>
@@ -181,7 +187,13 @@ $(document).ready(function() {
                     <ul class="nav-menu">
                         <li><a class="active" href="{% url 'main:home' %}">Home</a></li>
                         {% if user.is_authenticated %}
-                        <li><a href="{% url 'calorycalc:calorycalc' %}">CaloryCalc</a></li>
+                        <li>
+                            <a href="{% url 'calorycalc:calorycalc' %}">CaloryCalc</a>
+                            <ul class="sub-menu">
+                                <li><a href="{% url 'calorycalc:calorycalc' %}">Add Calory</a></li>
+                                <li><a href="{% url 'calorycalc:histories' %}">Your Calories' History</a></li>
+                            </ul>
+                        </li>
                         {% else %}
                         <li><a id="myBtn" href="#">CaloryCalc</a></li>
                         <!-- The Modal -->
@@ -195,54 +207,18 @@ $(document).ready(function() {
                         
                         </div>
                         {% endif %}
+                        <li><a href="{% url 'food_rec:show_all_food' %}">Food Recommendation</a></li>
                         <li>
-                            <a href="#">Food Recommendation</a>
+                            <a href="{% url 'article:article' %}">Articles </a>
                             <ul class="sub-menu">
-                                <li><a href="courses.html">Courses</a></li>
-                                <li><a href="my-courses.html">My Courses</a></li>
-                                <li><a href="#">Courses Details</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="courses-details-left-sidebar.html">Courses Details Left Sidebar</a></li>
-                                        <li><a href="courses-details-right-sidebar.html">Courses Details Right Sidebar</a></li>
-                                    </ul>
-                                </li>
+                                <li><a href="{% url 'article:write' %}">Write Article</a></li>
                             </ul>
                         </li>
                         <li>
-                            <a href="#">Articles </a>
+                            <a href="{% url 'main:about' %}">About Us</a>
                             <ul class="sub-menu">
-                                <li><a href="after-enroll.html">After Enroll</a></li>
-                                <li><a href="courses-admin.html">Instructor Dashboard (Course List)</a></li>
-                                <li><a href="overview.html">Instructor Dashboard (Performance)</a></li>
-                                <li><a href="students.html">Students</a></li>
-                                <li><a href="reviews.html">Reviews</a></li>
-                                <li><a href="engagement.html">Course engagement</a></li>
-                                <li><a href="traffic-conversion.html">Traffic & conversion</a></li>
-                                <li><a href="messages.html">Messages</a></li>
-                                <li><a href="register.html">Register</a></li>
-                                <li><a href="login.html">Login</a></li>
-                                <li><a href="faq.html">FAQ</a></li>
-                                <li><a href="404-error.html">404 Error</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#">About Us</a>
-                            <ul class="sub-menu">
-                                <li>
-                                    <a href="#">Dive into us!</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="blog-grid.html">Blog Grid</a></li>
-                                        <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
-                                        <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#">Testimonial</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="blog-details-left-sidebar.html">Blog Details Left Sidebar</a></li>
-                                        <li><a href="blog-details-right-sidebar.html">Blog Details Right Sidebar</a></li>
-                                    </ul>
-                                </li>
+                                <li><a href="{% url 'main:about' %}">Dive into us!</a></li>
+                                <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -318,11 +294,15 @@ $(document).ready(function() {
                                 <div style="text-align: center;">
                                     <h3 class="footer-widget-title">All Features</h3>
                                     <ul class="widget-link">
+                                        {% if user.is_authenticated %}
                                         <li><a href="{% url 'calorycalc:calorycalc' %}">CaloryCalc</a></li>
-                                        <li><a href="#">Food Recommendation</a></li>
-                                        <li><a href="#">Articles</a></li>
-                                        <li><a href="#">Testimonial</a></li>
-                                        <li><a href="#">Dive into us!</a></li>
+                                        {% else %}
+                                        <li><a href="{% url 'main:login' %}">CaloryCalc</a></li>
+                                        {% endif %}
+                                        <li><a href="{% url 'food_rec:show_all_food' %}">Food Recommendation</a></li>
+                                        <li><a href="{% url 'article:article' %}">Articles</a></li>
+                                        <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>
+                                        <li><a href="{% url 'main:about' %}">Dive into us!</a></li>
                                     </ul>
                                 </div>
                                 <!-- Footer Widget End -->

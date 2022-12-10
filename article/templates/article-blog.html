@@ -1,3 +1,4 @@
+<!-- Inspiration: https://elements.envato.com/nutras-fitness-nutrition-bootstrap-5-template-4J7MWUZ -->
 <!doctype html>
 {% extends 'base.html' %} {% block content %}
 {% load static%}
@@ -6,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>NuTrack - Write Your Article</title>
+    <title>NuTrack - Article Page</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -107,7 +108,13 @@
                             <ul class="nav-menu">
                                 <li><a class="active" href="/">Home</a></li>
                                 {% if user.is_authenticated %}
-                                <li><a href="{% url 'calorycalc:calorycalc' %}">CaloryCalc</a></li>
+                                <li>
+                                    <a href="{% url 'calorycalc:calorycalc' %}">CaloryCalc</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="{% url 'calorycalc:calorycalc' %}">Add Calory</a></li>
+                                        <li><a href="{% url 'calorycalc:histories' %}">Your Calories' History</a></li>
+                                    </ul>
+                                </li>
                                 {% else %}
                                 <li><a id="myBtn" href="#">CaloryCalc</a></li>
                                 <!-- The Modal -->
@@ -129,9 +136,9 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="#">About Us</a>
+                                    <a href="{% url 'main:about' %}">About Us</a>
                                     <ul class="sub-menu">
-                                        <li><a href="#">Dive into us!</a></li>
+                                        <li><a href="{% url 'main:about' %}">Dive into us!</a></li>
                                         <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>
                                     </ul>
                                 </li>
@@ -198,59 +205,42 @@
             <!-- Mobile Menu Start -->
             <div class="mobile-menu-items">
                 <ul class="nav-menu">
-                    <li><a class="active" href="index.html">Home</a></li>
-                    <li><a href="about.html">About Us</a></li>
+                    <li><a class="active" href="{% url 'main:home' %}">Home</a></li>
+                    {% if user.is_authenticated %}
                     <li>
-                        <a href="#">All Course</a>
+                        <a href="{% url 'calorycalc:calorycalc' %}">CaloryCalc</a>
                         <ul class="sub-menu">
-                            <li><a href="courses.html">Courses</a></li>
-                            <li><a href="my-courses.html">My Courses</a></li>
-                            <li><a href="#">Courses Details</a>
-                                <ul class="sub-menu">
-                                    <li><a href="courses-details-left-sidebar.html">Courses Details Left Sidebar</a></li>
-                                    <li><a href="courses-details-right-sidebar.html">Courses Details Right Sidebar</a></li>
-                                </ul>
-                            </li>
+                            <li><a href="{% url 'calorycalc:calorycalc' %}">Add Calory</a></li>
+                            <li><a href="{% url 'calorycalc:histories' %}">Your Calories' History</a></li>
+                        </ul>
+                    </li>
+                    {% else %}
+                    <li><a id="myBtn" href="#">CaloryCalc</a></li>
+                    <!-- The Modal -->
+                    <div id="myModal" class="modal">
+
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h3>Please log in first!</h3>
+                        </div>
+                    
+                    </div>
+                    {% endif %}
+                    <li><a href="{% url 'food_rec:show_all_food' %}">Food Recommendation</a></li>
+                    <li>
+                        <a href="{% url 'article:article' %}">Articles </a>
+                        <ul class="sub-menu">
+                            <li><a href="{% url 'article:write' %}">Write Article</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="#">Pages </a>
+                        <a href="{% url 'main:about' %}">About Us</a>
                         <ul class="sub-menu">
-                            <li><a href="after-enroll.html">After Enroll</a></li>
-                            <li><a href="courses-admin.html">Instructor Dashboard (Course List)</a></li>
-                            <li><a href="overview.html">Instructor Dashboard (Performance)</a></li>
-                            <li><a href="students.html">Students</a></li>
-                            <li><a href="reviews.html">Reviews</a></li>
-                            <li><a href="engagement.html">Course engagement</a></li>
-                            <li><a href="traffic-conversion.html">Traffic & conversion</a></li>
-                            <li><a href="messages.html">Messages</a></li>
-                            <li><a href="register.html">Register</a></li>
-                            <li><a href="login.html">Login</a></li>
-                            <li><a href="faq.html">FAQ</a></li>
-                            <li><a href="404-error.html">404 Error</a></li>
+                            <li><a href="{% url 'main:about' %}">Dive into us!</a></li>
+                            <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="#">Blog</a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a href="#">Blog</a>
-                                <ul class="sub-menu">
-                                    <li><a href="blog-grid.html">Blog Grid</a></li>
-                                    <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
-                                    <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">Blog Details</a>
-                                <ul class="sub-menu">
-                                    <li><a href="blog-details-left-sidebar.html">Blog Details Left Sidebar</a></li>
-                                    <li><a href="blog-details-right-sidebar.html">Blog Details Right Sidebar</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a href="contact.html">Contact</a></li>
                 </ul>
 
             </div>
@@ -269,7 +259,8 @@
                 <div class="swiper-wrapper">
 
                     <!-- Single Slider Start -->
-                    <div id="article-slider" class="swiper-slide animation-style-01 single-slider d-flex align-items-center" style="background-image: url(/static/assets/images/slider/slider-1.jpg);">
+                    <div id="article-slider" class="swiper-slide animation-style-01 single-slider d-flex align-items-center" style="background-image: linear-gradient(-45deg, #9AB94D, white, #F7E255);">
+                        <!-- image: url(/static/assets/images/slider/slider-1.jpg) -->
                         <div class="container" id="title-container-slider">
 
                             <!-- Slider Content Start -->
@@ -277,7 +268,7 @@
                                 <h6 class="sub-title">Blog Post</h6>
                                 <h1 class="main-title">Read More About The Latest Article of Nutrition</h1>
                                 <p>Write Your Own Article Here</p>
-                                <a href="{% url 'article:write' %}" class="btn btn-primary btn-hover-secondary">Start Writing</a>
+                                <a href="{% url 'article:write' %}" class="btn btn-primary btn-hover-secondary" id="start-write-button">Start Writing</a>
                             </div>
                             <!-- Slider Content End -->
 
@@ -296,6 +287,7 @@
 
                 <!-- Blog Wrapper Start -->
                 <div class="blog-wrapper-02">
+                    
                     <div class="row gx-xxl-5" id="view-article"></div>
                 </div>
                 <!-- Blog Wrapper End -->
@@ -370,6 +362,17 @@
         padding-top: 0px;
         padding-bottom: 0px;
         height: 375px;
+        /* border-radius: 20px; */
+    }
+
+    .single-blog:hover {
+        box-shadow: 0 16px 16px 0 rgba(0, 0, 0, 0.2);
+        transform: scale(1.1);
+    }
+
+    #start-write-button:hover {
+        background-color: #9AB94D;
+        box-shadow: 0 16px 16px 0 rgba(0, 0, 0, 0.2);
     }
 
     .author {
@@ -423,10 +426,25 @@
     }
 
     #article-slider {
-        background-color: white;
         padding-bottom: 0px;
         padding-top: 0px;
+        background-size: 400% 400%;
+        animation: gradient 15s ease infinite;
+        height: 100vh;
     }
+
+    @keyframes gradient {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
 </style>
 {% endblock content %}
 </html>

@@ -42,6 +42,39 @@
             border-color: #0a4d3c;
             color: #fff;
         }
+
+        @media only screen and (max-width: 575px) {
+            .main-wrapper{
+                width: 47%;
+            }
+
+            #log-sec, #kaki-sec{
+                width: 88%;
+            }
+
+        }
+
+        @media only screen and (min-width: 576px) and (max-width: 768px) {
+            .main-wrapper{
+                width: 80%;
+            }
+            
+            .container, .slider-content{
+                width: 80%;
+            }
+
+        }
+
+        @media only screen and (min-width: 769px) and (max-width: 991px) {
+            .main-wrapper{
+                width: 90%;
+            }
+
+            .container, .slider-content{
+                width: 75%;
+            }
+
+        }
     </style>
 
 </head>
@@ -94,9 +127,9 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="#">About Us</a>
+                                    <a href="{% url 'main:about' %}">About Us</a>
                                     <ul class="sub-menu">
-                                        <li><a href="#">Dive into us!</a></li>
+                                        <li><a href="{% url 'main:about' %}">Dive into us!</a></li>
                                         <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>
                                     </ul>
                                 </li>
@@ -165,7 +198,13 @@
                 <ul class="nav-menu">
                     <li><a class="active" href="{% url 'main:home' %}">Home</a></li>
                     {% if user.is_authenticated %}
-                    <li><a href="{% url 'calorycalc:calorycalc' %}">CaloryCalc</a></li>
+                    <li>
+                        <a href="{% url 'calorycalc:calorycalc' %}">CaloryCalc</a>
+                        <ul class="sub-menu">
+                            <li><a href="{% url 'calorycalc:calorycalc' %}">Add Calory</a></li>
+                            <li><a href="{% url 'calorycalc:histories' %}">Your Calories' History</a></li>
+                        </ul>
+                    </li>
                     {% else %}
                     <li><a id="myBtn" href="#">CaloryCalc</a></li>
                     <!-- The Modal -->
@@ -187,9 +226,9 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#">About Us</a>
+                        <a href="{% url 'main:about' %}">About Us</a>
                         <ul class="sub-menu">
-                            <li><a href="#">Dive into us!</a></li>
+                            <li><a href="{% url 'main:about' %}">Dive into us!</a></li>
                             <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>
                         </ul>
                     </li>
@@ -226,7 +265,7 @@
         <!-- Page banner Section End -->
 
         <!-- Login & Register Section Start -->
-        <div class="section section-padding">
+        <div id="log-sec" class="section section-padding">
             <div class="container">
 
                 <!-- Register & Login Wrapper Start -->
@@ -276,7 +315,7 @@
         <!-- Login & Register Section End -->
 
         <!-- Footer Start -->
-        <div class="section footer-section">
+        <div id="kaki-sec" class="section footer-section">
 
             <!-- Footer Widget Section Start -->
             <div class="footer-widget-section section-padding">
@@ -301,7 +340,7 @@
                                     <li><a href="{% url 'food_rec:show_all_food' %}">Food Recommendation</a></li>
                                     <li><a href="{% url 'article:article' %}">Articles</a></li>
                                     <li><a href="{% url 'testimonies:show_testimonies' %}">Testimonial</a></li>
-                                    <li><a href="#">Dive into us!</a></li>
+                                    <li><a href="{% url 'main:about' %}">Dive into us!</a></li>
                                 </ul>
                             </div>
                             <!-- Footer Widget End -->

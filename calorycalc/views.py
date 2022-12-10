@@ -14,7 +14,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from calorycalc.forms import TaskForm  
 # Create your views here.
-from calorycalc.models import caloryInfo
+from calorycalc.models import caloryInfo  
 
 
 

@@ -46,7 +46,7 @@ def show_calory_json(request):
 def show_calory_json_flutter(request):
     date = datetime.date.today()
     caloryInfo.objects.filter(date__lt=date).delete()
-    data = caloryInfo.objects.all()
+    data = caloryInfo.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 

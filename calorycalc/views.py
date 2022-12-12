@@ -61,8 +61,15 @@ def add_calory_flutter(request):
         data = json.loads(request.body)
         date = data['date']
         calory = data['calory']
-        form = caloryInfo(user=request.user, date=date, calory=calory)
-        form.save()
+        user = request.user
+
+        data = caloryInfo.objects.create(
+            user=user,
+            date=date,
+            calory=calory
+        )
+
+        data.save()
 
         return JsonResponse({'status': 'success'}, status=200)
     else:

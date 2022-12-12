@@ -15,4 +15,5 @@ urlpatterns = [
     path('register-flutter/', register_flutter, name='register_flutter'),
     path('login-flutter/', login_flutter, name='login_flutter'),
     path('logout-flutter/', logout_flutter, name='logout_flutter'),
+    path("add_goal/", add_cal_goal, name="add_cal_goal"),
 ]

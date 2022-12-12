@@ -133,7 +133,7 @@ def add_food_flutter(request):
             is_food = True
         else:
             is_food = False
-        rating = request.POST.get('rating')
+        rating = data['rating']
         if int(rating) > 5:
             rating = 5
         food = Food.objects.create(name=name, calories=calories, protein=protein, fat=fat, carbs=carbs, rating=rating, is_food=is_food)

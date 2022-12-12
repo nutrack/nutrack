@@ -102,7 +102,8 @@ class TaskForm(forms.ModelForm):
     class Meta:
         model = Nutrack
         fields= ['goal']
-
+        
+@csrf_exempt
 def add_cal_goal(request):
     form = TaskForm(request.POST)
     form.instance.user = request.user

@@ -123,7 +123,7 @@ def add_food_flutter(request):
     if request.method == 'POST':
         data = json.loads(request.body)
         
-        user = data['user']
+        user = request.user
         name = data['name']
         calories = data['calories']
         protein = data['protein']

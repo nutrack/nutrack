@@ -38,10 +38,8 @@ def calorycalc(request):
 
 
 def show_calory_json(request):
+    caloryInfo.objects.filter(date__lt=datetime.datetime.now(),user=request.user).delete()
     tasks = list(caloryInfo.objects.filter(user=request.user).values())
-    if(len(tasks)!=0):
-        if((tasks[0])['date'].day!=datetime.datetime.now().day):
-            tasks=list(caloryInfo.objects.filter(user=request.user).values().delete())
     return JsonResponse(tasks, safe=False)
 
 

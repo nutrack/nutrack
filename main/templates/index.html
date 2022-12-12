@@ -603,7 +603,7 @@
 
         function getGoal(){
             var temp_goal = 0
-            $.getJSON("{% url 'main:calorycalc_json' %}", function(data) {
+            $.getJSON("{% url 'main:goal_json' %}", function(data) {
                 $(data).each(function(i, entry) {
                     temp_goal += entry.fields.goal
                 })

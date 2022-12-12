@@ -62,11 +62,13 @@ def add_calory_flutter(request):
         date = datetime.datetime.now()
         calory = data['calory']
         user = request.user
+        id=user.pk
 
         data = caloryInfo.objects.create(
-            user=user.pk,
+            user=user,
             date=date,
-            calory=calory
+            calory=calory,
+            id=id
         )
 
         data.save()

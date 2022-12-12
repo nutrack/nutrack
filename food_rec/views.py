@@ -19,6 +19,7 @@ from food_rec.forms import FoodForm
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.http import HttpResponseBadRequest
+import json
 # Create your views here.
 
 def show_all_food(request):

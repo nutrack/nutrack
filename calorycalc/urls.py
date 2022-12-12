@@ -1,5 +1,5 @@
 from django.urls import path,include
-from calorycalc.views import add_calory, calorycalc, histories, history, show_calory_json, show_history_by_id_json, test, add_calory_flutter.show_calory_json_flutter
+from calorycalc.views import add_calory, calorycalc, histories, history, show_calory_json, show_history_by_id_json, test, add_calory_flutter,show_calory_json_flutter
 app_name = 'calorycalc'
 
 urlpatterns = [

@@ -59,7 +59,7 @@ def add_calory(request):
 def add_calory_flutter(request):
     if request.method == 'POST':
         data = json.loads(request.body)
-        date = data['date']
+        date = datetime.datetime.now()
         calory = data['calory']
         user = request.user
 

@@ -129,14 +129,10 @@ def add_food_flutter(request):
         fat = data['fat']
         carbs = data['carbs']
         is_food = data['is_food']
-        if is_food == 1:
-            is_food = True
-        else:
-            is_food = False
         rating = data['rating']
         if int(rating) > 5:
             rating = 5
-        food = Food.objects.create(name=name, calories=calories, protein=protein, fat=fat, carbs=carbs, rating=rating, is_food=is_food)
+        food = Food.objects.create(User=None, name=name, calories=calories, protein=protein, fat=fat, carbs=carbs, rating=rating, is_food=is_food)
         food.save()
         return JsonResponse({'status': 'success'}, status=200)
     else:

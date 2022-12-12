@@ -136,4 +136,4 @@ def add_food_flutter(request):
         food.save()
         return JsonResponse({'status': 'success'}, status=200)
     else:
-        return JsonResponse({'status': 'error'})
+        return JsonResponse({'status': 'failed'}, status=400)

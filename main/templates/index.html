@@ -272,6 +272,22 @@
                     <a href="{% url 'calorycalc:calorycalc' %}" class="btn btn-primary btn-hover-secondary" id="btn-add">Add Calory</a>
                     <a href="{% url 'calorycalc:histories' %}" class="btn btn-primary btn-hover-secondary" id="btn-hist">See Your Calories' History</a>
                 </div>
+                <br>
+                <div class="section-title shape-none">
+                    <h6 class="sub-title" style="color: orange">Set Your Calories' Goal</h6>
+                    <h3 class="main-title" style="color: white;" id="get-goal"></h3>
+                </div>
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <table>
+                        <div class="form-cal" style="padding-top: 20px;">
+                            <input type="number" id="goal" name="goal" placeholder="Example: 220" class="form-control">   
+                        </div>
+                    </table>
+                    <div class="btn-cal" style="padding-top: 20px;">
+                        <input class="btn btn-primary btn-hover-secondary" style="width: 100px;" type="submit" value="Tambah">
+                    </div>
+                </form>
             </div>
             <!-- Slider Content End -->
         </div>
@@ -585,8 +601,34 @@
             })
         };
 
+        function getGoal(){
+            var temp_goal = 0
+            $.getJSON("{% url 'main:calorycalc_json' %}", function(data) {
+                $(data).each(function(i, entry) {
+                    temp_goal += entry.fields.goal
+                })
+                $("#get-goal").html(`${temp_goal} <span class="sub-title" style="color: orange;">cal</span>`)
+            })
+        }
+
         $(document).ready(function() {
             getCalc()
+            console.log(goal);
+            getGoal()
+
+            $("form").submit(function(event){
+                event.preventDefault()
+                var form = {
+                    goal: $("#goal").val(),
+                    csrfmiddlewaretoken: "{{ csrf_token }}",
+                }
+                $.post("{% url 'main:add_cal_goal' %}", form, function(info) {
+                    kaloriGoal += info["goal"];
+                    document.getElementById("goal").value="";
+                    getGoal(kaloriGoal)
+                }, "json")
+            })
+
         });
     </script>
 

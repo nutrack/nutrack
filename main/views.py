@@ -16,6 +16,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 import json
 from django.contrib.auth.backends import UserModel
+from django import forms
+from main.models import Nutrack
 
 from main.forms import CreateUserForm
 import sys
@@ -87,9 +89,27 @@ def calorycalc_json(request):
     data = caloryInfo.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
+@login_required(login_url='/login/')
+def goal_json(request):
+    data = Nutrack.objects.filter(user=request.user)
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
 def about(request):
     context = {}
     return render(request, 'about.html', context)
+
+class TaskForm(forms.ModelForm):
+    class Meta:
+        model = Nutrack
+        fields= ['goal']
+
+def add_cal_goal(request):
+    form = TaskForm(request.POST)
+    form.instance.user = request.user
+    if form.is_valid():
+        form.save()
+        return JsonResponse({'goal':form.instance.goal})
+    return redirect("main:caloryInfo")
 
 @csrf_exempt
 def login_flutter(request):

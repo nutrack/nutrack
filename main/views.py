@@ -108,7 +108,7 @@ def add_cal_goal(request):
     form.instance.user = request.user
     if form.is_valid():
         form.save()
-        return JsonResponse({'goal':form.instance.goal,"id":form.instance.pk})
+        return JsonResponse({'goal':form.instance.goal})
     return redirect("main:caloryInfo")
 
 @csrf_exempt

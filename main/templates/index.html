@@ -279,9 +279,11 @@
                 </div>
                 <form method="POST" action="">
                     {% csrf_token %}
-                    <div class="form-cal" style="padding-top: 20px;">
-                        <input type="number" id="goal" name="goal" placeholder="Example: 220" class="form-control">   
-                    </div>
+                    <table>
+                        <div class="form-cal" style="padding-top: 20px;">
+                            <input type="number" id="goal" name="goal" placeholder="Example: 220" class="form-control">   
+                        </div>
+                    </table>
                     <div class="btn-cal" style="padding-top: 20px;">
                         <input class="btn btn-primary btn-hover-secondary" style="width: 100px;" type="submit" value="Tambah">
                     </div>

@@ -89,6 +89,11 @@ def calorycalc_json(request):
     data = caloryInfo.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
+@login_required(login_url='/login/')
+def goal_json(request):
+    data = Nutrack.objects.filter(user=request.user)
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
 def about(request):
     context = {}
     return render(request, 'about.html', context)

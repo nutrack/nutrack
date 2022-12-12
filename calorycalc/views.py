@@ -43,6 +43,14 @@ def show_calory_json(request):
     tasks = list(caloryInfo.objects.filter(user=request.user).values())
     return JsonResponse(tasks, safe=False)
 
+def show_calory_json_flutter(request):
+    date = datetime.date.today()
+    caloryInfo.objects.filter(date__lt=date,user=request.user).delete()
+    tasks = list(caloryInfo.objects.all.values())
+    return JsonResponse(tasks, safe=False)
+
+
+
 
 @csrf_exempt
 def add_calory(request):

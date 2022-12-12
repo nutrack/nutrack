@@ -8,7 +8,7 @@ urlpatterns = [
     path('write-article/', write_article_page, name='write'),
     path('json-article/', show_json_article, name='json'),
     path('show-article/<int:id>', article_page_by_id, name='id'),
-    path('post/', post_article, name='post'),
+    # path('post/', post_article, name='post'),
     path('like/<int:id>', like, name='like'),
     path('delete/<int:id>', delete_article, name='delete'),
 

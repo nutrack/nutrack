@@ -148,10 +148,10 @@ def add_flutter(request):
         date = data["date"]
         like = data["like"]
         author = data["author"]
-        user = request.user
+        # user = request.user
 
         data = Article.objects.create(
-            user=user,
+            user=None,
             title=title, 
             author=author, 
             date=date, 
